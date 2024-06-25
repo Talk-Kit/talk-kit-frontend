@@ -1,6 +1,7 @@
-/** @type {import('next').NextConfig} */
-const nextConfig = {
+export default {
   reactStrictMode: true,
+  swcMinify: true,
+  images: {
+    domains: ["localhost"],
+  },
 };
-
-export default nextConfig;
