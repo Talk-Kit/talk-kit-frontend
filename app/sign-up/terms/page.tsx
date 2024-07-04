@@ -4,6 +4,8 @@ import { useEffect, useState } from "react";
 import CheckBox from "../../components/Icons";
 import TalkKitLogo from "../../components/LOGO";
 import { useRouter } from "next/navigation";
+import { ProgressBarCircle, ProgressCircle } from "../components/Icons";
+import SignUpProgress from "../components/SignUpProgress";
 
 type CheckboxName = "all" | "terms1" | "terms2";
 
@@ -51,9 +53,12 @@ export default function SignUp_Terms() {
     <div className="flex w-full px-4 py-8 flex-col items-center gap-6 self-stretch">
       <TalkKitLogo width={280} height={79} />
 
-      <div className="flex h-[72px] max-w-[600px] py-6 px-0 text-xl font-semibold text-gray-9">
-        토크키트 가입을 위해 약관에 동의해주세요
-      </div>
+      <SignUpProgress
+        text="약관 동의"
+        num={1}
+        isStep2={false}
+        isStep3={false}
+      />
 
       {/* 전체 동의하기 */}
       <button
