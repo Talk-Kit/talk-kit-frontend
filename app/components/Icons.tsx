@@ -1,5 +1,5 @@
 // 약관 동의 체크박스
-export default function CheckBox({ isChecked }) {
+export const CheckBox = ({ isChecked }) => {
   return (
     <svg
       width="24"
@@ -15,4 +15,19 @@ export default function CheckBox({ isChecked }) {
       />
     </svg>
   );
-}
+};
+
+// 아래 화살표
+export const DownLightArrow = () => {
+  return (
+    <svg
+      width="24"
+      height="24"
+      viewBox="0 0 24 24"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path d="M18 9L12 15L6 9" stroke="#1A1A1A" />
+    </svg>
+  );
+};
