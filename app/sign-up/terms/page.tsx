@@ -50,7 +50,7 @@ export default function SignUp_Terms() {
     setIsButtonActive(terms1 && terms2 && all);
   }, [isChecked]);
   return (
-    <div className="flex w-full px-4 py-8 flex-col items-center gap-6 self-stretch">
+    <div className="signup-screen">
       <TalkKitLogo width={280} height={79} />
 
       <SignUpProgress

@@ -37,10 +37,7 @@ export default function SignUp_Email() {
       </div>
 
       {/* 인증번호를 입력해주세요 */}
-      <input
-        className="flex w-full max-w-[600px] py-2 pr-2 h-[50px] justify-between border-[1px] border-gray-3 pl-4 rounded-lg placeholder:text-gray-3"
-        placeholder="인증번호를 입력해주세요"
-      />
+      <input className="signup-input" placeholder="인증번호를 입력해주세요" />
 
       {/* 다음 버튼 */}
       <div className="w-full max-w-[600px]">
