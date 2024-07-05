@@ -4,9 +4,19 @@ import { useState } from "react";
 import TalkKitLogo from "../../components/LOGO";
 import SignUpProgress from "../components/SignUpProgress";
 import { useRouter } from "next/navigation";
+import { DownLightArrow } from "../../components/Icons";
 
 export default function SignUp_Detail() {
   const router = useRouter();
+
+  const [showAffiliation, setShowAffiliation] = useState(false);
+  const [affiliation, setAffiliation] = useState("");
+
+  const handleAffiliationSelect = (value: string) => {
+    setAffiliation(value);
+    setShowAffiliation(false);
+  };
+
   const [isButtonActive, setIsButtonActive] = useState(false);
   return (
     <div className="signup-screen">
@@ -53,9 +63,61 @@ export default function SignUp_Detail() {
       </div>
 
       {/* 소속 */}
-      <div className="flex max-w-[600px] w-full flex-col items-start gap-2">
+      <div className="flex max-w-[600px] w-full flex-col items-start gap-1 relative">
         <span className="text-gray-4 text-sm font-bold">소속</span>
-        <input className="signup-input" placeholder="소속을 선택해 주세요" />
+        <div
+          onClick={() => {
+            setShowAffiliation((prev) => !prev);
+          }}
+          className="signup-input items-center cursor-pointer"
+        >
+          <input
+            value={affiliation}
+            className="placeholder:text-gray-3 cursor-pointer"
+            placeholder="소속을 선택해 주세요"
+            onFocus={(e) => e.target.blur()}
+            readOnly
+          />
+          <DownLightArrow />
+        </div>
+
+        {/* 소속 상세 */}
+        {showAffiliation && (
+          <div className="flex flex-col items-start w-full max-w-[600px] rounded-lg border-[1px] border-gray-2 bg-white shadow-lg cursor-pointer">
+            <div
+              onClick={() => {
+                handleAffiliationSelect("청소년");
+              }}
+              className="flex py-[6px] px-6 items-center self-stretch text-gray-9 text-sm font-normal"
+            >
+              청소년
+            </div>
+            <div
+              onClick={() => {
+                handleAffiliationSelect("대학생");
+              }}
+              className="flex py-[6px] px-6 items-center self-stretch text-gray-9 text-sm font-normal"
+            >
+              대학생
+            </div>
+            <div
+              onClick={() => {
+                handleAffiliationSelect("직장인");
+              }}
+              className="flex py-[6px] px-6 items-center self-stretch text-gray-9 text-sm font-normal"
+            >
+              직장인
+            </div>
+            <div
+              onClick={() => {
+                handleAffiliationSelect("기타");
+              }}
+              className="flex py-[6px] px-6 items-center self-stretch text-gray-9 text-sm font-normal"
+            >
+              기타
+            </div>
+          </div>
+        )}
       </div>
 
       {/* 다음 버튼 */}
