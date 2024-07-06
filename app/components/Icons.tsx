@@ -31,3 +31,35 @@ export const DownLightArrow = () => {
     </svg>
   );
 };
+
+// 플러스 아이콘
+export const PlusIcon = () => {
+  return (
+    <svg
+      width="30"
+      height="30"
+      viewBox="0 0 30 30"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+      xmlnsXlink="http://www.w3.org/1999/xlink"
+    >
+      <rect width="30" height="30" fill="url(#pattern0_433_1782)" />
+      <defs>
+        <pattern
+          id="pattern0_433_1782"
+          patternContentUnits="objectBoundingBox"
+          width="1"
+          height="1"
+        >
+          <use xlinkHref="#image0_433_1782" transform="scale(0.0104167)" />
+        </pattern>
+        <image
+          id="image0_433_1782"
+          width="96"
+          height="96"
+          xlinkHref="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGAAAABgCAYAAADimHc4AAAAAXNSR0IArs4c6QAAAfNJREFUeF7tmjFuAgEQA+/emyovoeK9oLQpsKzYMhcm7S5emDlLROI8+JsSOKfXOX4gYPwQIAABYwLj8zQAAWMC4/M0AAFjAuPzNAABYwLj8zQAAWMC4/M0AAFjAuPzNAABYwLj8zQAAWMC4/M0AAEega/vx+PVK+6381IP1aXe7A94BHgPbHwbAXGkXiACPF7xbQTEkXqBCPB4xbcREEfqBSLA4xXfRkAcqReIAI9XfBsBcaReIAI8XvFtBMSReoEI8HjFtxEQR+oFIsDjFd9GQBypF4gAj1d8GwFxpF4gAjxe8W0ExJF6gQjweMW3ERBH6gUiQPBSgDzc77ed/t1R/HdBCPAeGgR4vA4aYAJLryMgTdTMQ4AJLL2OgDRRMw8BJrD0+tsLSH/g33nqa24aUPvzxL+Gtt8wAtqE//ifNg0oC6IBZcAqHgGKUHmOgDJgFY8ARag8R0AZsIpHgCJUniOgDFjFI0ARKs8RUAas4hGgCJXnCCgDVvEIUITKcwSUAat4BChC5TkCyoBVPAIUofIcAWXAKh4BilB5joAyYBWPAEWoPEdAGfCnxV/ud0H/TRACxkYRgIAxgfF5GoCAMYHxeRqAgDGB8XkagIAxgfF5GoCAMYHxeRqAgDGB8XkagIAxgfF5GoCAMYHxeRowFvAE8l7gYUYIzS4AAAAASUVORK5CYII="
+        />
+      </defs>
+    </svg>
+  );
+};
