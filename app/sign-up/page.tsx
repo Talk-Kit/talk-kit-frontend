@@ -6,8 +6,9 @@ import TalkKitLogo from "../components/LOGO";
 import SignUpProgress from "./components/SignUpProgress";
 import { CheckBox } from "../components/Icons";
 import PrimaryButton from "./components/PrimaryButton";
+import { Terms1, Terms2, Terms3 } from "./components/Terms";
 
-type CheckboxName = "all" | "terms1" | "terms2";
+type CheckboxName = "all" | "terms1" | "terms2" | "terms3";
 
 export default function SignUp_Terms() {
   const router = useRouter();
@@ -16,6 +17,7 @@ export default function SignUp_Terms() {
     all: false,
     terms1: false,
     terms2: false,
+    terms3: false,
   });
 
   useEffect(() => {
@@ -33,6 +35,7 @@ export default function SignUp_Terms() {
         all: isAllChecked,
         terms1: isAllChecked,
         terms2: isAllChecked,
+        terms3: isAllChecked,
       });
     } else {
       setIsChecked((prevState) => ({
@@ -46,7 +49,7 @@ export default function SignUp_Terms() {
 
   useEffect(() => {
     const { terms1, terms2, all } = isChecked;
-    // 모든 조건이 참일 때만 버튼을 활성화
+    // [필수] 조건이 참일 때만 버튼을 활성화
     setIsButtonActive(terms1 && terms2 && all);
   }, [isChecked]);
 
@@ -79,56 +82,22 @@ export default function SignUp_Terms() {
       </button>
 
       {/* 토크키트 이용 약관 */}
-      <div className="flex w-full max-w-[600px] flex-col items-start gap-4">
-        <button
-          onClick={() => handleCheckboxClick("terms1")}
-          className="flex items-center gap-2 self-stretch"
-        >
-          <CheckBox isChecked={isChecked.terms1} />
-          <span
-            className={`${isChecked.terms1 ? "text-gray-9" : "text-gray-4"}`}
-          >
-            <span className="font-bold">[필수]</span> 토크키트 이용약관
-          </span>
-        </button>
-        <div className="flex h-[120px] py-2 px-4 items-start gap-2 self-stretch border-[1px] border-gray-3 overflow-scroll hide-scrollbar">
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent sed
-          efficitur nulla, eget varius arcu. Phasellus auctor massa vel turpis
-          imperdiet posuere id a metus. Nulla elementum scelerisque elit, non
-          bibendum lacus ornare eu. Cras dignissim aliquam nulla ut porta. Fusce
-          pulvinar sed sem sed aliquet. Vivamus nisl nunc, vulputate eu sem sit
-          amet, viverra dictum mauris. Curabitur eget nunc ultricies, tincidunt
-          arcu sed, auctor enim. Vivamus elementum tincidunt dapibus. Vivamus
-          tincidunt ex nec massa commodo auctor. Cras ultricies posuere dolor
-          efficitur pharetra.
-        </div>
-      </div>
+      <Terms1
+        isChecked={isChecked.terms1}
+        onClick={() => handleCheckboxClick("terms1")}
+      />
 
       {/* 개인정보 수집 및 이용 */}
-      <div className="flex w-full max-w-[600px] flex-col items-start gap-4">
-        <button
-          onClick={() => handleCheckboxClick("terms2")}
-          className="flex items-center gap-2 self-stretch"
-        >
-          <CheckBox isChecked={isChecked.terms2} />
-          <span
-            className={`${isChecked.terms2 ? "text-gray-9" : "text-gray-4"}`}
-          >
-            <span className="font-bold">[필수]</span> 개인정보 수집 및 이용
-          </span>
-        </button>
-        <div className="flex h-[120px] py-2 px-4 items-start gap-2 self-stretch border-[1px] border-gray-3 overflow-scroll hide-scrollbar">
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent sed
-          efficitur nulla, eget varius arcu. Phasellus auctor massa vel turpis
-          imperdiet posuere id a metus. Nulla elementum scelerisque elit, non
-          bibendum lacus ornare eu. Cras dignissim aliquam nulla ut porta. Fusce
-          pulvinar sed sem sed aliquet. Vivamus nisl nunc, vulputate eu sem sit
-          amet, viverra dictum mauris. Curabitur eget nunc ultricies, tincidunt
-          arcu sed, auctor enim. Vivamus elementum tincidunt dapibus. Vivamus
-          tincidunt ex nec massa commodo auctor. Cras ultricies posuere dolor
-          efficitur pharetra.
-        </div>
-      </div>
+      <Terms2
+        isChecked={isChecked.terms2}
+        onClick={() => handleCheckboxClick("terms2")}
+      />
+
+      {/* 마케팅 수신 동의 */}
+      <Terms3
+        isChecked={isChecked.terms3}
+        onClick={() => handleCheckboxClick("terms3")}
+      />
 
       {/* 다음 버튼 */}
       <PrimaryButton
