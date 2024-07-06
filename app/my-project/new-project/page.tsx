@@ -12,7 +12,7 @@ export default function MyProject_New() {
     setIsButtonActive(projectName.trim().length > 0);
   }, [projectName]);
 
-  const handleProjectNameChange = (e) => {
+  const handleProjectNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setProjectName(e.target.value);
   };
   return (
@@ -48,7 +48,7 @@ export default function MyProject_New() {
                 placeholder="대본 추가하려면 우측 플러스 버튼을 눌러 주세요"
               />
             </div>
-            <button className="flex h-[50px] w-[50px] items-center justify-center bg-white rounded-2xl">
+            <button className="flex-center h-[50px] w-[50px] bg-white rounded-2xl">
               <PlusIcon />
             </button>
           </div>
@@ -66,7 +66,7 @@ export default function MyProject_New() {
                 placeholder="음성녹음을 추가하려면 우측 플러스 버튼을 눌러 주세요"
               />
             </div>
-            <button className="flex h-[50px] w-[50px] items-center justify-center bg-white rounded-2xl">
+            <button className="flex-center h-[50px] w-[50px] bg-white rounded-2xl">
               <PlusIcon />
             </button>
           </div>
@@ -84,7 +84,7 @@ export default function MyProject_New() {
                 placeholder="발표자료를 추가하려면 우측 플러스 버튼을 눌러 주세요"
               />
             </div>
-            <button className="flex h-[50px] w-[50px] items-center justify-center bg-white rounded-2xl">
+            <button className="flex-center h-[50px] w-[50px] bg-white rounded-2xl">
               <PlusIcon />
             </button>
           </div>
@@ -98,7 +98,7 @@ export default function MyProject_New() {
               console.log("프로젝트 생성");
             }
           }}
-          className={`flex px-6 py-3 items-center justify-center rounded-lg border-[1px] border-gray-2 font-semibold ${
+          className={`flex-center px-6 py-3 rounded-lg border-[1px] border-gray-2 font-semibold ${
             isButtonActive ? "bg-primary-1 text-white" : "bg-white text-gray-4"
           }`}
         >
