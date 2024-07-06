@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 import TalkKitLogo from "../components/LOGO";
 import SignUpProgress from "./components/SignUpProgress";
 import { CheckBox } from "../components/Icons";
+import PrimaryButton from "./components/PrimaryButton";
 
 type CheckboxName = "all" | "terms1" | "terms2";
 
@@ -48,6 +49,13 @@ export default function SignUp_Terms() {
     // 모든 조건이 참일 때만 버튼을 활성화
     setIsButtonActive(terms1 && terms2 && all);
   }, [isChecked]);
+
+  // 다음 버튼
+  const handleButtonClick = () => {
+    if (isButtonActive) {
+      router.push("/sign-up/e-mail");
+    }
+  };
   return (
     <div className="signup-screen">
       <TalkKitLogo width={280} height={79} />
@@ -123,26 +131,11 @@ export default function SignUp_Terms() {
       </div>
 
       {/* 다음 버튼 */}
-      <div className="w-full max-w-[600px]">
-        <button
-          onClick={() => {
-            if (isButtonActive) {
-              router.push("/sign-up/e-mail");
-            }
-          }}
-          className={`flex w-full max-w-[600px] py-3 px-2 justify-center items-center gap-2 self-stretch rounded-lg border-[1px] border-gray-3 ${
-            isButtonActive ? "bg-primary-1" : "bg-gray-0"
-          } `}
-        >
-          <span
-            className={`${
-              isButtonActive ? "text-gray-0" : "text-gray-3"
-            } font-bold text-center`}
-          >
-            다음
-          </span>
-        </button>
-      </div>
+      <PrimaryButton
+        isActive={isButtonActive}
+        onClick={handleButtonClick}
+        text="다음"
+      />
     </div>
   );
 }

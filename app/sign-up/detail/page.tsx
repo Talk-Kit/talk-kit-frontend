@@ -5,6 +5,7 @@ import TalkKitLogo from "../../components/LOGO";
 import SignUpProgress from "../components/SignUpProgress";
 import { useRouter } from "next/navigation";
 import { DownLightArrow } from "../../components/Icons";
+import PrimaryButton from "../components/PrimaryButton";
 
 export default function SignUp_Detail() {
   const router = useRouter();
@@ -12,12 +13,20 @@ export default function SignUp_Detail() {
   const [showAffiliation, setShowAffiliation] = useState(false);
   const [affiliation, setAffiliation] = useState("");
 
+  // 소속 클릭
   const handleAffiliationSelect = (value: string) => {
     setAffiliation(value);
     setShowAffiliation(false);
   };
 
   const [isButtonActive, setIsButtonActive] = useState(false);
+
+  // 회원가입 버튼 클릭
+  const handleButtonClick = () => {
+    if (isButtonActive) {
+      router.push("/sign-up/e-mail");
+    }
+  };
   return (
     <div className="signup-screen">
       <TalkKitLogo width={280} height={79} />
@@ -121,26 +130,11 @@ export default function SignUp_Detail() {
       </div>
 
       {/* 다음 버튼 */}
-      <div className="w-full max-w-[600px]">
-        <button
-          onClick={() => {
-            if (isButtonActive) {
-              router.push("/sign-up/e-mail");
-            }
-          }}
-          className={`flex w-full max-w-[600px] py-3 px-2 justify-center items-center gap-2 self-stretch rounded-lg border-[1px] border-gray-3 ${
-            isButtonActive ? "bg-primary-1" : "bg-gray-0"
-          } `}
-        >
-          <span
-            className={`${
-              isButtonActive ? "text-gray-0" : "text-gray-3"
-            } font-bold text-center`}
-          >
-            회원가입
-          </span>
-        </button>
-      </div>
+      <PrimaryButton
+        isActive={isButtonActive}
+        onClick={handleButtonClick}
+        text="회원가입"
+      />
     </div>
   );
 }

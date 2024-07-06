@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import TalkKitLogo from "../../components/LOGO";
 import { useRouter } from "next/navigation";
 import SignUpProgress from "../components/SignUpProgress";
+import PrimaryButton from "../components/PrimaryButton";
 
 export default function SignUp_Email() {
   const router = useRouter();
@@ -27,6 +28,12 @@ export default function SignUp_Email() {
   };
 
   const [isButtonActive, setIsButtonActive] = useState(false);
+
+  const handleButtonClick = () => {
+    if (isButtonActive) {
+      router.push("/sign-up/detail");
+    }
+  };
   return (
     <div className="flex py-8 px-4 flex-col items-center gap-6 self-stretch">
       <TalkKitLogo width={280} height={79} />
@@ -66,26 +73,11 @@ export default function SignUp_Email() {
       <input className="signup-input" placeholder="인증번호를 입력해주세요" />
 
       {/* 다음 버튼 */}
-      <div className="w-full max-w-[600px]">
-        <button
-          onClick={() => {
-            if (isButtonActive) {
-              router.push("/sign-up/detail");
-            }
-          }}
-          className={`flex w-full max-w-[600px] py-3 px-2 justify-center items-center gap-2 self-stretch rounded-lg border-[1px] border-gray-3 ${
-            isButtonActive ? "bg-primary-1" : "bg-gray-0"
-          } `}
-        >
-          <span
-            className={`${
-              isButtonActive ? "text-gray-0" : "text-gray-3"
-            } font-bold text-center`}
-          >
-            다음
-          </span>
-        </button>
-      </div>
+      <PrimaryButton
+        isActive={isButtonActive}
+        onClick={handleButtonClick}
+        text="다음"
+      />
     </div>
   );
 }
