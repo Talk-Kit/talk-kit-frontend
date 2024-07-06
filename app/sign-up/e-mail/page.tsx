@@ -9,6 +9,7 @@ import PrimaryButton from "../components/PrimaryButton";
 export default function SignUp_Email() {
   const router = useRouter();
 
+  // 이메일 입력 받기
   const [email, setEmail] = useState("");
   const [isEmailValid, setIsEmailValid] = useState(false);
 
@@ -17,10 +18,11 @@ export default function SignUp_Email() {
     setIsEmailValid(emailRegex.test(email)); // 정규식 검사
   }, [email]);
 
-  const handleEmailChange = (e) => {
+  const handleEmailChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setEmail(e.target.value);
   };
 
+  // 인증요청 버튼 클릭
   const handleAuthRequest = () => {
     if (isEmailValid) {
       console.log("인증 요청");
@@ -29,13 +31,14 @@ export default function SignUp_Email() {
 
   const [isButtonActive, setIsButtonActive] = useState(false);
 
+  // 다음 버튼 클릭
   const handleButtonClick = () => {
     if (isButtonActive) {
       router.push("/sign-up/detail");
     }
   };
   return (
-    <div className="flex py-8 px-4 flex-col items-center gap-6 self-stretch">
+    <div className="flex py-8 px-4 flex-col items-center gap-6">
       <TalkKitLogo width={280} height={79} />
       {/* 텍스트 */}
       <SignUpProgress

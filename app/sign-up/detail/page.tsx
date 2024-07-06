@@ -6,6 +6,7 @@ import SignUpProgress from "../components/SignUpProgress";
 import { useRouter } from "next/navigation";
 import { DownLightArrow } from "../../components/Icons";
 import PrimaryButton from "../components/PrimaryButton";
+import AffiliationSelect from "./components/AffiliationSelect";
 
 export default function SignUp_Detail() {
   const router = useRouter();
@@ -82,7 +83,7 @@ export default function SignUp_Detail() {
         >
           <input
             value={affiliation}
-            className="placeholder:text-gray-3 cursor-pointer"
+            className="placeholder:text-gray-3 placeholder:font-normal cursor-pointer "
             placeholder="소속을 선택해 주세요"
             onFocus={(e) => e.target.blur()}
             readOnly
@@ -90,42 +91,12 @@ export default function SignUp_Detail() {
           <DownLightArrow />
         </div>
 
-        {/* 소속 상세 */}
+        {/* 소속 선택 */}
         {showAffiliation && (
-          <div className="flex flex-col items-start w-full max-w-[600px] rounded-lg border-[1px] border-gray-2 bg-white shadow-lg cursor-pointer">
-            <div
-              onClick={() => {
-                handleAffiliationSelect("청소년");
-              }}
-              className="flex py-[6px] px-6 items-center self-stretch text-gray-9 text-sm font-normal"
-            >
-              청소년
-            </div>
-            <div
-              onClick={() => {
-                handleAffiliationSelect("대학생");
-              }}
-              className="flex py-[6px] px-6 items-center self-stretch text-gray-9 text-sm font-normal"
-            >
-              대학생
-            </div>
-            <div
-              onClick={() => {
-                handleAffiliationSelect("직장인");
-              }}
-              className="flex py-[6px] px-6 items-center self-stretch text-gray-9 text-sm font-normal"
-            >
-              직장인
-            </div>
-            <div
-              onClick={() => {
-                handleAffiliationSelect("기타");
-              }}
-              className="flex py-[6px] px-6 items-center self-stretch text-gray-9 text-sm font-normal"
-            >
-              기타
-            </div>
-          </div>
+          <AffiliationSelect
+            show={showAffiliation}
+            onSelect={handleAffiliationSelect}
+          />
         )}
       </div>
 

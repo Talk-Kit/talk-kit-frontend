@@ -1,6 +1,18 @@
 import { ProgressCircle, ProgressBarCircle } from "./Icons";
 
-export default function SignUpProgress({ text, num, isStep2, isStep3 }) {
+interface SignUpProgressProps {
+  text: string;
+  num: number;
+  isStep2: boolean;
+  isStep3: boolean;
+}
+
+export default function SignUpProgress({
+  text,
+  num,
+  isStep2,
+  isStep3,
+}: SignUpProgressProps) {
   return (
     <div className="flex flex-col gap-6 items-center text-gray-9">
       <div className="text-gray-9 items-center text-lg font-semibold">

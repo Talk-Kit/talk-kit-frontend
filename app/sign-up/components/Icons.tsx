@@ -30,7 +30,7 @@ export const ProgressBarCircle = ({ isActive }) => {
           x2="50"
           y2="15"
           stroke={isActive ? "#6B71FF" : "#DADADA"}
-          stroke-width="4"
+          strokeWidth="4"
         />
         <circle
           id="Ellipse 8"

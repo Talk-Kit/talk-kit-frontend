@@ -6,11 +6,11 @@ interface PrimaryButtonProps {
   text: string;
 }
 
-const PrimaryButton: React.FC<PrimaryButtonProps> = ({
+export default function PrimaryButton({
   isActive,
   onClick,
   text,
-}) => {
+}: PrimaryButtonProps) {
   return (
     <div className="w-full max-w-[600px]">
       <button
@@ -29,6 +29,4 @@ const PrimaryButton: React.FC<PrimaryButtonProps> = ({
       </button>
     </div>
   );
-};
-
-export default PrimaryButton;
+}
