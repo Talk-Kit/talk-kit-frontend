@@ -15,7 +15,7 @@ export default function PrimaryButton({
     <div className="w-full max-w-[600px]">
       <button
         onClick={onClick}
-        className={`flex w-full max-w-[600px] py-3 px-2 justify-center items-center gap-2 self-stretch rounded-lg border-[1px] border-gray-3 ${
+        className={`signup-max-w-600 py-3 px-2 flex-center gap-2 self-stretch rounded-lg border-[1px] border-gray-3 ${
           isActive ? "bg-primary-1" : "bg-gray-0"
         }`}
       >

@@ -35,7 +35,7 @@ export default function SignUp_Detail() {
       <SignUpProgress text="회원생성" num={3} isStep2={true} isStep3={true} />
 
       {/* 아이디 */}
-      <div className="flex max-w-[600px] w-full flex-col items-start gap-2">
+      <div className="signup-max-w-600 flex-col items-start gap-2">
         <span className="text-gray-4 text-sm font-bold">아이디</span>
         <input
           className="signup-input"
@@ -44,7 +44,7 @@ export default function SignUp_Detail() {
       </div>
 
       {/* 비밀번호 */}
-      <div className="flex max-w-[600px] w-full flex-col items-start gap-2">
+      <div className="signup-max-w-600 flex-col items-start gap-2">
         <span className="text-gray-4 text-sm font-bold">비밀번호</span>
         <input
           className="signup-input"
@@ -54,7 +54,7 @@ export default function SignUp_Detail() {
       </div>
 
       {/* 비밀번호 확인 */}
-      <div className="flex max-w-[600px] w-full flex-col items-start gap-2">
+      <div className="signup-max-w-600 flex-col items-start gap-2">
         <span className="text-gray-4 text-sm font-bold">비밀번호 확인</span>
         <input
           className="signup-input"
@@ -64,7 +64,7 @@ export default function SignUp_Detail() {
       </div>
 
       {/* 닉네임 */}
-      <div className="flex max-w-[600px] w-full flex-col items-start gap-2">
+      <div className="signup-max-w-600 flex-col items-start gap-2">
         <span className="text-gray-4 text-sm font-bold">닉네임</span>
         <input
           className="signup-input"
@@ -73,7 +73,7 @@ export default function SignUp_Detail() {
       </div>
 
       {/* 소속 */}
-      <div className="flex max-w-[600px] w-full flex-col items-start gap-1 relative">
+      <div className="signup-max-w-600 flex-col items-start gap-1 relative">
         <span className="text-gray-4 text-sm font-bold">소속</span>
         <div
           onClick={() => {

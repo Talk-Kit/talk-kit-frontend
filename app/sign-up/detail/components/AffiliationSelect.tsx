@@ -12,7 +12,7 @@ export default function AffiliationSelect({
   if (!show) return null;
 
   return (
-    <div className="flex flex-col items-start w-full max-w-[600px] rounded-lg border-[1px] border-gray-2 bg-white shadow-lg cursor-pointer">
+    <div className="signup-max-w-600 flex-col items-start rounded-lg border-[1px] border-gray-2 bg-white shadow-lg cursor-pointer">
       <div
         onClick={() => onSelect("청소년")}
         className="flex py-[6px] px-6 items-center self-stretch text-gray-9 text-sm"

@@ -36,11 +36,18 @@ body {
 }
 
 @layer components {
+  .flex-center {
+    @apply flex justify-center items-center;
+  }
+
   /* 회원가입 */
   .signup-screen {
     @apply flex w-full px-4 py-8 flex-col items-center gap-6 self-stretch;
   }
+  .signup-max-w-600 {
+    @apply flex w-full max-w-[600px];
+  }
   .signup-input {
-    @apply flex w-full max-w-[600px] py-2 pr-2 h-[50px] justify-between border-[1px] border-gray-3 pl-4 rounded-lg font-semibold placeholder:text-gray-3 placeholder:font-normal;
+    @apply signup-max-w-600 py-2 pr-2 h-[50px] justify-between border-[1px] border-gray-3 pl-4 rounded-lg font-semibold placeholder:text-gray-3 placeholder:font-normal;
   }
 }

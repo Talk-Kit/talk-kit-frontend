@@ -73,7 +73,7 @@ export default function SignUp_Terms() {
       {/* 전체 동의하기 */}
       <button
         onClick={() => handleCheckboxClick("all")}
-        className="flex w-full max-w-[600px] h-6 items-center gap-2"
+        className="signup-max-w-600 h-6 items-center gap-2"
       >
         <CheckBox isChecked={isChecked.all} />
         <span className={`${isChecked.all ? "text-gray-9" : "text-gray-4"}`}>

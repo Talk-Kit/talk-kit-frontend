@@ -52,7 +52,7 @@ export default function SignUp_Email() {
       </span>
 
       {/* 이메일을 입력해주세요 */}
-      <div className="flex w-full items-center max-w-[600px] py-2 px-4 h-[50px] justify-between border-[1px] border-gray-3 rounded-lg">
+      <div className="signup-max-w-600 justify-between items-center py-2 px-4 h-[50px] border-[1px] border-gray-3 rounded-lg">
         <input
           type="email"
           className="w-full placeholder:text-gray-3 outline-none"
@@ -62,7 +62,7 @@ export default function SignUp_Email() {
         />
         <div
           onClick={handleAuthRequest}
-          className={`flex items-center justify-center py-2 px-3 rounded-lg border-[1px] cursor-pointer ${
+          className={`flex-center py-2 px-3 rounded-lg border-[1px] cursor-pointer ${
             isEmailValid ? "bg-primary-1" : "bg-gray-2"
           }`}
         >
