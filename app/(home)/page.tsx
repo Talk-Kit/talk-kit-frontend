@@ -3,6 +3,7 @@
 import Banner from "../components/Banner";
 import FileCard from "../components/FileCard";
 import PostCard from "../components/PostCard";
+import TopBar from "../components/TopBar";
 
 const dummyPostData = [
   {
@@ -62,8 +63,8 @@ const dummyFileData = [
 export default function Home() {
   return (
     <>
-      <nav></nav>
-      <div className="w-full flex flex-col items-center">
+      <TopBar screen="lg" />
+      <div className="pt-[72px] w-full flex flex-col items-center">
         <section className="w-full h-[400px] flex bg-gray-3 justify-center px-4">
           <div className="w-full max-w-[1200px] flex flex-col justify-center gap-4">
             <h2 className="font-bold text-[2rem]">발표를 쉽고 편리하게</h2>
