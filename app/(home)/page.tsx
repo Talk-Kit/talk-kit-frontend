@@ -3,7 +3,7 @@
 import Banner from "../components/Banner";
 import FileCard from "../components/FileCard";
 import PostCard from "../components/PostCard";
-import TopBar from "../components/TopBar";
+import TopBar from "../components/TopBar/TopBar";
 
 const dummyPostData = [
   {

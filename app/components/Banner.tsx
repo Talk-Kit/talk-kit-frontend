@@ -26,7 +26,7 @@ export default function Banner({
       initial="hidden"
       whileInView="visible"
       viewport={{ once: true, amount: 0.4 }}
-      className={`w-full sm:py-8 lg:h-[400px] flex justify-center px-4 ${
+      className={`w-full sm:py-8 lg:h-[400px] flex justify-center px-4 -z-10 ${
         reversed && "bg-primary-0"
       }`}
     >
