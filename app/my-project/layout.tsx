@@ -1,4 +1,5 @@
 import React from "react";
+import MyProjectFooter from "./components/Footer";
 
 export const metadata = {
   title: "토크키트",
@@ -10,5 +11,10 @@ export default function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
-  return <>{children}</>;
+  return (
+    <>
+      {children}
+      <MyProjectFooter />
+    </>
+  );
 }

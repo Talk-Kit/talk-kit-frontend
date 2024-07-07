@@ -18,7 +18,7 @@ export default function MyProject_New() {
   return (
     <div
       style={{ background: "rgba(189, 203, 253, 0.20)" }}
-      className="mt-[72px] mb-[88px] h-auto flex py-[60px] px-4 lg:px-[120px] flex-col items-center self-stretch"
+      className="mt-[72px] h-auto flex py-[60px] px-4 lg:px-[120px] flex-col items-center self-stretch"
     >
       <div className="flex flex-col items-center gap-8 self-stretch">
         {/* 프로젝트명 */}
