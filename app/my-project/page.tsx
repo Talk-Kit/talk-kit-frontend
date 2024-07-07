@@ -1,29 +1,44 @@
 "use client";
 
+import { useState } from "react";
 import { EmptyProjectIcon } from "./components/Icons";
-import MyProjectFolder, { CreateFolder } from "./components/MyProjectFolder";
+import MyProjectFolder from "./components/MyProjectFolder";
+import { useRouter } from "next/navigation";
 
 export default function MyProject() {
-  const myProjectList = ["ex1", "ex2", "ex3", "ex4", "ex5", "ex6", "ex7"];
+  const [myProjectList, setMyProjectList] = useState([
+    "ex1",
+    "ex2",
+    "ex3",
+    "ex4",
+    "ex5",
+    "ex6",
+    "ex7",
+  ]);
   return (
     <div className="pt-[72px] flex px-4 py-8 flex-col items-center self-stretch">
       {/* 위에 */}
-      <div
-        style={{ background: "rgba(247, 247, 247, 0.50)" }}
-        className="flex py-8 px-0 flex-col justify-center items-center gap-8 self-stretch"
-      >
-        <div className="flex w-full py-0 px-4 justify-start gap-6 self-stretch flex-wrap">
-          {myProjectList.map((index) => (
-            <MyProjectFolder key={index} />
-          ))}
-          <CreateFolder />
+      {myProjectList.length > 0 ? (
+        <div
+          style={{ background: "rgba(247, 247, 247, 0.50)" }}
+          className="flex py-8 px-0 flex-col justify-center items-center gap-8 self-stretch"
+        >
+          <div className="flex w-full py-0 px-4 justify-start gap-6 self-stretch flex-wrap">
+            {myProjectList.map((index) => (
+              <MyProjectFolder key={index} />
+            ))}
+            <MyProjectFolder isCreate />
+          </div>
         </div>
-      </div>
+      ) : (
+        <EmptyProject />
+      )}
     </div>
   );
 }
 
 const EmptyProject = () => {
+  const router = useRouter();
   return (
     <div className="flex flex-col items-center gap-[60px] self-stretch">
       <div className="flex flex-col items-center gap-3 self-stretch">
@@ -42,7 +57,7 @@ const EmptyProject = () => {
       <button
         type="button"
         onClick={() => {
-          console.log("새로운 프로젝트 생성하러 가기");
+          router.push("/my-project/new-project");
         }}
         className="flex-center py-3 px-6 gap-[10px] rounded-lg bg-primary-1 text-gray-0 font-semibold "
       >
