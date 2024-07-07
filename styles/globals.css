@@ -19,6 +19,10 @@
 body {
 }
 
+* {
+  @apply text-gray-9 whitespace-pre-wrap break-keep;
+}
+
 /* 스크롤바 숨기기 */
 .hide-scrollbar {
   -ms-overflow-style: none; /* IE and Edge */
@@ -38,6 +42,9 @@ body {
 @layer components {
   .flex-center {
     @apply flex justify-center items-center;
+  }
+  .long-button {
+    @apply w-full py-3 rounded-lg;
   }
 
   /* 회원가입 */
