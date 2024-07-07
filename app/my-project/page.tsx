@@ -11,10 +11,10 @@ export default function MyProject() {
           <div className="flex-center w-[200px] h-[200px]">
             <EmptyProjectIcon />
           </div>
-          <span className="flex-center py-1 px-3 gap-[10px] self-stretch text-gray-9 text-center ">
+          <span className="flex-center py-1 px-3 gap-[10px] self-stretch text-center ">
             생성된 프로젝트가 아직 없습니다
           </span>
-          <span className="flex-center py-1 px-3 gap-[10px] self-stretch text-gray-9 text-center ">
+          <span className="flex-center py-1 px-3 gap-[10px] self-stretch text-center ">
             프로젝트를 생성하여 <br /> 자료들을 효율적으로 관리해 보세요!
           </span>
         </div>

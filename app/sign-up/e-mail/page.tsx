@@ -47,7 +47,7 @@ export default function SignUp_Email() {
         isStep2={true}
         isStep3={false}
       />
-      <span className="text-gray-9 text-center text-sm">
+      <span className="text-center text-sm">
         인증에 사용한 이메일은 로그인할 때 사용돼요
       </span>
 

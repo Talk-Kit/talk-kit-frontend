@@ -23,12 +23,10 @@ export default function MyProject_New() {
       <div className="flex flex-col items-center gap-8 self-stretch">
         {/* 프로젝트명 */}
         <div className="flex w-full flex-col gap-3">
-          <span className="px-[10px] text-gray-9 font-semibold">
-            프로젝트명
-          </span>
+          <span className="px-[10px] font-semibold">프로젝트명</span>
           <div className="flex h-[50px] px-6 justify-between items-center bg-white rounded-2xl">
             <input
-              className="flex w-full py-[10px] items-center outline-none text-gray-9 font-semibold placeholder:text-gray-3 placeholder:font-normal"
+              className="flex w-full py-[10px] items-center outline-none font-semibold placeholder:text-gray-3 placeholder:font-normal"
               placeholder="생성할 프로젝트명을 입력해주세요"
               value={projectName}
               onChange={handleProjectNameChange}
@@ -38,13 +36,13 @@ export default function MyProject_New() {
 
         {/* 대본 */}
         <div className="flex w-full flex-col items-start gap-3">
-          <span className="flex px-8 py-0 items-center text-gray-9 font-semibold">
+          <span className="flex px-8 py-0 items-center font-semibold">
             대본
           </span>
           <div className="flex w-full pl-8 justify-center gap-3">
             <div className="flex w-full h-[50px] px-6 items-center rounded-2xl bg-white">
               <input
-                className="flex py-[10px] items-center w-full outline-none text-gray-9 font-semibold placeholder:text-gray-3 placeholder:font-normal"
+                className="flex py-[10px] items-center w-full outline-none font-semibold placeholder:text-gray-3 placeholder:font-normal"
                 placeholder="대본 추가하려면 우측 플러스 버튼을 눌러 주세요"
               />
             </div>
@@ -56,13 +54,13 @@ export default function MyProject_New() {
 
         {/* 음성녹음 */}
         <div className="flex w-full flex-col items-start gap-3">
-          <span className="flex px-8 py-0 items-center text-gray-9 font-semibold">
+          <span className="flex px-8 py-0 items-center font-semibold">
             음성녹음
           </span>
           <div className="flex w-full pl-8 justify-center gap-3">
             <div className="flex w-full h-[50px] px-6 items-center rounded-2xl bg-white">
               <input
-                className="flex py-[10px] items-center w-full outline-none text-gray-9 font-semibold placeholder:text-gray-3 placeholder:font-normal"
+                className="flex py-[10px] items-center w-full outline-none font-semibold placeholder:text-gray-3 placeholder:font-normal"
                 placeholder="음성녹음을 추가하려면 우측 플러스 버튼을 눌러 주세요"
               />
             </div>
@@ -74,13 +72,13 @@ export default function MyProject_New() {
 
         {/* 발표자료 */}
         <div className="flex w-full flex-col items-start gap-3">
-          <span className="flex px-8 py-0 items-center text-gray-9 font-semibold">
+          <span className="flex px-8 py-0 items-center font-semibold">
             발표자료
           </span>
           <div className="flex w-full pl-8 justify-center gap-3">
             <div className="flex w-full h-[50px] px-6 items-center rounded-2xl bg-white">
               <input
-                className="flex py-[10px] items-center w-full outline-none text-gray-9 font-semibold placeholder:text-gray-3 placeholder:font-normal"
+                className="flex py-[10px] items-center w-full outline-none font-semibold placeholder:text-gray-3 placeholder:font-normal"
                 placeholder="발표자료를 추가하려면 우측 플러스 버튼을 눌러 주세요"
               />
             </div>
