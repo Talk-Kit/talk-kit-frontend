@@ -1,3 +1,5 @@
+import { motion } from "framer-motion";
+
 interface IBanner {
   tag: string;
   title: string;
@@ -15,13 +17,22 @@ export default function Banner({
   img,
   reversed,
 }: IBanner) {
+  const variants = {
+    hidden: { y: 60, opacity: 0 },
+    visible: { y: 0, opacity: 1 },
+  };
   return (
-    <section
+    <motion.section
+      initial="hidden"
+      whileInView="visible"
+      viewport={{ once: true, amount: 0.4 }}
       className={`w-full sm:py-8 lg:h-[400px] flex justify-center px-4 ${
         reversed && "bg-primary-0"
       }`}
     >
-      <div
+      <motion.div
+        variants={variants}
+        transition={{ type: "tween", duration: 0.5 }}
         className={`w-full max-w-[1200px] flex gap-8 items-center ${
           reversed
             ? "flex-col-reverse lg:flex-row-reverse"
@@ -43,7 +54,7 @@ export default function Banner({
             바로 사용해보기↗ {/* 링크 연결 필요 */}
           </span>
         </div>
-      </div>
-    </section>
+      </motion.div>
+    </motion.section>
   );
 }
