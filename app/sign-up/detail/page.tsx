@@ -8,7 +8,7 @@ import { DownLightArrow } from "../../components/Icons";
 import PrimaryButton from "../components/PrimaryButton";
 import AffiliationSelect from "./components/AffiliationSelect";
 import { SubmitHandler, useForm } from "react-hook-form";
-import { AlertIcon } from "../components/Icons";
+import { AlertIcon, DetailCheckBox } from "../components/Icons";
 
 interface FormData {
   id: string;
@@ -26,10 +26,13 @@ export default function SignUp_Detail() {
     watch,
     setError,
     clearErrors,
-    formState: { errors, isValid },
+    formState: { errors },
   } = useForm<FormData>({
-    mode: "onChange",
+    mode: "onBlur",
   });
+
+  const [idChecked, setIdChecked] = useState(false);
+  const [nicknameChecked, setNicknameChecked] = useState(false);
 
   // 아이디 유효성 검사
   const validateId = (id: string) => {
@@ -64,9 +67,9 @@ export default function SignUp_Detail() {
   };
 
   // 닉네임 중복 검사
-  const checkNicknameDuplicate = (nickname: string) => [
-    console.log("닉네임 중복검사"),
-  ];
+  const checkNicknameDuplicate = (nickname: string) => {
+    console.log("닉네임 중복검사");
+  };
 
   // 소속
   const [showAffiliation, setShowAffiliation] = useState(false);
@@ -104,7 +107,6 @@ export default function SignUp_Detail() {
     // 닉네임 중복 검사
     checkNicknameDuplicate(data.nickname);
 
-    console.log(isButtonActive);
     console.log("서브밋", data);
     router.push("/sign-up/done");
   };
@@ -129,6 +131,12 @@ export default function SignUp_Detail() {
           <span className="flex items-center gap-[6px] self-stretch text-red-1 text-sm">
             <AlertIcon />
             {errors.id.message}
+          </span>
+        )}
+        {errors.id && idChecked && (
+          <span className="flex items-center gap-[6px] self-stretch text-gray-4 text-sm">
+            <DetailCheckBox />
+            아이디 사용 가능합니다.
           </span>
         )}
       </div>
@@ -170,6 +178,15 @@ export default function SignUp_Detail() {
             {errors.pwdConfirm.message}
           </span>
         )}
+        {!errors.pwd &&
+          !errors.pwdConfirm &&
+          watch("pwdConfirm") === watch("pwd") &&
+          watch("pwd")?.length > 0 && (
+            <span className="flex items-center gap-[6px] self-stretch text-gray-4 text-sm">
+              <DetailCheckBox />
+              비밀번호가 일치합니다
+            </span>
+          )}
       </div>
 
       {/* 닉네임 */}
@@ -187,6 +204,12 @@ export default function SignUp_Detail() {
           <span className="flex items-center gap-[6px] self-stretch text-red-1 text-sm">
             <AlertIcon />
             {errors.nickname.message}
+          </span>
+        )}
+        {!errors.nickname && nicknameChecked && (
+          <span className="flex items-center gap-[6px] self-stretch text-gray-4 text-sm">
+            <DetailCheckBox />
+            닉네임 사용 가능합니다.
           </span>
         )}
       </div>
