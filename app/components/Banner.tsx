@@ -26,7 +26,7 @@ export default function Banner({
       initial="hidden"
       whileInView="visible"
       viewport={{ once: true, amount: 0.4 }}
-      className={`w-full sm:py-8 lg:h-[400px] flex justify-center px-4 -z-10 ${
+      className={`w-full sm:py-8 lg:h-[400px] flex justify-center px-4 ${
         reversed && "bg-primary-0"
       }`}
     >
@@ -50,7 +50,10 @@ export default function Banner({
           <p className="text-sm leading-5 sm:whitespace-normal lg:whitespace-pre-wrap">
             {content}
           </p>
-          <span className="font-semibold leading-5 underline cursor-pointer">
+          <span
+            onClick={() => {}}
+            className="font-semibold leading-5 underline cursor-pointer"
+          >
             바로 사용해보기↗ {/* 링크 연결 필요 */}
           </span>
         </div>
