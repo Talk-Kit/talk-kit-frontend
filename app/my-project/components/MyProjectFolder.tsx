@@ -9,7 +9,7 @@ import {
 import { useState } from "react";
 
 interface MyProjectFolderProps {
-  isCreate: boolean;
+  isCreate?: boolean;
   title: string;
   date: any;
 }

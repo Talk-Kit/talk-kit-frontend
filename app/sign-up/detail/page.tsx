@@ -136,7 +136,7 @@ export default function SignUp_Detail() {
         {errors.id && idChecked && (
           <span className="flex items-center gap-[6px] self-stretch text-gray-4 text-sm">
             <DetailCheckBox />
-            아이디 사용 가능합니다.
+            사용 가능한 아이디입니다
           </span>
         )}
       </div>
@@ -209,7 +209,7 @@ export default function SignUp_Detail() {
         {!errors.nickname && nicknameChecked && (
           <span className="flex items-center gap-[6px] self-stretch text-gray-4 text-sm">
             <DetailCheckBox />
-            닉네임 사용 가능합니다.
+            사용 가능한 닉네임입니다
           </span>
         )}
       </div>

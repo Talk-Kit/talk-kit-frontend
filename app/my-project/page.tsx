@@ -25,12 +25,7 @@ export default function MyProject() {
         >
           <div className="flex w-full py-0 px-4 justify-start gap-6 self-stretch flex-wrap">
             {myProjectList.map((index) => (
-              <MyProjectFolder
-                title="프로젝트명"
-                date="24.07.07"
-                isCreate={false}
-                key={index}
-              />
+              <MyProjectFolder title="프로젝트명" date="24.07.07" key={index} />
             ))}
             <MyProjectFolder title="" date="" isCreate />
           </div>
