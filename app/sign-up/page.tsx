@@ -4,9 +4,9 @@ import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import TalkKitLogo from "../components/LOGO";
 import SignUpProgress from "./components/SignUpProgress";
-import { CheckBox } from "../components/Icons";
 import PrimaryButton from "./components/PrimaryButton";
 import { Terms1, Terms2, Terms3 } from "./components/Terms";
+import { CheckBox } from "./components/Icons";
 
 type CheckboxName = "all" | "terms1" | "terms2" | "terms3";
 

@@ -1,5 +1,5 @@
 import React from "react";
-import { CheckBox } from "../../components/Icons";
+import { CheckBox } from "./Icons";
 
 interface TermsProps {
   isChecked: boolean;
