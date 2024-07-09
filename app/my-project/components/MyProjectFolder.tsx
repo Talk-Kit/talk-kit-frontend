@@ -24,7 +24,7 @@ export default function MyProjectFolder({
   const [showDetail, setShowDetail] = useState(false);
   return (
     <div
-      className="flex-center py-[6px] px-3 flex-col gap-3 w-auto cursor-pointer"
+      className="flex-center max-w-[174px] py-[6px] px-3 flex-col gap-3 w-auto cursor-pointer"
       onClick={() => {
         if (isCreate) {
           router.push("/my-project/new-project");

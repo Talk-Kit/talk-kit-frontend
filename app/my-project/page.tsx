@@ -21,9 +21,9 @@ export default function MyProject() {
       {myProjectList.length > 0 ? (
         <div
           style={{ background: "rgba(247, 247, 247, 0.50)" }}
-          className="flex py-8 px-0 flex-col justify-center items-center gap-8 self-stretch"
+          className="flex py-8 px-0 flex-col items-center gap-8 self-stretch"
         >
-          <div className="flex w-full py-0 px-4 justify-start gap-6 self-stretch flex-wrap">
+          <div className="grid sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-5 py-0 px-4 gap-6 self-stretch">
             {myProjectList.map((index) => (
               <MyProjectFolder title="프로젝트명" date="24.07.07" key={index} />
             ))}
