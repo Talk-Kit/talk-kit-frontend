@@ -1,8 +1,8 @@
 import React from "react";
 
 export const metadata = {
-  title: "토크키트 - 가입완료",
-  description: "토크키트 회원가입 완료 페이지",
+  title: "토크키트",
+  description: "토크키트 프로젝트",
 };
 
 export default function RootLayout({
