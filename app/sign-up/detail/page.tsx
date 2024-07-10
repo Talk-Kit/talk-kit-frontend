@@ -9,6 +9,8 @@ import PrimaryButton from "../components/PrimaryButton";
 import AffiliationSelect from "./components/AffiliationSelect";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { AlertIcon, DetailCheckBox } from "../components/Icons";
+import { useRecoilValue } from "recoil";
+import { emailState } from "../state/atom";
 
 interface FormData {
   id: string;
@@ -19,6 +21,9 @@ interface FormData {
 }
 
 export default function SignUp_Detail() {
+  const email = useRecoilValue(emailState);
+  console.log("디테일 이메일", email);
+
   const router = useRouter();
   const {
     register,
