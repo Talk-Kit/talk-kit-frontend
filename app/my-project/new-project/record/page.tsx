@@ -4,11 +4,8 @@ import { useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { MikeIcon, RecordIcon } from "../../../components/Icons";
 import TopBar from "../../../components/TopBar/TopBar";
-import {
-  PlayIcon,
-  RecordingIcon,
-  ShowSelectionIcon,
-} from "../../components/Icons";
+import { PlayIcon, ShowSelectionIcon } from "../../components/Icons";
+import RecordingAnimation from "../../components/RecordingAnimation";
 
 export default function Record() {
   const [isRecording, setIsRecording] = useState(false);
@@ -30,7 +27,9 @@ export default function Record() {
             <div className="py-6 bg-white rounded-lg">
               <div className="flex flex-col gap-16 items-center">
                 <div className="flex flex-col gap-6 items-center">
-                  <span>{isRecording ? <RecordingIcon /> : <MikeIcon />}</span>
+                  <span>
+                    {isRecording ? <RecordingAnimation /> : <MikeIcon />}
+                  </span>
                   <span
                     className={`text-center font-medium leading-5 ${
                       isRecording && "text-gray-4 text-sm"
