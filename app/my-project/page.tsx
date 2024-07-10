@@ -20,7 +20,10 @@ export default function MyProject() {
       {/* 위에 */}
       {myProjectList.length > 0 ? (
         <div
-          style={{ background: "rgba(247, 247, 247, 0.50)" }}
+          style={{
+            background: "rgba(247, 247, 247, 0.50)",
+            minHeight: "calc(100vh - (88px + 72px))",
+          }}
           className="flex py-8 px-0 flex-col items-center gap-8 self-stretch"
         >
           <div className="grid sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-5 py-0 px-4 gap-6 self-stretch">

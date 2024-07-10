@@ -1,5 +1,6 @@
 import React from "react";
 import "../styles/globals.css";
+import RecoilProvider from "./components/RecoilProvider";
 
 export const metadata = {
   title: "토크키트",
@@ -13,7 +14,9 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body>{children}</body>
+      <body>
+        <RecoilProvider>{children}</RecoilProvider>
+      </body>
     </html>
   );
 }
