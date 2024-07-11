@@ -9,8 +9,8 @@ import PrimaryButton from "../components/PrimaryButton";
 import AffiliationSelect from "./components/AffiliationSelect";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { AlertIcon, DetailCheckBox } from "../components/Icons";
-import { useRecoilValue } from "recoil";
-import { emailState } from "../state/atom";
+import { useRecoilState, useRecoilValue } from "recoil";
+import { emailState, nicknameState } from "../state/atom";
 
 interface FormData {
   id: string;
@@ -22,8 +22,7 @@ interface FormData {
 
 export default function SignUp_Detail() {
   const email = useRecoilValue(emailState);
-  console.log("디테일 이메일", email);
-
+  const [, setNicknameState] = useRecoilState(nicknameState);
   const router = useRouter();
   const {
     register,
@@ -111,6 +110,7 @@ export default function SignUp_Detail() {
 
     // 닉네임 중복 검사
     checkNicknameDuplicate(data.nickname);
+    setNicknameState(data.nickname);
 
     console.log("서브밋", data);
     router.push("/sign-up/done");
