@@ -42,7 +42,7 @@ export default function SignUp_Email() {
     }
   };
   return (
-    <div className="flex py-8 px-4 flex-col items-center gap-6">
+    <div className="signup-screen">
       <TalkKitLogo width={280} height={79} />
       {/* 텍스트 */}
       <SignUpProgress

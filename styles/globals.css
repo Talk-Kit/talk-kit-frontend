@@ -49,7 +49,7 @@ body {
 
   /* 회원가입 */
   .signup-screen {
-    @apply flex w-full px-4 py-8 flex-col items-center gap-6 self-stretch;
+    @apply flex w-full pt-[72px] px-4 pb-8 flex-col items-center gap-6 self-stretch;
   }
   .signup-max-w-600 {
     @apply flex w-full max-w-[600px];
