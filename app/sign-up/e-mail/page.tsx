@@ -3,41 +3,48 @@
 import { useEffect, useState } from "react";
 import TalkKitLogo from "../../components/LOGO";
 import { useRouter } from "next/navigation";
-import SignUpProgress from "../components/SignUpProgress";
-import PrimaryButton from "../components/PrimaryButton";
+import SignUpProgress from "../_components/SignUpProgress";
+import PrimaryButton from "../_components/PrimaryButton";
 import { useRecoilState } from "recoil";
-import { emailState } from "../state/atom";
+import { emailState } from "../_state/atom";
 
 export default function SignUp_Email() {
   const router = useRouter();
   const [, setEmailState] = useRecoilState(emailState);
 
-  // 이메일 입력 받기
-  const [email, setEmail] = useState("");
-  const [isEmailValid, setIsEmailValid] = useState(false);
+  // 이메일 state
+  const [formState, setFormState] = useState({
+    email: "",
+    isEmailValid: false,
+    isBtnActive: true,
+  });
 
   useEffect(() => {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    setIsEmailValid(emailRegex.test(email)); // 정규식 검사
-  }, [email]);
+    setFormState((prev) => ({
+      ...prev,
+      isEmailValid: emailRegex.test(formState.email),
+    })); // 정규식 검사
+  }, [formState.email]);
 
   const handleEmailChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setEmail(e.target.value);
+    setFormState((prevState) => ({
+      ...prevState,
+      email: e.target.value,
+    }));
   };
 
   // 인증요청 버튼 클릭
   const handleAuthRequest = () => {
-    if (isEmailValid) {
+    if (formState.isEmailValid) {
       console.log("인증 요청");
     }
   };
 
-  const [isButtonActive, setIsButtonActive] = useState(true);
-
   // 다음 버튼 클릭
   const handleButtonClick = () => {
-    if (isButtonActive) {
-      setEmailState(email);
+    if (formState.isBtnActive) {
+      setEmailState(formState.email);
       router.push("/sign-up/detail");
     }
   };
@@ -61,13 +68,13 @@ export default function SignUp_Email() {
           type="email"
           className="w-full placeholder:text-gray-3 outline-none"
           placeholder="이메일을 입력해주세요"
-          value={email}
+          value={formState.email}
           onChange={handleEmailChange}
         />
         <div
           onClick={handleAuthRequest}
           className={`flex-center py-2 px-3 rounded-lg border-[1px] cursor-pointer ${
-            isEmailValid ? "bg-primary-1" : "bg-gray-2"
+            formState.isEmailValid ? "bg-primary-1" : "bg-gray-2"
           }`}
         >
           <span className="text-gray-0 text-xs whitespace-nowrap h-5">
@@ -81,7 +88,7 @@ export default function SignUp_Email() {
 
       {/* 다음 버튼 */}
       <PrimaryButton
-        isActive={isButtonActive}
+        isActive={formState.isBtnActive}
         onClick={handleButtonClick}
         text="다음"
       />
