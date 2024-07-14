@@ -3,10 +3,10 @@
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import TalkKitLogo from "../components/LOGO";
-import SignUpProgress from "./components/SignUpProgress";
-import PrimaryButton from "./components/PrimaryButton";
-import { Terms1, Terms2, Terms3 } from "./components/Terms";
-import { CheckBox } from "./components/Icons";
+import SignUpProgress from "./_components/SignUpProgress";
+import PrimaryButton from "./_components/PrimaryButton";
+import { Terms1, Terms2, Terms3 } from "./_components/Terms";
+import { CheckBox } from "./_components/Icons";
 
 type CheckboxName = "all" | "terms1" | "terms2" | "terms3";
 

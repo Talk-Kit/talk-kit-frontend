@@ -1,10 +1,5 @@
 import React from "react";
-
-interface PrimaryButtonProps {
-  isActive: boolean;
-  onClick: () => void;
-  text: string;
-}
+import { PrimaryButtonProps } from "../_types/sign-up_types";
 
 export default function PrimaryButton({
   isActive,

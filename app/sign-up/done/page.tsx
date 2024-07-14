@@ -2,9 +2,9 @@
 
 import { useRouter } from "next/navigation";
 import TalkKitLogo from "../../components/LOGO";
-import PrimaryButton from "../components/PrimaryButton";
+import PrimaryButton from "../_components/PrimaryButton";
 import { useRecoilValue } from "recoil";
-import { nicknameState } from "../state/atom";
+import { nicknameState } from "../_state/atom";
 
 export default function SignUp_Done() {
   const router = useRouter();

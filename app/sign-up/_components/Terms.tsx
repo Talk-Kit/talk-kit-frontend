@@ -1,10 +1,6 @@
 import React from "react";
 import { CheckBox } from "./Icons";
-
-interface TermsProps {
-  isChecked: boolean;
-  onClick: () => void;
-}
+import { TermsProps } from "../_types/sign-up_types";
 
 // 토크키트 이용 약관
 export const Terms1: React.FC<TermsProps> = ({ isChecked, onClick }) => (
