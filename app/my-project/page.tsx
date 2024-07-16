@@ -1,20 +1,13 @@
 "use client";
 
-import { useState } from "react";
+import { ChangeEvent, useState } from "react";
 import { EmptyProjectIcon } from "./components/Icons";
 import MyProjectFolder from "./components/MyProjectFolder";
 import { useRouter } from "next/navigation";
+import { CreateProjectDialog } from "./components/CreateProject";
 
 export default function MyProject() {
-  const [myProjectList, setMyProjectList] = useState([
-    "ex1",
-    "ex2",
-    "ex3",
-    "ex4",
-    "ex5",
-    "ex6",
-    "ex7",
-  ]);
+  const [myProjectList, setMyProjectList] = useState([]);
   return (
     <div className="pt-[72px] flex px-4 py-8 flex-col items-center self-stretch">
       {/* 위에 */}
@@ -43,6 +36,13 @@ export default function MyProject() {
 
 const EmptyProject = () => {
   const router = useRouter();
+
+  const [inputValue, setInputValue] = useState("");
+
+  const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
+    console.log(inputValue);
+    setInputValue(event.target.value);
+  };
   return (
     <div className="flex flex-col items-center gap-[60px] self-stretch">
       <div className="flex flex-col items-center gap-3 self-stretch">
@@ -67,6 +67,12 @@ const EmptyProject = () => {
       >
         새로운 프로젝트 생성하러 가기
       </button>
+
+      {/* <CreateProjectDialog
+        onBtnClick={() => {}}
+        value={inputValue}
+        onChange={handleInputChange}
+      /> */}
     </div>
   );
 };

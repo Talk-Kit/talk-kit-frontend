@@ -12,7 +12,7 @@ interface DialogProps {
   onSubBtnClick?: () => void;
 }
 
-export default function Dialog({
+export function Dialog({
   isWarn,
   topText,
   bottomText,
@@ -25,7 +25,7 @@ export default function Dialog({
 }: DialogProps) {
   return (
     <div className="fixed inset-0 flex-center z-50 bg-black bg-opacity-30">
-      <div className="flex w-[300px] py-6 px-0 flex-col items-start gap-8 rounded-2xl bg-white shadow-xl">
+      <div className="dialog-container">
         <div className="flex flex-col items-center gap-4 self-stretch">
           {/* 아이콘 */}
           <div className="flex-center w-20 h-20 p-[10px]">

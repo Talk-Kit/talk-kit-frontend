@@ -136,7 +136,9 @@ export default function Home() {
         </section>
         <section className="bg-primary-0 w-full flex justify-center px-4 py-8">
           <div className="w-full max-w-[1200px] flex flex-col gap-8">
-            <h2 className="text-[1.75rem]">사용자's Pick, 인기 발표자료</h2>
+            <h2 className="text-[1.75rem]">
+              사용자&apos;s Pick, 인기 발표자료
+            </h2>
             <div className="flex w-full justify-center">
               <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 py-[.62rem] w-full max-w-[600px] lg:max-w-none">
                 {dummyFileData.map((el, index) => (
