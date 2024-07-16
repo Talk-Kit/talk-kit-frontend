@@ -1,9 +1,11 @@
+// 메인 버튼 타입
 export interface PrimaryButtonProps {
   isActive: boolean;
   onClick: () => void;
   text: string;
 }
 
+// 프로그레스 타입
 export interface SignUpProgressProps {
   text: string;
   num: number;
@@ -11,11 +13,13 @@ export interface SignUpProgressProps {
   isStep3: boolean;
 }
 
+// 약관동의 타입
 export interface TermsProps {
   isChecked: boolean;
   onClick: () => void;
 }
 
+// 회원 생성 입력 상세
 export interface FormData {
   id: string;
   pwd: string;
@@ -24,6 +28,7 @@ export interface FormData {
   affiliation: string;
 }
 
+// 소속 선택 타입
 export interface AffiliationSelectProps {
   show: boolean;
   onSelect: (value: string) => void;

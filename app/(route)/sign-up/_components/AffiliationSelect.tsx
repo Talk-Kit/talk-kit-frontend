@@ -1,5 +1,5 @@
 import React from "react";
-import { AffiliationSelectProps } from "../../_types/sign-up_types";
+import { AffiliationSelectProps } from "../_types/sign-up_types";
 
 export default function AffiliationSelect({
   show,
