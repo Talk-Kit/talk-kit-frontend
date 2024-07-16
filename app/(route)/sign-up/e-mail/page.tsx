@@ -1,12 +1,12 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import TalkKitLogo from "../../components/LOGO";
 import { useRouter } from "next/navigation";
-import SignUpProgress from "../_components/SignUpProgress";
-import PrimaryButton from "../_components/PrimaryButton";
 import { useRecoilState } from "recoil";
 import { emailState } from "../_state/atom";
+import TalkKitLogo from "../../../components/LOGO";
+import SignUpProgress from "../_components/SignUpProgress";
+import PrimaryButton from "../_components/PrimaryButton";
 
 export default function SignUp_Email() {
   const router = useRouter();

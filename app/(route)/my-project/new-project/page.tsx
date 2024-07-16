@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { PlusIcon } from "../../components/Icons";
+import { PlusIcon } from "../../../components/Icons";
 
 export default function MyProject_New() {
   const [projectState, setProjectState] = useState({

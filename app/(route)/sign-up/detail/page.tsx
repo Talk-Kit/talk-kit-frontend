@@ -1,10 +1,8 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import TalkKitLogo from "../../components/LOGO";
 import SignUpProgress from "../_components/SignUpProgress";
 import { useRouter } from "next/navigation";
-import { DownLightArrow } from "../../components/Icons";
 import PrimaryButton from "../_components/PrimaryButton";
 import AffiliationSelect from "./_components/AffiliationSelect";
 import { SubmitHandler, useForm } from "react-hook-form";
@@ -12,6 +10,8 @@ import { AlertIcon, DetailCheckBox } from "../_components/Icons";
 import { useRecoilState, useRecoilValue } from "recoil";
 import { emailState, nicknameState } from "../_state/atom";
 import { FormData } from "../_types/sign-up_types";
+import { DownLightArrow } from "../../../components/Icons";
+import TalkKitLogo from "../../../components/LOGO";
 
 export default function SignUp_Detail() {
   const email = useRecoilValue(emailState);
