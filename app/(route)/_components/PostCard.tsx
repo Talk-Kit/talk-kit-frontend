@@ -1,4 +1,4 @@
-import { CommentsIcon, LikesIcon } from "./Icons";
+import { CommentsIcon, LikesIcon } from "../../components/Icons";
 
 interface IPostCard {
   rank: number;

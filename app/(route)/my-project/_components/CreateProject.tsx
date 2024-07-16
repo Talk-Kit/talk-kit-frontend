@@ -1,5 +1,5 @@
 import { ChangeEvent } from "react";
-import { FolderIcon } from "../../components/Icons";
+import { FolderIcon } from "../../../components/Icons";
 
 interface DialogProps {
   onBtnClick: () => void;

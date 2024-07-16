@@ -1,4 +1,4 @@
-import { FolderIcon } from "./Icons";
+import { FolderIcon } from "../../components/Icons";
 
 interface IFileCard {
   title: string;

@@ -1,6 +1,6 @@
 import React from "react";
-import "../styles/globals.css";
-import RecoilProvider from "./components/RecoilProvider";
+import "../../styles/globals.css";
+import RecoilProvider from "../components/RecoilProvider";
 
 export const metadata = {
   title: "토크키트",

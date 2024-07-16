@@ -2,7 +2,7 @@
 
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
-import TalkKitLogo from "../components/LOGO";
+import TalkKitLogo from "../../components/LOGO";
 import SignUpProgress from "./_components/SignUpProgress";
 import PrimaryButton from "./_components/PrimaryButton";
 import { Terms1, Terms2, Terms3 } from "./_components/Terms";

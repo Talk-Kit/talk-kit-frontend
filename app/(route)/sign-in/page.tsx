@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import TalkKitLogo from "../components/LOGO";
+import TalkKitLogo from "../../components/LOGO";
 
 export default function SignIn() {
   const [loginErr, setLoginErr] = useState(false);

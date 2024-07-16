@@ -1,4 +1,4 @@
-import TopBar from "../components/TopBar/TopBar";
+import TopBar from "../../components/TopBar/TopBar";
 
 export const metadata = {
   title: "회원가입",
