@@ -1,10 +1,10 @@
 "use client";
 
 import { ChangeEvent, useState } from "react";
-import { EmptyProjectIcon } from "./components/Icons";
-import MyProjectFolder from "./components/MyProjectFolder";
+import { EmptyProjectIcon } from "./_components/Icons";
+import MyProjectFolder from "./_components/MyProjectFolder";
 import { useRouter } from "next/navigation";
-import { CreateProjectDialog } from "./components/CreateProject";
+import { CreateProjectDialog } from "./_components/CreateProject";
 
 export default function MyProject() {
   const [myProjectList, setMyProjectList] = useState([]);
