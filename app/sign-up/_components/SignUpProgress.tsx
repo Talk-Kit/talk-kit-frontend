@@ -1,11 +1,5 @@
+import { SignUpProgressProps } from "../_types/sign-up_types";
 import { ProgressCircle, ProgressBarCircle } from "./Icons";
-
-interface SignUpProgressProps {
-  text: string;
-  num: number;
-  isStep2: boolean;
-  isStep3: boolean;
-}
 
 export default function SignUpProgress({
   text,

@@ -2,23 +2,16 @@
 
 import { useEffect, useState } from "react";
 import TalkKitLogo from "../../components/LOGO";
-import SignUpProgress from "../components/SignUpProgress";
+import SignUpProgress from "../_components/SignUpProgress";
 import { useRouter } from "next/navigation";
 import { DownLightArrow } from "../../components/Icons";
-import PrimaryButton from "../components/PrimaryButton";
-import AffiliationSelect from "./components/AffiliationSelect";
+import PrimaryButton from "../_components/PrimaryButton";
+import AffiliationSelect from "./_components/AffiliationSelect";
 import { SubmitHandler, useForm } from "react-hook-form";
-import { AlertIcon, DetailCheckBox } from "../components/Icons";
+import { AlertIcon, DetailCheckBox } from "../_components/Icons";
 import { useRecoilState, useRecoilValue } from "recoil";
-import { emailState, nicknameState } from "../state/atom";
-
-interface FormData {
-  id: string;
-  pwd: string;
-  pwdConfirm: string;
-  nickname: string;
-  affiliation: string;
-}
+import { emailState, nicknameState } from "../_state/atom";
+import { FormData } from "../_types/sign-up_types";
 
 export default function SignUp_Detail() {
   const email = useRecoilValue(emailState);
@@ -35,15 +28,42 @@ export default function SignUp_Detail() {
     mode: "onBlur",
   });
 
-  const [idChecked, setIdChecked] = useState(false);
-  const [nicknameChecked, setNicknameChecked] = useState(false);
+  const [formState, setFormState] = useState({
+    idChecked: false,
+    nicknameChecked: false,
+    showAffiliation: false,
+    affiliation: "",
+    isButtonActive: false,
+  });
 
-  // 아이디 유효성 검사
-  const validateId = (id: string) => {
-    const isValidId = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{6,}$/.test(id);
-    return (
-      isValidId || "영문과 숫자를 포함하는 6자 이상의 아이디를 입력해 주세요"
-    );
+  // 각 input validation
+  const validateField = (field: string, type: "id" | "pwd" | "nickname") => {
+    let isValid = false;
+    let message = "";
+
+    switch (type) {
+      case "id":
+        isValid = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{6,}$/.test(field);
+        message = "영문과 숫자를 포함하는 6자 이상의 아이디를 입력해 주세요";
+        break;
+      case "pwd":
+        isValid =
+          /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/.test(
+            field
+          );
+        message =
+          "영문, 숫자, 특수기호를 포함하는 8자 이상의 비밀번호를 입력해 주세요";
+        break;
+      case "nickname":
+        isValid = /^[A-Za-z0-9가-힣]{2,}$/.test(field);
+        message =
+          "영문, 한글 및 숫자로 이루어진 2글자 이상 닉네임을 입력해 주세요";
+        break;
+      default:
+        break;
+    }
+
+    return isValid || message;
   };
 
   // 아이디 중복 검사
@@ -51,60 +71,43 @@ export default function SignUp_Detail() {
     console.log("아이디 중복검사");
   };
 
-  // 비밀번호 유효성 검사
-  const validatePWD = (pwd: string) => {
-    const isValidPwd =
-      /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/.test(pwd);
-    return (
-      isValidPwd ||
-      "영문, 숫자, 특수기호를 포함하는 8자 이상의 비밀번호를 입력해 주세요"
-    );
-  };
-
-  // 닉네임 유효성 검사
-  const validateNickname = (nickname: string) => {
-    const isValidNickname = /^[A-Za-z0-9가-힣]{2,}$/.test(nickname);
-    return (
-      isValidNickname ||
-      "영문, 한글 및 숫자로 이루어진 2글자 이상 닉네임을 입력해 주세요"
-    );
-  };
-
   // 닉네임 중복 검사
   const checkNicknameDuplicate = (nickname: string) => {
     console.log("닉네임 중복검사");
   };
 
-  // 소속
-  const [showAffiliation, setShowAffiliation] = useState(false);
-  const [affiliation, setAffiliation] = useState("");
-
   // 소속 클릭
   const handleAffiliationSelect = (value: string) => {
-    setAffiliation(value);
-    setShowAffiliation(false);
+    setFormState((prevState) => ({
+      ...prevState,
+      affiliation: value,
+      showAffiliation: false,
+    }));
     clearErrors("affiliation");
   };
 
-  const [isButtonActive, setIsButtonActive] = useState(false);
-
   useEffect(() => {
-    if (affiliation) {
-      setIsButtonActive(true);
+    if (formState.affiliation) {
+      setFormState((prevState) => ({
+        ...prevState,
+        isButtonActive: true,
+      }));
     } else {
-      setIsButtonActive(false);
+      setFormState((prevState) => ({
+        ...prevState,
+        isButtonActive: false,
+      }));
     }
-  }, [affiliation]);
+  }, [formState.affiliation]);
 
   const onSubmit: SubmitHandler<FormData> = (data) => {
-    if (!affiliation) {
+    if (!formState.affiliation) {
       setError("affiliation", {
         type: "manual",
         message: "소속을 선택해 주세요",
       });
       return;
     }
-
     // 아이디 중복 검사
     checkIdDuplicate(data.id);
 
@@ -126,7 +129,7 @@ export default function SignUp_Detail() {
         <span className="text-gray-4 text-sm font-bold">아이디</span>
         <input
           {...register("id", {
-            validate: validateId,
+            validate: (value) => validateField(value, "id"),
             onBlur: (e) => checkIdDuplicate(e.target.value),
           })}
           className={`signup-input ${errors.id && "border-red-1"}`}
@@ -138,7 +141,7 @@ export default function SignUp_Detail() {
             {errors.id.message}
           </span>
         )}
-        {errors.id && idChecked && (
+        {errors.id && formState.idChecked && (
           <span className="flex items-center gap-[6px] self-stretch text-gray-4 text-sm">
             <DetailCheckBox />
             사용 가능한 아이디입니다
@@ -151,7 +154,7 @@ export default function SignUp_Detail() {
         <span className="text-gray-4 text-sm font-bold">비밀번호</span>
         <input
           {...register("pwd", {
-            validate: validatePWD,
+            validate: (value) => validateField(value, "pwd"),
           })}
           className={`signup-input ${errors.pwd && "border-red-1"}`}
           type="password"
@@ -199,7 +202,7 @@ export default function SignUp_Detail() {
         <span className="text-gray-4 text-sm font-bold">닉네임</span>
         <input
           {...register("nickname", {
-            validate: validateNickname,
+            validate: (value) => validateField(value, "nickname"),
             onBlur: (e) => checkNicknameDuplicate(e.target.value),
           })}
           className={`signup-input ${errors.nickname && "border-red-1"}`}
@@ -211,7 +214,7 @@ export default function SignUp_Detail() {
             {errors.nickname.message}
           </span>
         )}
-        {!errors.nickname && nicknameChecked && (
+        {!errors.nickname && formState.nicknameChecked && (
           <span className="flex items-center gap-[6px] self-stretch text-gray-4 text-sm">
             <DetailCheckBox />
             사용 가능한 닉네임입니다
@@ -224,14 +227,17 @@ export default function SignUp_Detail() {
         <span className="text-gray-4 text-sm font-bold">소속</span>
         <div
           onClick={() => {
-            setShowAffiliation((prev) => !prev);
+            setFormState((prevState) => ({
+              ...prevState,
+              showAffiliation: !prevState.showAffiliation,
+            }));
           }}
           className={`signup-input items-center cursor-pointer ${
             errors.affiliation && "border-red-1"
           }`}
         >
           <input
-            value={affiliation}
+            value={formState.affiliation}
             className="placeholder:text-gray-3 placeholder:font-normal cursor-pointer "
             placeholder="소속을 선택해 주세요"
             onFocus={(e) => e.target.blur()}
@@ -248,9 +254,9 @@ export default function SignUp_Detail() {
         )}
 
         {/* 소속 선택 */}
-        {showAffiliation && (
+        {formState.showAffiliation && (
           <AffiliationSelect
-            show={showAffiliation}
+            show={formState.showAffiliation}
             onSelect={handleAffiliationSelect}
           />
         )}
@@ -258,7 +264,7 @@ export default function SignUp_Detail() {
 
       {/* 다음 버튼 */}
       <PrimaryButton
-        isActive={isButtonActive}
+        isActive={formState.isButtonActive}
         onClick={() => {}}
         text="가입완료"
       />

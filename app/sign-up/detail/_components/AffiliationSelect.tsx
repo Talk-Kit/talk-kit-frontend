@@ -1,9 +1,5 @@
 import React from "react";
-
-interface AffiliationSelectProps {
-  show: boolean;
-  onSelect: (value: string) => void;
-}
+import { AffiliationSelectProps } from "../../_types/sign-up_types";
 
 export default function AffiliationSelect({
   show,

@@ -4,16 +4,24 @@ import { useEffect, useState } from "react";
 import { PlusIcon } from "../../components/Icons";
 
 export default function MyProject_New() {
-  const [projectName, setProjectName] = useState("");
-  const [isButtonActive, setIsButtonActive] = useState(false);
+  const [projectState, setProjectState] = useState({
+    projectName: "",
+    isButtonActive: false,
+  });
 
   useEffect(() => {
     // 프로젝트명이 입력되었는지 확인하고 버튼 Active로
-    setIsButtonActive(projectName.trim().length > 0);
-  }, [projectName]);
+    setProjectState((prevState) => ({
+      ...prevState,
+      isButtonActive: prevState.projectName.trim().length > 0,
+    }));
+  }, [projectState.projectName]);
 
   const handleProjectNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setProjectName(e.target.value);
+    setProjectState((prevState) => ({
+      ...prevState,
+      projectName: e.target.value,
+    }));
   };
   return (
     <div
@@ -28,7 +36,7 @@ export default function MyProject_New() {
             <input
               className="flex w-full py-[10px] items-center outline-none font-semibold placeholder:text-gray-3 placeholder:font-normal"
               placeholder="생성할 프로젝트명을 입력해주세요"
-              value={projectName}
+              value={projectState.projectName}
               onChange={handleProjectNameChange}
             />
           </div>
@@ -92,12 +100,14 @@ export default function MyProject_New() {
       <div className="flex flex-col px-4 items-end w-full mt-[60px]">
         <button
           onClick={() => {
-            if (isButtonActive) {
+            if (projectState.isButtonActive) {
               console.log("프로젝트 생성");
             }
           }}
           className={`flex-center px-6 py-3 rounded-lg border-[1px] border-gray-2 font-semibold ${
-            isButtonActive ? "bg-primary-1 text-white" : "bg-white text-gray-4"
+            projectState.isButtonActive
+              ? "bg-primary-1 text-white"
+              : "bg-white text-gray-4"
           }`}
         >
           프로젝트 생성
