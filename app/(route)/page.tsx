@@ -1,9 +1,9 @@
 "use client";
 
-import Banner from "../components/Banner";
-import FileCard from "../components/FileCard";
-import PostCard from "../components/PostCard";
 import TopBar from "../components/TopBar/TopBar";
+import Banner from "./_components/Banner";
+import PostCard from "./_components/PostCard";
+import FileCard from "./_components/FileCard";
 
 const dummyPostData = [
   {
