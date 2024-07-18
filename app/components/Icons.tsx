@@ -266,7 +266,7 @@ export const RecordIcon = () => {
         r="27.5"
         fill="#F7F7F7"
         stroke="#737373"
-        stroke-width="5"
+        strokeWidth="5"
       />
     </svg>
   );
