@@ -98,7 +98,7 @@ export default function MyProject_New() {
           </div>
 
           {/* 대본 */}
-          <div className="flex pl-8 items-start gap-3 self-stretch">
+          <div className="project-input-container">
             <div className="flex flex-col items-end gap-3 w-full">
               <ProjectInput
                 placeholder="대본을 적어주세요"
@@ -126,7 +126,7 @@ export default function MyProject_New() {
           </div>
 
           {/* 새로운 녹음 */}
-          <div className="flex pl-8 items-start gap-3 self-stretch">
+          <div className="project-input-container">
             <div className="flex px-6 items-center gap-3 w-full rounded-2xl bg-white">
               <div className="flex h-[50px] py-[10px] items-center">
                 <div className="flex items-center gap-3">
@@ -144,7 +144,7 @@ export default function MyProject_New() {
           </div>
 
           {/* 발표자료 */}
-          <div className="flex pl-8 items-start gap-3 self-stretch">
+          <div className="project-input-container">
             <div className="flex px-6 items-center gap-3 w-full rounded-2xl bg-white">
               <div className="flex h-[50px] py-[10px] items-center">
                 <div className="flex items-center gap-3">
