@@ -5,32 +5,42 @@ import { EmptyProjectIcon } from "./_components/Icons";
 import MyProjectFolder from "./_components/MyProjectFolder";
 import { useRouter } from "next/navigation";
 import { CreateProjectDialog } from "./_components/CreateProject";
+import TopBar from "../../components/TopBar/TopBar";
+import MyProjectFooter from "./_components/Footer";
 
 export default function MyProject() {
-  const [myProjectList, setMyProjectList] = useState([]);
+  const [myProjectList, setMyProjectList] = useState([1]);
   return (
-    <div className="pt-[72px] flex px-4 py-8 flex-col items-center self-stretch">
-      {/* 위에 */}
-      {myProjectList.length > 0 ? (
-        <div
-          style={{
-            background: "rgba(247, 247, 247, 0.50)",
-            minHeight: "calc(100vh - (88px + 72px))",
-          }}
-          className="flex py-8 px-0 flex-col items-center gap-8 self-stretch"
-        >
-          <div className="grid sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-5 py-0 px-4 gap-6 self-stretch">
-            {myProjectList.map((index) => (
-              <MyProjectFolder title="프로젝트명" date="24.07.07" key={index} />
-            ))}
-            <MyProjectFolder title="" date="" isCreate />
+    <>
+      <TopBar screen={"md"} />
+      <div className="pt-[72px] flex px-4 py-8 flex-col items-center self-stretch">
+        {/* 위에 */}
+        {myProjectList.length > 0 ? (
+          <div
+            style={{
+              background: "rgba(247, 247, 247, 0.50)",
+              minHeight: "calc(100vh - (88px + 72px))",
+            }}
+            className="flex py-8 px-0 flex-col items-center gap-8 self-stretch"
+          >
+            <div className="grid sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-5 py-0 px-4 gap-6 self-stretch">
+              {myProjectList.map((index) => (
+                <MyProjectFolder
+                  title="프로젝트명"
+                  date="24.07.07"
+                  key={index}
+                />
+              ))}
+              <MyProjectFolder title="" date="" isCreate />
+            </div>
           </div>
-        </div>
-      ) : (
-        // 아무 프로젝트도 없을 경우
-        <EmptyProject />
-      )}
-    </div>
+        ) : (
+          // 아무 프로젝트도 없을 경우
+          <EmptyProject />
+        )}
+      </div>
+      <MyProjectFooter />
+    </>
   );
 }
 
