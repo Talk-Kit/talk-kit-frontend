@@ -45,6 +45,20 @@ export const PlusIcon = () => {
   );
 };
 
+export const MinusIcon = () => {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width="30"
+      height="30"
+      viewBox="0 0 30 30"
+      fill="none"
+    >
+      <path d="M6.25 16.25V13.75H23.75V16.25H6.25Z" fill="#6B71FF" />
+    </svg>
+  );
+};
+
 // 다이얼로그 체크 아이콘
 export const DialogCheckIcon = () => {
   return (

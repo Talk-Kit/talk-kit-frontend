@@ -1,21 +1,38 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { PlusIcon } from "../../../components/Icons";
+import dynamic from "next/dynamic";
+import TopBar from "../../../components/TopBar/TopBar";
+import { MinusIcon } from "../../../components/Icons";
+import MyProjectFooter from "../_components/Footer";
+
+// react-quill을 dynamic import로
+// react-quill은 브라우저 환경에서만 동작하는 라이브러리이기 때문에
+const ReactQuill = dynamic(() => import("react-quill"), { ssr: false });
 
 export default function MyProject_New() {
   const [projectState, setProjectState] = useState({
     projectName: "",
-    isButtonActive: false,
+    isNameBtnActive: false,
+    isScriptBtnActive: false,
   });
+  const [scriptContent, setScriptContent] = useState("");
 
   useEffect(() => {
     // 프로젝트명이 입력되었는지 확인하고 버튼 Active로
     setProjectState((prevState) => ({
       ...prevState,
-      isButtonActive: prevState.projectName.trim().length > 0,
+      isNameBtnActive: prevState.projectName.trim().length > 0,
     }));
   }, [projectState.projectName]);
+
+  useEffect(() => {
+    // 대본이 입력됐는지 확인하고 버튼 Active로
+    setProjectState((prevState) => ({
+      ...prevState,
+      isScriptBtnActive: scriptContent.trim().length > 0,
+    }));
+  }, [scriptContent]);
 
   const handleProjectNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setProjectState((prevState) => ({
@@ -23,96 +40,141 @@ export default function MyProject_New() {
       projectName: e.target.value,
     }));
   };
+
+  useEffect(() => {
+    const savedContent = localStorage.getItem("scriptContent");
+    if (savedContent) {
+      setScriptContent(savedContent);
+    }
+  }, []);
+
+  const handleSave = () => {
+    localStorage.setItem("scriptContent", scriptContent);
+  };
+
+  const handleLoad = () => {
+    const savedContent = localStorage.getItem("scriptContent");
+    if (savedContent) {
+      setScriptContent(savedContent);
+    }
+  };
+
+  useEffect(() => {
+    handleLoad();
+  }, []);
+
+  const handleChange = (e) => {
+    setScriptContent(e);
+  };
   return (
-    <div
-      style={{ background: "rgba(189, 203, 253, 0.20)" }}
-      className="mt-[72px] h-auto flex py-[60px] px-4 lg:px-[120px] flex-col items-center self-stretch"
-    >
-      <div className="flex flex-col items-center gap-8 self-stretch">
-        {/* 프로젝트명 */}
-        <div className="flex w-full flex-col gap-3">
-          <span className="px-[10px] font-semibold">프로젝트명</span>
-          <div className="flex h-[50px] px-6 justify-between items-center bg-white rounded-2xl">
-            <input
-              className="flex w-full py-[10px] items-center outline-none font-semibold placeholder:text-gray-3 placeholder:font-normal"
-              placeholder="생성할 프로젝트명을 입력해주세요"
-              value={projectState.projectName}
-              onChange={handleProjectNameChange}
-            />
-          </div>
-        </div>
-
-        {/* 대본 */}
-        <div className="flex w-full flex-col items-start gap-3">
-          <span className="flex px-8 py-0 items-center font-semibold">
-            대본
-          </span>
-          <div className="flex w-full pl-8 justify-center gap-3">
-            <div className="flex w-full h-[50px] px-6 items-center rounded-2xl bg-white">
+    <>
+      <TopBar screen={"md"} />
+      <div
+        style={{ background: "rgba(189, 203, 253, 0.20)" }}
+        className="pt-[132px] pb-[60px] h-auto flex py-[60px] px-4 lg:px-[120px] flex-col items-center self-stretch"
+      >
+        <div className="flex flex-col items-center gap-8 self-stretch">
+          {/* 프로젝트명 */}
+          <div className="flex flex-col items-end gap-3 self-stretch">
+            <span className="flex py-0 px-[10px] items-center gap-[10px] self-stretch font-semibold">
+              프로젝트명
+            </span>
+            <div className="flex h-[50px] px-6 justify-between items-center self-stretch bg-white rounded-2xl">
               <input
-                className="flex py-[10px] items-center w-full outline-none font-semibold placeholder:text-gray-3 placeholder:font-normal"
-                placeholder="대본 추가하려면 우측 플러스 버튼을 눌러 주세요"
+                className="flex w-full py-[10px] items-center self-stretch outline-none font-semibold placeholder:text-gray-3 placeholder:font-normal"
+                placeholder="생성할 프로젝트명을 입력해주세요"
+                value={projectState.projectName}
+                onChange={handleProjectNameChange}
               />
             </div>
-            <button className="flex-center h-[50px] w-[50px] bg-white rounded-2xl">
-              <PlusIcon />
+
+            <button
+              onClick={() => {
+                if (projectState.isNameBtnActive) {
+                  console.log("업로드");
+                }
+              }}
+              className={`flex-center px-6 py-3 rounded-lg border-[1px] font-semibold ${
+                projectState.isNameBtnActive ? "bg-primary-1" : "bg-gray-3"
+              } text-white`}
+            >
+              업로드
             </button>
           </div>
-        </div>
 
-        {/* 음성녹음 */}
-        <div className="flex w-full flex-col items-start gap-3">
-          <span className="flex px-8 py-0 items-center font-semibold">
-            음성녹음
-          </span>
-          <div className="flex w-full pl-8 justify-center gap-3">
-            <div className="flex w-full h-[50px] px-6 items-center rounded-2xl bg-white">
-              <input
-                className="flex py-[10px] items-center w-full outline-none font-semibold placeholder:text-gray-3 placeholder:font-normal"
-                placeholder="음성녹음을 추가하려면 우측 플러스 버튼을 눌러 주세요"
-              />
+          {/* 대본 */}
+          <div className="flex pl-8 items-start gap-3 self-stretch">
+            <div className="flex flex-col items-end gap-3 w-full">
+              <div className="flex py-0 px-6 items-center gap-3 self-stretch rounded-2xl bg-white">
+                <input
+                  className="flex w-full h-[50px] py-[10px] items-center self-stretch outline-none font-semibold placeholder:text-gray-3 placeholder:font-normal"
+                  placeholder="대본을 적어주세요"
+                />
+              </div>
+
+              <div className="flex-center h-[500px] self-stretch">
+                <ReactQuill
+                  className="h-[500px] w-full bg-white border-none text-xl"
+                  value={scriptContent}
+                  onChange={handleChange}
+                  modules={{ toolbar: false }}
+                />
+              </div>
+
+              <button
+                onClick={handleSave}
+                className={`flex-center py-3 px-6 rounded-lg   ${
+                  projectState.isScriptBtnActive ? "bg-primary-1" : "bg-gray-3"
+                } text-gray-0 font-semibold`}
+              >
+                저장하기
+              </button>
             </div>
-            <button className="flex-center h-[50px] w-[50px] bg-white rounded-2xl">
-              <PlusIcon />
-            </button>
+
+            <div className="flex-center min-w-[50px] h-[50px] rounded-2xl bg-white">
+              <MinusIcon />
+            </div>
           </div>
-        </div>
 
-        {/* 발표자료 */}
-        <div className="flex w-full flex-col items-start gap-3">
-          <span className="flex px-8 py-0 items-center font-semibold">
-            발표자료
-          </span>
-          <div className="flex w-full pl-8 justify-center gap-3">
-            <div className="flex w-full h-[50px] px-6 items-center rounded-2xl bg-white">
-              <input
-                className="flex py-[10px] items-center w-full outline-none font-semibold placeholder:text-gray-3 placeholder:font-normal"
-                placeholder="발표자료를 추가하려면 우측 플러스 버튼을 눌러 주세요"
-              />
+          {/* 새로운 녹음 */}
+          <div className="flex pl-8 items-start gap-3 self-stretch">
+            <div className="flex px-6 items-center gap-3 w-full rounded-2xl bg-white">
+              <div className="flex h-[50px] py-[10px] items-center">
+                <div className="flex items-center gap-3">
+                  <span className="flex-center max-w-[300px] text-gray-9 font-semibold">
+                    새로운 녹음
+                  </span>
+                  <span className="flex-center text-gray-4 text-sm">
+                    10시 32분
+                  </span>
+                </div>
+              </div>
             </div>
-            <button className="flex-center h-[50px] w-[50px] bg-white rounded-2xl">
-              <PlusIcon />
-            </button>
+
+            <div className="flex-center w-[50px] h-[50px] rounded-2xl bg-white">
+              <MinusIcon />
+            </div>
+          </div>
+
+          {/* 발표자료 */}
+          <div className="flex pl-8 items-start gap-3 self-stretch">
+            <div className="flex px-6 items-center gap-3 w-full rounded-2xl bg-white">
+              <div className="flex h-[50px] py-[10px] items-center">
+                <div className="flex items-center gap-3">
+                  <span className="flex-center max-w-[300px] text-gray-9 font-semibold">
+                    발표자료
+                  </span>
+                </div>
+              </div>
+            </div>
+
+            <div className="flex-center w-[50px] h-[50px] rounded-2xl bg-white">
+              <MinusIcon />
+            </div>
           </div>
         </div>
       </div>
-
-      <div className="flex flex-col px-4 items-end w-full mt-[60px]">
-        <button
-          onClick={() => {
-            if (projectState.isButtonActive) {
-              console.log("프로젝트 생성");
-            }
-          }}
-          className={`flex-center px-6 py-3 rounded-lg border-[1px] border-gray-2 font-semibold ${
-            projectState.isButtonActive
-              ? "bg-primary-1 text-white"
-              : "bg-white text-gray-4"
-          }`}
-        >
-          프로젝트 생성
-        </button>
-      </div>
-    </div>
+      <MyProjectFooter />
+    </>
   );
 }
