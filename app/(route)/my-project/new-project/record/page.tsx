@@ -2,10 +2,10 @@
 
 import { useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
-import { MikeIcon, RecordIcon } from "../../../../components/Icons";
 import TopBar from "../../../../components/TopBar/TopBar";
-import { PlayIcon, ShowSelectionIcon } from "../../_components/Icons";
-import RecordingAnimation from "../../_components/RecordingAnimation";
+import RecordingAnimation from "./_components/RecordingAnimation";
+import { ShowSelectionIcon } from "../../_components/Icons";
+import { MikeIcon, PlayIcon, RecordIcon } from "./_components/Icons";
 
 export default function Record() {
   const [isRecording, setIsRecording] = useState(false);
