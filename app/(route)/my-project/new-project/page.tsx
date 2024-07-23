@@ -3,8 +3,10 @@
 import { useEffect, useState } from "react";
 import dynamic from "next/dynamic";
 import TopBar from "../../../components/TopBar/TopBar";
-import { MinusIcon } from "../../../components/Icons";
 import MyProjectFooter from "../_components/Footer";
+import RemoveContentBtn from "./_components/RemoveContentBtn";
+import ProjectInput from "./_components/ProjectInput";
+import ProjectBtn from "./_components/ProjectBtn";
 
 // react-quill을 dynamic import로
 // react-quill은 브라우저 환경에서만 동작하는 라이브러리이기 때문에
@@ -79,38 +81,30 @@ export default function MyProject_New() {
             <span className="flex py-0 px-[10px] items-center gap-[10px] self-stretch font-semibold">
               프로젝트명
             </span>
-            <div className="flex h-[50px] px-6 justify-between items-center self-stretch bg-white rounded-2xl">
-              <input
-                className="flex w-full py-[10px] items-center self-stretch outline-none font-semibold placeholder:text-gray-3 placeholder:font-normal"
-                placeholder="생성할 프로젝트명을 입력해주세요"
-                value={projectState.projectName}
-                onChange={handleProjectNameChange}
-              />
-            </div>
-
-            <button
+            <ProjectInput
+              placeholder="생성할 프로젝트명을 입력해주세요"
+              value={projectState.projectName}
+              onChange={handleProjectNameChange}
+            />
+            <ProjectBtn
+              text="업로드"
               onClick={() => {
                 if (projectState.isNameBtnActive) {
                   console.log("업로드");
                 }
               }}
-              className={`flex-center px-6 py-3 rounded-lg border-[1px] font-semibold ${
-                projectState.isNameBtnActive ? "bg-primary-1" : "bg-gray-3"
-              } text-white`}
-            >
-              업로드
-            </button>
+              isActive={projectState.isNameBtnActive}
+            />
           </div>
 
           {/* 대본 */}
           <div className="flex pl-8 items-start gap-3 self-stretch">
             <div className="flex flex-col items-end gap-3 w-full">
-              <div className="flex py-0 px-6 items-center gap-3 self-stretch rounded-2xl bg-white">
-                <input
-                  className="flex w-full h-[50px] py-[10px] items-center self-stretch outline-none font-semibold placeholder:text-gray-3 placeholder:font-normal"
-                  placeholder="대본을 적어주세요"
-                />
-              </div>
+              <ProjectInput
+                placeholder="대본을 적어주세요"
+                value={""}
+                onChange={() => {}}
+              />
 
               <div className="flex-center h-[500px] self-stretch">
                 <ReactQuill
@@ -121,19 +115,14 @@ export default function MyProject_New() {
                 />
               </div>
 
-              <button
+              <ProjectBtn
                 onClick={handleSave}
-                className={`flex-center py-3 px-6 rounded-lg   ${
-                  projectState.isScriptBtnActive ? "bg-primary-1" : "bg-gray-3"
-                } text-gray-0 font-semibold`}
-              >
-                저장하기
-              </button>
+                text="저장하기"
+                isActive={projectState.isScriptBtnActive}
+              />
             </div>
 
-            <div className="flex-center min-w-[50px] h-[50px] rounded-2xl bg-white">
-              <MinusIcon />
-            </div>
+            <RemoveContentBtn onClick={() => {}} />
           </div>
 
           {/* 새로운 녹음 */}
@@ -151,9 +140,7 @@ export default function MyProject_New() {
               </div>
             </div>
 
-            <div className="flex-center w-[50px] h-[50px] rounded-2xl bg-white">
-              <MinusIcon />
-            </div>
+            <RemoveContentBtn onClick={() => {}} />
           </div>
 
           {/* 발표자료 */}
@@ -168,9 +155,7 @@ export default function MyProject_New() {
               </div>
             </div>
 
-            <div className="flex-center w-[50px] h-[50px] rounded-2xl bg-white">
-              <MinusIcon />
-            </div>
+            <RemoveContentBtn onClick={() => {}} />
           </div>
         </div>
       </div>
