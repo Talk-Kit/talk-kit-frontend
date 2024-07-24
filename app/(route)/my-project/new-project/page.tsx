@@ -4,8 +4,8 @@ import { useEffect, useState } from "react";
 import dynamic from "next/dynamic";
 import TopBar from "../../../components/TopBar/TopBar";
 import MyProjectFooter from "../_components/Footer";
-import RemoveContentBtn from "./_components/RemoveContentBtn";
-import ProjectInput from "./_components/ProjectInput";
+import RemoveContentBtn from "../_components/RemoveContentBtn";
+import ProjectInput from "../_components/ProjectInput";
 import Button from "../../../components/Button";
 
 // react-quill을 dynamic import로

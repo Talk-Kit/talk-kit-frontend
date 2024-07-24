@@ -4,7 +4,7 @@ import { ChangeEvent, useState } from "react";
 import { EmptyProjectIcon } from "./_components/Icons";
 import MyProjectFolder from "./_components/MyProjectFolder";
 import { useRouter } from "next/navigation";
-import { CreateProjectDialog } from "./_components/CreateProject";
+import { CreateProjectDialog } from "./_components/CreateProjectDialog";
 import TopBar from "../../components/TopBar/TopBar";
 import MyProjectFooter from "./_components/Footer";
 import Button from "../../components/Button";

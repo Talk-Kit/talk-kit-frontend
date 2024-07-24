@@ -3,9 +3,13 @@
 import { useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import TopBar from "../../../../components/TopBar/TopBar";
-import RecordingAnimation from "./_components/RecordingAnimation";
-import { ShowSelectionIcon } from "../../_components/Icons";
-import { MikeIcon, PlayIcon, RecordIcon } from "./_components/Icons";
+import RecordingAnimation from "../../_components/RecordingAnimation";
+import {
+  MikeIcon,
+  PlayIcon,
+  RecordIcon,
+  ShowSelectionIcon,
+} from "../../_components/Icons";
 import Button from "../../../../components/Button";
 
 export default function Record() {

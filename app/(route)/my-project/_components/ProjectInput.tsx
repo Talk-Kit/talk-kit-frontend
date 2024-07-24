@@ -1,4 +1,4 @@
-import { ProjectInputProps } from "../../_types/project_types";
+import { ProjectInputProps } from "../_types/project_types";
 
 export default function ProjectInput({
   placeholder,
