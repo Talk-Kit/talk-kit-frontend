@@ -1,5 +1,3 @@
-"use client";
-
 import TopBar from "../components/TopBar/TopBar";
 import Banner from "./_components/Banner";
 import PostCard from "./_components/PostCard";
@@ -76,7 +74,7 @@ export default function Home() {
           </div>
         </section>
         <Banner
-          tag="대본"
+          tag="대본작성"
           title={"대본을 더 쉽고 빠르게\n작성할 수 있습니다"}
           content={
             "발표 내용을 간단히 입력하면 대본 초안을 AI가 생성해 줍니다\n사용자는 이에 덧붙여 대본을 쉽게 작성 및 수정할 수 있습니다"
@@ -85,10 +83,10 @@ export default function Home() {
           img=""
         />
         <Banner
-          tag="발표"
+          tag="발표연습"
           title={"체계적이고 효율적인\n발표 연습이 가능합니다"}
           content={
-            "음성녹음과 발음평가 기능을 지원합니다\n이를 통해 나의 억양, 속도 그리고 발음 등을 확인하고\n연습할 수 있습니다"
+            "타이머, 대본 및 발표자료를 한 화면에 보며 연습할 수 있습니다\n또한 음성녹음과 발음평가 기능을 지원합니다\n이를 통해 나의 억양, 속도 그리고 발음 등을 확인하고 연습할 수 있습니다"
           }
           link=""
           img=""
