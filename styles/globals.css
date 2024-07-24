@@ -68,4 +68,7 @@ body {
   .project-input-container {
     @apply flex pl-8 items-start gap-3 self-stretch;
   }
+  .long-button {
+    @apply w-full py-3 rounded-lg;
+  }
 }
