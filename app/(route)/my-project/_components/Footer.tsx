@@ -24,7 +24,7 @@ export default function MyProjectFooter() {
           <span className="text-gray-3 text-center text-xs">이용약관</span>
         </div>
 
-        <div className="flex-center py-1 px-3 gap-[10px] border-r-[1px] border-gray-3">
+        <div className="flex-center py-1 px-3 gap-[10px]">
           <span className="text-gray-3 text-center text-xs">
             email : chloe_kang@naver.com
           </span>

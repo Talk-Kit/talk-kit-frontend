@@ -60,7 +60,12 @@ body {
   .signup-input {
     @apply signup-max-w-600 py-2 pr-2 h-[50px] justify-between border-[1px] border-gray-3 pl-4 rounded-lg font-semibold placeholder:text-gray-3 placeholder:font-normal;
   }
-  .long-button {
-    @apply w-full py-3 rounded-lg;
+  .signup-affiliation {
+    @apply flex py-[6px] px-6 items-center self-stretch text-sm;
+  }
+
+  /* 프로젝트 */
+  .project-input-container {
+    @apply flex pl-8 items-start gap-3 self-stretch;
   }
 }

@@ -1,5 +1,17 @@
+"use client";
+
+import { useState } from "react";
+import { AnimatePresence, motion } from "framer-motion";
 import TopBar from "../../../../components/TopBar/TopBar";
-import RecordBox from "./_components/RecordBox";
+import RecordingAnimation from "../../_components/RecordingAnimation";
+import {
+  MikeIcon,
+  PlayIcon,
+  RecordIcon,
+  ShowSelectionIcon,
+} from "../../_components/Icons";
+import Button from "../../../../components/Button";
+import RecordBox from "../../_components/RecordBox";
 
 export default function Record() {
   return (

@@ -1,10 +1,9 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import RecordingAnimation from "../../../_components/RecordingAnimation";
-import { MikeIcon, RecordIcon } from "../../../../../components/Icons";
+import RecordingAnimation from "./RecordingAnimation";
 import { motion, AnimatePresence } from "framer-motion";
-import { PlayIcon, ShowSelectionIcon } from "../../../_components/Icons";
+import { MikeIcon, PlayIcon, RecordIcon, ShowSelectionIcon } from "./Icons";
 
 export default function RecordBox() {
   const [isRecording, setIsRecording] = useState(false);

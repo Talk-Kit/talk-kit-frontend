@@ -4,33 +4,44 @@ import { ChangeEvent, useState } from "react";
 import { EmptyProjectIcon } from "./_components/Icons";
 import MyProjectFolder from "./_components/MyProjectFolder";
 import { useRouter } from "next/navigation";
-import { CreateProjectDialog } from "./_components/CreateProject";
+import { CreateProjectDialog } from "./_components/CreateProjectDialog";
+import TopBar from "../../components/TopBar/TopBar";
+import MyProjectFooter from "./_components/Footer";
+import Button from "../../components/Button";
 
 export default function MyProject() {
   const [myProjectList, setMyProjectList] = useState([]);
   return (
-    <div className="pt-[72px] flex px-4 py-8 flex-col items-center self-stretch">
-      {/* 위에 */}
-      {myProjectList.length > 0 ? (
-        <div
-          style={{
-            background: "rgba(247, 247, 247, 0.50)",
-            minHeight: "calc(100vh - (88px + 72px))",
-          }}
-          className="flex py-8 px-0 flex-col items-center gap-8 self-stretch"
-        >
-          <div className="grid sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-5 py-0 px-4 gap-6 self-stretch">
-            {myProjectList.map((index) => (
-              <MyProjectFolder title="프로젝트명" date="24.07.07" key={index} />
-            ))}
-            <MyProjectFolder title="" date="" isCreate />
+    <>
+      <TopBar screen={"md"} />
+      <div className="pt-[72px] flex px-4 py-8 flex-col items-center self-stretch">
+        {/* 위에 */}
+        {myProjectList.length > 0 ? (
+          <div
+            style={{
+              background: "rgba(247, 247, 247, 0.50)",
+              minHeight: "calc(100vh - (88px + 72px))",
+            }}
+            className="flex py-8 px-0 flex-col items-center gap-8 self-stretch"
+          >
+            <div className="grid sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-5 py-0 px-4 gap-6 self-stretch">
+              {myProjectList.map((index) => (
+                <MyProjectFolder
+                  title="프로젝트명"
+                  date="24.07.07"
+                  key={index}
+                />
+              ))}
+              <MyProjectFolder title="" date="" isCreate />
+            </div>
           </div>
-        </div>
-      ) : (
-        // 아무 프로젝트도 없을 경우
-        <EmptyProject />
-      )}
-    </div>
+        ) : (
+          // 아무 프로젝트도 없을 경우
+          <EmptyProject />
+        )}
+      </div>
+      <MyProjectFooter />
+    </>
   );
 }
 
@@ -58,18 +69,15 @@ const EmptyProject = () => {
       </div>
 
       {/* 버튼 */}
-      <button
-        type="button"
+      <Button
         onClick={() => {
           router.push("/my-project/new-project");
         }}
-        className="flex-center py-3 px-6 gap-[10px] rounded-lg bg-primary-1 text-gray-0 font-semibold "
-      >
-        새로운 프로젝트 생성하러 가기
-      </button>
+        text="새로운 프로젝트 생성하러 가기"
+      />
 
       {/* <CreateProjectDialog
-        onBtnClick={() => {}}
+        onClick={() => {}}
         value={inputValue}
         onChange={handleInputChange}
       /> */}

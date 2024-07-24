@@ -7,12 +7,7 @@ import {
   ShowDetailIcon,
 } from "./Icons";
 import { useState } from "react";
-
-interface MyProjectFolderProps {
-  isCreate?: boolean;
-  title: string;
-  date: any;
-}
+import { MyProjectFolderProps } from "../_types/project_types";
 
 export default function MyProjectFolder({
   isCreate,

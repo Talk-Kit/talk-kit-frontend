@@ -1,11 +1,11 @@
 import React from "react";
-import { PrimaryButtonProps } from "../_types/sign-up_types";
+import { ButtonProps } from "../../../components/Button";
 
 export default function PrimaryButton({
   isActive,
   onClick,
   text,
-}: PrimaryButtonProps) {
+}: ButtonProps) {
   return (
     <div className="w-full max-w-[600px]">
       <button
