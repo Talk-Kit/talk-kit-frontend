@@ -40,9 +40,7 @@ export default function TopBar({ screen }: ITopBar) {
       <div className="w-full h-full max-w-[1200px] flex justify-between items-center">
         <TalkKitLogo width={130} height={50} />
         {/* 작은 화면일 때의 탑바 */}
-        <div
-          className={`sm:block ${screen === "md" ? "md:hidden" : "lg:hidden"}`}
-        >
+        <div className={`block ${screen === "md" ? "md:hidden" : "lg:hidden"}`}>
           <span
             className="cursor-pointer"
             onClick={() => setIsMenuOpened((prev) => !prev)}
@@ -103,9 +101,7 @@ export default function TopBar({ screen }: ITopBar) {
           </AnimatePresence>
         </div>
         {/* 큰 화면일 때의 탑바 */}
-        <div
-          className={`sm:hidden ${screen === "md" ? "md:block" : "lg:block"}`}
-        >
+        <div className={`hidden ${screen === "md" ? "md:block" : "lg:block"}`}>
           {token ? (
             <>
               {/* 로그인 되었을 때 */}
