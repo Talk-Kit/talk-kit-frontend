@@ -6,7 +6,7 @@ import TopBar from "../../../components/TopBar/TopBar";
 import MyProjectFooter from "../_components/Footer";
 import RemoveContentBtn from "./_components/RemoveContentBtn";
 import ProjectInput from "./_components/ProjectInput";
-import ProjectBtn from "./_components/ProjectBtn";
+import Button from "../../../components/Button";
 
 // react-quill을 dynamic import로
 // react-quill은 브라우저 환경에서만 동작하는 라이브러리이기 때문에
@@ -86,14 +86,14 @@ export default function MyProject_New() {
               value={projectState.projectName}
               onChange={handleProjectNameChange}
             />
-            <ProjectBtn
+            <Button
               text="업로드"
               onClick={() => {
                 if (projectState.isNameBtnActive) {
                   console.log("업로드");
                 }
               }}
-              isActive={projectState.isNameBtnActive}
+              isActive={!projectState.isNameBtnActive}
             />
           </div>
 
@@ -115,10 +115,10 @@ export default function MyProject_New() {
                 />
               </div>
 
-              <ProjectBtn
+              <Button
                 onClick={handleSave}
                 text="저장하기"
-                isActive={projectState.isScriptBtnActive}
+                isActive={!projectState.isScriptBtnActive}
               />
             </div>
 

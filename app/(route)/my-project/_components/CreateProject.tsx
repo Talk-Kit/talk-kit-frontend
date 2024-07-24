@@ -1,3 +1,4 @@
+import Button from "../../../components/Button";
 import { FolderIcon } from "../../../components/Icons";
 import { DialogProps } from "../_types/project_types";
 
@@ -28,16 +29,10 @@ export function CreateProjectDialog({ onClick, value, onChange }: DialogProps) {
         </div>
 
         {/* 버튼 */}
-        <div className="flex py-0 px-8 items-center self-stretch">
+        <div className="flex-center py-0 px-8 self-stretch">
           {/* 기본 버튼 */}
-          <button
-            onClick={onClick}
-            className={`flex-center p-2 gap-2 rounded-lg w-full ${
-              value ? "bg-primary-1" : "bg-gray-2"
-            } `}
-          >
-            <span className="text-white text-xl font-bold">생성하기</span>
-          </button>
+
+          <Button onClick={onClick} text="생성하기" isActive={!value} />
         </div>
       </div>
     </div>

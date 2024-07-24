@@ -18,12 +18,6 @@ export interface MyProjectFolderProps {
   date: any;
 }
 
-// 프로젝트 페이지 button
-export interface ProjectBtnProps extends BtnProps {
-  text: string;
-  isActive: boolean;
-}
-
 // 프로젝트 input
 export interface ProjectInputProps {
   placeholder: string;

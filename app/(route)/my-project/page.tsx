@@ -7,9 +7,10 @@ import { useRouter } from "next/navigation";
 import { CreateProjectDialog } from "./_components/CreateProject";
 import TopBar from "../../components/TopBar/TopBar";
 import MyProjectFooter from "./_components/Footer";
+import Button from "../../components/Button";
 
 export default function MyProject() {
-  const [myProjectList, setMyProjectList] = useState([1]);
+  const [myProjectList, setMyProjectList] = useState([]);
   return (
     <>
       <TopBar screen={"md"} />
@@ -68,15 +69,12 @@ const EmptyProject = () => {
       </div>
 
       {/* 버튼 */}
-      <button
-        type="button"
+      <Button
         onClick={() => {
           router.push("/my-project/new-project");
         }}
-        className="flex-center py-3 px-6 gap-[10px] rounded-lg bg-primary-1 text-gray-0 font-semibold "
-      >
-        새로운 프로젝트 생성하러 가기
-      </button>
+        text="새로운 프로젝트 생성하러 가기"
+      />
 
       {/* <CreateProjectDialog
         onClick={() => {}}

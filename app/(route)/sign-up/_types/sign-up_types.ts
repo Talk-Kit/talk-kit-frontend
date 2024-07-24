@@ -1,10 +1,3 @@
-// 메인 버튼 타입
-export interface PrimaryButtonProps {
-  isActive: boolean;
-  onClick: () => void;
-  text: string;
-}
-
 // 프로그레스 타입
 export interface SignUpProgressProps {
   text: string;

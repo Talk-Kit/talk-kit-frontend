@@ -6,6 +6,7 @@ import TopBar from "../../../../components/TopBar/TopBar";
 import RecordingAnimation from "./_components/RecordingAnimation";
 import { ShowSelectionIcon } from "../../_components/Icons";
 import { MikeIcon, PlayIcon, RecordIcon } from "./_components/Icons";
+import Button from "../../../../components/Button";
 
 export default function Record() {
   const [isRecording, setIsRecording] = useState(false);
@@ -89,12 +90,7 @@ export default function Record() {
                     <span className="text-gray-3">저장할 프로젝트</span>
                     <ShowSelectionIcon />
                   </div>
-                  <button
-                    onClick={() => {}}
-                    className="px-6 py-3 bg-primary-1 text-white rounded-lg"
-                  >
-                    저장
-                  </button>
+                  <Button onClick={() => {}} text="저장" />
                 </div>
               </>
             )}
