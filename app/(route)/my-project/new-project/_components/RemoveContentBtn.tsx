@@ -1,6 +1,7 @@
 import { MinusIcon } from "../../../../components/Icons";
+import { BtnProps } from "../../_types/project_types";
 
-export default function RemoveContentBtn({ onClick }) {
+export default function RemoveContentBtn({ onClick }: BtnProps) {
   return (
     <div
       onClick={onClick}

@@ -1,17 +1,7 @@
-import { ChangeEvent } from "react";
 import { FolderIcon } from "../../../components/Icons";
+import { DialogProps } from "../_types/project_types";
 
-interface DialogProps {
-  onBtnClick: () => void;
-  value: string;
-  onChange: (event: ChangeEvent<HTMLInputElement>) => void;
-}
-
-export function CreateProjectDialog({
-  onBtnClick,
-  value,
-  onChange,
-}: DialogProps) {
+export function CreateProjectDialog({ onClick, value, onChange }: DialogProps) {
   return (
     <div className="fixed inset-0 flex-center z-50 bg-black bg-opacity-30">
       <div className="dialog-container">
@@ -41,7 +31,7 @@ export function CreateProjectDialog({
         <div className="flex py-0 px-8 items-center self-stretch">
           {/* 기본 버튼 */}
           <button
-            onClick={onBtnClick}
+            onClick={onClick}
             className={`flex-center p-2 gap-2 rounded-lg w-full ${
               value ? "bg-primary-1" : "bg-gray-2"
             } `}

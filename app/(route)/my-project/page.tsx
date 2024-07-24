@@ -79,7 +79,7 @@ const EmptyProject = () => {
       </button>
 
       {/* <CreateProjectDialog
-        onBtnClick={() => {}}
+        onClick={() => {}}
         value={inputValue}
         onChange={handleInputChange}
       /> */}

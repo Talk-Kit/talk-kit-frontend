@@ -1,4 +1,10 @@
-export default function ProjectBtn({ text, onClick, isActive }) {
+import { ProjectBtnProps } from "../../_types/project_types";
+
+export default function ProjectBtn({
+  text,
+  onClick,
+  isActive,
+}: ProjectBtnProps) {
   return (
     <button
       onClick={onClick}
