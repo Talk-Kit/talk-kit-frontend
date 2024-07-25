@@ -5,6 +5,7 @@ import PrimaryButton from "../_components/PrimaryButton";
 import { useRecoilValue } from "recoil";
 import { nicknameState } from "../_state/atom";
 import TalkKitLogo from "../../../components/LOGO";
+import { DONE_TEXT } from "../_constants/constants";
 
 export default function SignUp_Done() {
   const router = useRouter();
@@ -13,7 +14,8 @@ export default function SignUp_Done() {
     <div className="signup-screen">
       <TalkKitLogo width={280} height={79} />
       <div className="signup-max-w-600 py-6 px-0 flex-center text-center text-xl font-semibold">
-        {nickname}님 <br /> 회원가입을 축하드려요!
+        {nickname}
+        {DONE_TEXT[0]} <br /> {DONE_TEXT[1]}
       </div>
 
       <PrimaryButton
@@ -21,7 +23,7 @@ export default function SignUp_Done() {
         onClick={() => {
           router.push("/sign-in");
         }}
-        text="로그인하기"
+        text={DONE_TEXT[2]}
       />
     </div>
   );
