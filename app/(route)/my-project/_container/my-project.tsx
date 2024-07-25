@@ -5,9 +5,10 @@ import { useRouter } from "next/navigation";
 import MyProjectFolder from "../_components/MyProjectFolder";
 import Button from "../../../components/Button";
 import { EmptyProjectIcon } from "../_components/Icons";
+import { MYPROJECT_TEXT } from "../_constants/constants";
 
 export default function MyProjectContainer() {
-  const [myProjectList, setMyProjectList] = useState([]);
+  const [myProjectList, setMyProjectList] = useState([1]);
   return (
     <div className="pt-[72px] flex px-4 py-8 flex-col items-center self-stretch">
       {/* 위에 */}
@@ -50,10 +51,11 @@ const EmptyProject = () => {
           <EmptyProjectIcon />
         </div>
         <span className="flex-center py-1 px-3 gap-[10px] self-stretch text-center ">
-          생성된 프로젝트가 아직 없습니다
+          {MYPROJECT_TEXT[0]}
         </span>
         <span className="flex-center py-1 px-3 gap-[10px] self-stretch text-center ">
-          프로젝트를 생성하여 <br /> 자료들을 효율적으로 관리해 보세요!
+          {MYPROJECT_TEXT[1]}
+          <br /> {MYPROJECT_TEXT[2]}
         </span>
       </div>
 
@@ -62,7 +64,7 @@ const EmptyProject = () => {
         onClick={() => {
           router.push("/my-project/new-project");
         }}
-        text="새로운 프로젝트 생성하러 가기"
+        text={MYPROJECT_TEXT[3]}
       />
 
       {/* <CreateProjectDialog

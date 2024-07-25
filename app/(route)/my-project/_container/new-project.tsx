@@ -5,6 +5,7 @@ import dynamic from "next/dynamic";
 import Button from "../../../components/Button";
 import ProjectInput from "../_components/ProjectInput";
 import RemoveContentBtn from "../_components/RemoveContentBtn";
+import { NEWPROJECT_TEXT } from "../_constants/constants";
 
 // react-quill을 dynamic import로
 // react-quill은 브라우저 환경에서만 동작하는 라이브러리이기 때문에
@@ -71,15 +72,15 @@ export default function NewProjectContainer() {
       {/* 프로젝트명 */}
       <div className="flex flex-col items-end gap-3 self-stretch">
         <span className="flex py-0 px-[10px] items-center gap-[10px] self-stretch font-semibold">
-          프로젝트명
+          {NEWPROJECT_TEXT[0]}
         </span>
         <ProjectInput
-          placeholder="생성할 프로젝트명을 입력해주세요"
+          placeholder={NEWPROJECT_TEXT[1]}
           value={projectState.projectName}
           onChange={handleProjectNameChange}
         />
         <Button
-          text="업로드"
+          text={NEWPROJECT_TEXT[2]}
           onClick={() => {
             if (projectState.isNameBtnActive) {
               console.log("업로드");
@@ -93,7 +94,7 @@ export default function NewProjectContainer() {
       <div className="project-input-container">
         <div className="flex flex-col items-end gap-3 w-full">
           <ProjectInput
-            placeholder="대본을 적어주세요"
+            placeholder={NEWPROJECT_TEXT[3]}
             value={""}
             onChange={() => {}}
           />
@@ -109,7 +110,7 @@ export default function NewProjectContainer() {
 
           <Button
             onClick={handleSave}
-            text="저장하기"
+            text={NEWPROJECT_TEXT[4]}
             isActive={!projectState.isScriptBtnActive}
           />
         </div>
@@ -123,7 +124,7 @@ export default function NewProjectContainer() {
           <div className="flex h-[50px] py-[10px] items-center">
             <div className="flex items-center gap-3">
               <span className="flex-center max-w-[300px] text-gray-9 font-semibold">
-                새로운 녹음
+                {NEWPROJECT_TEXT[5]}
               </span>
               <span className="flex-center text-gray-4 text-sm">10시 32분</span>
             </div>
@@ -139,7 +140,7 @@ export default function NewProjectContainer() {
           <div className="flex h-[50px] py-[10px] items-center">
             <div className="flex items-center gap-3">
               <span className="flex-center max-w-[300px] text-gray-9 font-semibold">
-                발표자료
+                {NEWPROJECT_TEXT[6]}
               </span>
             </div>
           </div>
