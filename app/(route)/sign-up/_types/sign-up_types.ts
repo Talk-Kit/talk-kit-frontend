@@ -6,6 +6,9 @@ export interface SignUpProgressProps {
   isStep3: boolean;
 }
 
+// 약관동의 체크박스 타입
+export type CheckboxName = "all" | "terms1" | "terms2" | "terms3";
+
 // 약관동의 타입
 export interface TermsProps {
   isChecked: boolean;
