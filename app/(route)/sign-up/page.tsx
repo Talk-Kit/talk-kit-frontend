@@ -7,8 +7,8 @@ import SignUpProgress from "./_components/SignUpProgress";
 import PrimaryButton from "./_components/PrimaryButton";
 import { Terms1, Terms2, Terms3 } from "./_components/Terms";
 import { CheckBox } from "./_components/Icons";
-
-type CheckboxName = "all" | "terms1" | "terms2" | "terms3";
+import { CheckboxName } from "./_types/sign-up_types";
+import { TERMS_TEXT } from "./_constants/constants";
 
 export default function SignUp_Terms() {
   const router = useRouter();
@@ -64,7 +64,7 @@ export default function SignUp_Terms() {
       <TalkKitLogo width={280} height={79} />
 
       <SignUpProgress
-        text="약관 동의"
+        text={TERMS_TEXT[0]}
         num={1}
         isStep2={false}
         isStep3={false}
@@ -77,7 +77,7 @@ export default function SignUp_Terms() {
       >
         <CheckBox isChecked={isChecked.all} />
         <span className={`${isChecked.all ? "text-gray-9" : "text-gray-4"}`}>
-          전체 동의하기
+          {TERMS_TEXT[1]}
         </span>
       </button>
 
@@ -103,7 +103,7 @@ export default function SignUp_Terms() {
       <PrimaryButton
         isActive={isButtonActive}
         onClick={handleButtonClick}
-        text="다음"
+        text={TERMS_TEXT[7]}
       />
     </div>
   );

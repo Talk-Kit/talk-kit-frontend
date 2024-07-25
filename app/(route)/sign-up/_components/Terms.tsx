@@ -1,6 +1,7 @@
 import React from "react";
 import { CheckBox } from "./Icons";
 import { TermsProps } from "../_types/sign-up_types";
+import { TERMS_TEXT } from "../_constants/constants";
 
 // 토크키트 이용 약관
 export const Terms1: React.FC<TermsProps> = ({ isChecked, onClick }) => (
@@ -8,7 +9,7 @@ export const Terms1: React.FC<TermsProps> = ({ isChecked, onClick }) => (
     <button onClick={onClick} className="flex items-center gap-2 self-stretch">
       <CheckBox isChecked={isChecked} />
       <span className={`${isChecked ? "text-gray-9" : "text-gray-4"}`}>
-        <span className="font-bold">[필수]</span> 토크키트 이용약관
+        <span className="font-bold">{TERMS_TEXT[2]}</span> {TERMS_TEXT[3]}
       </span>
     </button>
     <div className="flex h-[120px] py-2 px-4 items-start border-[1px] self-stretch border-gray-3 overflow-scroll hide-scrollbar">
@@ -31,7 +32,7 @@ export const Terms2: React.FC<TermsProps> = ({ isChecked, onClick }) => (
     <button onClick={onClick} className="flex items-center gap-2 self-stretch">
       <CheckBox isChecked={isChecked} />
       <span className={`${isChecked ? "text-gray-9" : "text-gray-4"}`}>
-        <span className="font-bold">[필수]</span> 개인정보 수집 및 이용
+        <span className="font-bold">{TERMS_TEXT[2]}</span> {TERMS_TEXT[4]}
       </span>
     </button>
     <div className="flex h-[120px] py-2 px-4 items-start border-[1px] self-stretch border-gray-3 overflow-scroll hide-scrollbar">
@@ -54,7 +55,7 @@ export const Terms3: React.FC<TermsProps> = ({ isChecked, onClick }) => (
     <button onClick={onClick} className="flex items-center gap-2 self-stretch">
       <CheckBox isChecked={isChecked} />
       <span className={`${isChecked ? "text-gray-9" : "text-gray-4"}`}>
-        <span className="font-bold">[선택]</span> 마케팅 수신 동의
+        <span className="font-bold">{TERMS_TEXT[5]}</span> {TERMS_TEXT[6]}
       </span>
     </button>
     <div className="flex h-[120px] py-2 px-4 items-start border-[1px] self-stretch border-gray-3 overflow-scroll hide-scrollbar">

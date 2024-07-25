@@ -1,5 +1,6 @@
 import React from "react";
 import { AffiliationSelectProps } from "../_types/sign-up_types";
+import { DETAIL_TEXT } from "../_constants/constants";
 
 export default function AffiliationSelect({
   show,
@@ -9,17 +10,29 @@ export default function AffiliationSelect({
 
   return (
     <div className="signup-max-w-600 flex-col items-start rounded-lg border-[1px] border-gray-2 bg-white shadow-lg cursor-pointer">
-      <div onClick={() => onSelect("청소년")} className="signup-affiliation">
-        청소년
+      <div
+        onClick={() => onSelect(DETAIL_TEXT[11])}
+        className="signup-affiliation"
+      >
+        {DETAIL_TEXT[11]}
       </div>
-      <div onClick={() => onSelect("대학생")} className="signup-affiliation">
-        대학생
+      <div
+        onClick={() => onSelect(DETAIL_TEXT[12])}
+        className="signup-affiliation"
+      >
+        {DETAIL_TEXT[12]}
       </div>
-      <div onClick={() => onSelect("직장인")} className="signup-affiliation">
-        직장인
+      <div
+        onClick={() => onSelect(DETAIL_TEXT[13])}
+        className="signup-affiliation"
+      >
+        {DETAIL_TEXT[13]}
       </div>
-      <div onClick={() => onSelect("기타")} className="signup-affiliation">
-        기타
+      <div
+        onClick={() => onSelect(DETAIL_TEXT[14])}
+        className="signup-affiliation"
+      >
+        {DETAIL_TEXT[14]}
       </div>
     </div>
   );
