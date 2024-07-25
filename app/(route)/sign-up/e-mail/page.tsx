@@ -7,6 +7,7 @@ import { emailState } from "../_state/atom";
 import TalkKitLogo from "../../../components/LOGO";
 import SignUpProgress from "../_components/SignUpProgress";
 import PrimaryButton from "../_components/PrimaryButton";
+import { EMAIL_TEXT } from "../_constants/constants";
 
 export default function SignUp_Email() {
   const router = useRouter();
@@ -53,21 +54,19 @@ export default function SignUp_Email() {
       <TalkKitLogo width={280} height={79} />
       {/* 텍스트 */}
       <SignUpProgress
-        text="이메일 인증"
+        text={EMAIL_TEXT[0]}
         num={2}
         isStep2={true}
         isStep3={false}
       />
-      <span className="text-center text-sm">
-        인증에 사용한 이메일은 로그인할 때 사용돼요
-      </span>
+      <span className="text-center text-sm">{EMAIL_TEXT[1]}</span>
 
       {/* 이메일을 입력해주세요 */}
       <div className="signup-max-w-600 justify-between items-center py-2 px-4 h-[50px] border-[1px] border-gray-3 rounded-lg">
         <input
           type="email"
           className="w-full placeholder:text-gray-3 outline-none"
-          placeholder="이메일을 입력해주세요"
+          placeholder={EMAIL_TEXT[2]}
           value={formState.email}
           onChange={handleEmailChange}
         />
@@ -78,13 +77,13 @@ export default function SignUp_Email() {
           }`}
         >
           <span className="text-gray-0 text-xs whitespace-nowrap h-5">
-            인증요청
+            {EMAIL_TEXT[4]}
           </span>
         </div>
       </div>
 
       {/* 인증번호를 입력해주세요 */}
-      <input className="signup-input" placeholder="인증번호를 입력해주세요" />
+      <input className="signup-input" placeholder={EMAIL_TEXT[3]} />
 
       {/* 다음 버튼 */}
       <PrimaryButton

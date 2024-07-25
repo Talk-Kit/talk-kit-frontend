@@ -12,6 +12,7 @@ import { FormData } from "../_types/sign-up_types";
 import { DownLightArrow } from "../../../components/Icons";
 import TalkKitLogo from "../../../components/LOGO";
 import AffiliationSelect from "../_components/AffiliationSelect";
+import { DETAIL_ALERT_TEXT, DETAIL_TEXT } from "../_constants/constants";
 
 export default function SignUp_Detail() {
   const email = useRecoilValue(emailState);
@@ -44,20 +45,18 @@ export default function SignUp_Detail() {
     switch (type) {
       case "id":
         isValid = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{6,}$/.test(field);
-        message = "영문과 숫자를 포함하는 6자 이상의 아이디를 입력해 주세요";
+        message = DETAIL_ALERT_TEXT[0];
         break;
       case "pwd":
         isValid =
           /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/.test(
             field
           );
-        message =
-          "영문, 숫자, 특수기호를 포함하는 8자 이상의 비밀번호를 입력해 주세요";
+        message = DETAIL_ALERT_TEXT[2];
         break;
       case "nickname":
         isValid = /^[A-Za-z0-9가-힣]{2,}$/.test(field);
-        message =
-          "영문, 한글 및 숫자로 이루어진 2글자 이상 닉네임을 입력해 주세요";
+        message = DETAIL_ALERT_TEXT[5];
         break;
       default:
         break;
@@ -104,7 +103,7 @@ export default function SignUp_Detail() {
     if (!formState.affiliation) {
       setError("affiliation", {
         type: "manual",
-        message: "소속을 선택해 주세요",
+        message: DETAIL_ALERT_TEXT[7],
       });
       return;
     }
@@ -122,18 +121,23 @@ export default function SignUp_Detail() {
     <form className="signup-screen" onSubmit={handleSubmit(onSubmit)}>
       <TalkKitLogo width={280} height={79} />
 
-      <SignUpProgress text="회원생성" num={3} isStep2={true} isStep3={true} />
+      <SignUpProgress
+        text={DETAIL_TEXT[0]}
+        num={3}
+        isStep2={true}
+        isStep3={true}
+      />
 
       {/* 아이디 */}
       <div className="signup-max-w-600 flex-col items-start gap-2">
-        <span className="text-gray-4 text-sm font-bold">아이디</span>
+        <span className="text-gray-4 text-sm font-bold">{DETAIL_TEXT[1]}</span>
         <input
           {...register("id", {
             validate: (value) => validateField(value, "id"),
             onBlur: (e) => checkIdDuplicate(e.target.value),
           })}
           className={`signup-input ${errors.id && "border-red-1"}`}
-          placeholder="영문과 숫자를 포함하는 6자 이상의 아이디를 입력해 주세요"
+          placeholder={DETAIL_TEXT[2]}
         />
         {errors.id && typeof errors.id.message === "string" && (
           <span className="flex items-center gap-[6px] self-stretch text-red-1 text-sm">
@@ -144,21 +148,21 @@ export default function SignUp_Detail() {
         {errors.id && formState.idChecked && (
           <span className="flex items-center gap-[6px] self-stretch text-gray-4 text-sm">
             <DetailCheckBox />
-            사용 가능한 아이디입니다
+            {DETAIL_ALERT_TEXT[1]}
           </span>
         )}
       </div>
 
       {/* 비밀번호 */}
       <div className="signup-max-w-600 flex-col items-start gap-2">
-        <span className="text-gray-4 text-sm font-bold">비밀번호</span>
+        <span className="text-gray-4 text-sm font-bold">{DETAIL_TEXT[3]}</span>
         <input
           {...register("pwd", {
             validate: (value) => validateField(value, "pwd"),
           })}
           className={`signup-input ${errors.pwd && "border-red-1"}`}
           type="password"
-          placeholder="영문,숫자,특수기호를 포함하는 8자 이상의 비밀번호를 입력해 주세요"
+          placeholder={DETAIL_TEXT[4]}
         />
         {errors.pwd && typeof errors.pwd.message === "string" && (
           <span className="flex items-center gap-[6px] self-stretch text-red-1 text-sm">
@@ -170,15 +174,14 @@ export default function SignUp_Detail() {
 
       {/* 비밀번호 확인 */}
       <div className="signup-max-w-600 flex-col items-start gap-2">
-        <span className="text-gray-4 text-sm font-bold">비밀번호 확인</span>
+        <span className="text-gray-4 text-sm font-bold">{DETAIL_TEXT[5]}</span>
         <input
           {...register("pwdConfirm", {
-            validate: (value) =>
-              value === watch("pwd") || "비밀번호가 일치하지 않아요",
+            validate: (value) => value === watch("pwd") || DETAIL_ALERT_TEXT[3],
           })}
           className={`signup-input ${errors.pwdConfirm && "border-red-1"}`}
           type="password"
-          placeholder="비밀번호를 다시 한 번 확인할게요"
+          placeholder={DETAIL_TEXT[6]}
         />
         {errors.pwdConfirm && typeof errors.pwdConfirm.message === "string" && (
           <span className="flex items-center gap-[6px] self-stretch text-red-1 text-sm">
@@ -192,21 +195,21 @@ export default function SignUp_Detail() {
           watch("pwd")?.length > 0 && (
             <span className="flex items-center gap-[6px] self-stretch text-gray-4 text-sm">
               <DetailCheckBox />
-              비밀번호가 일치합니다
+              {DETAIL_ALERT_TEXT[4]}
             </span>
           )}
       </div>
 
       {/* 닉네임 */}
       <div className="signup-max-w-600 flex-col items-start gap-2">
-        <span className="text-gray-4 text-sm font-bold">닉네임</span>
+        <span className="text-gray-4 text-sm font-bold">{DETAIL_TEXT[7]}</span>
         <input
           {...register("nickname", {
             validate: (value) => validateField(value, "nickname"),
             onBlur: (e) => checkNicknameDuplicate(e.target.value),
           })}
           className={`signup-input ${errors.nickname && "border-red-1"}`}
-          placeholder="영문, 한글 및 숫자로 이루어진 2글자 이상의 닉네임을 입력해주세요"
+          placeholder={DETAIL_TEXT[8]}
         />
         {errors.nickname && typeof errors.nickname.message === "string" && (
           <span className="flex items-center gap-[6px] self-stretch text-red-1 text-sm">
@@ -217,14 +220,14 @@ export default function SignUp_Detail() {
         {!errors.nickname && formState.nicknameChecked && (
           <span className="flex items-center gap-[6px] self-stretch text-gray-4 text-sm">
             <DetailCheckBox />
-            사용 가능한 닉네임입니다
+            {DETAIL_ALERT_TEXT[6]}
           </span>
         )}
       </div>
 
       {/* 소속 */}
       <div className="signup-max-w-600 flex-col items-start gap-1 relative">
-        <span className="text-gray-4 text-sm font-bold">소속</span>
+        <span className="text-gray-4 text-sm font-bold">{DETAIL_TEXT[9]}</span>
         <div
           onClick={() => {
             setFormState((prevState) => ({
@@ -239,7 +242,7 @@ export default function SignUp_Detail() {
           <input
             value={formState.affiliation}
             className="placeholder:text-gray-3 placeholder:font-normal cursor-pointer "
-            placeholder="소속을 선택해 주세요"
+            placeholder={DETAIL_TEXT[10]}
             onFocus={(e) => e.target.blur()}
             readOnly
           />
@@ -266,7 +269,7 @@ export default function SignUp_Detail() {
       <PrimaryButton
         isActive={formState.isButtonActive}
         onClick={() => {}}
-        text="가입완료"
+        text={DETAIL_TEXT[15]}
       />
     </form>
   );
