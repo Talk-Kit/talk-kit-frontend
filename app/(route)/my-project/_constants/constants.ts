@@ -12,5 +12,7 @@ export const NEWPROJECT_TEXT = [
   "대본을 적어주세요",
   "저장하기",
   "새로운 녹음",
-  '발표자료'
+  "발표자료",
 ];
+
+export const DIALOG_TEXT = ["프로젝트명을 입력해주세요", "입력란", "생성하기"];
