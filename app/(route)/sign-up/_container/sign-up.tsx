@@ -1,3 +1,5 @@
+"use client";
+
 import { useRouter } from "next/navigation";
 import { useState, useEffect } from "react";
 import { CheckboxName } from "../_types/sign-up_types";
