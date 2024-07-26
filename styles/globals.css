@@ -71,4 +71,9 @@ body {
   .long-button {
     @apply w-full py-3 rounded-lg;
   }
+
+  /* 발표 연습 */
+  .title-text {
+    @apply font-semibold;
+  }
 }

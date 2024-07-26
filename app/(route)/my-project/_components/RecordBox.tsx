@@ -79,7 +79,7 @@ export default function RecordBox() {
   };
 
   return (
-    <>
+    <div className="w-full flex flex-col gap-3">
       <div className="py-6 bg-white rounded-lg">
         <div className="flex flex-col gap-16 items-center">
           <div className="flex flex-col gap-6 items-center">
@@ -189,6 +189,6 @@ export default function RecordBox() {
           </div>
         </>
       )}
-    </>
+    </div>
   );
 }
