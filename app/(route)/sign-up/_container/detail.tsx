@@ -22,6 +22,7 @@ export default function DetailContainer() {
     watch,
     setError,
     clearErrors,
+    setValue,
     formState: { errors },
   } = useForm<FormData>({
     mode: "onBlur",
@@ -81,6 +82,7 @@ export default function DetailContainer() {
       showAffiliation: false,
     }));
     clearErrors("affiliation");
+    setValue("affiliation", value);
   };
 
   useEffect(() => {
@@ -228,13 +230,13 @@ export default function DetailContainer() {
             errors.affiliation && "border-red-1"
           }`}
         >
-          <input
-            value={formState.affiliation}
-            className="placeholder:text-gray-3 placeholder:font-normal cursor-pointer "
-            placeholder={DETAIL_TEXT[10]}
-            onFocus={(e) => e.target.blur()}
-            readOnly
-          />
+          <div
+            className={`cursor-pointer ${
+              formState.affiliation ? "text-black" : "text-gray-3 font-normal"
+            }`}
+          >
+            {formState.affiliation || DETAIL_TEXT[10]}
+          </div>
           <DownLightArrow />
         </div>
 
