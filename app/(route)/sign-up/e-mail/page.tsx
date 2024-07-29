@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { useRecoilState } from "recoil";
 import { emailState } from "../_state/atom";
-import TalkKitLogo from "../../../components/LOGO";
+import TalkKitLogo from "../../../_components/LOGO";
 import SignUpProgress from "../_components/SignUpProgress";
 import PrimaryButton from "../_components/PrimaryButton";
 import { EMAIL_TEXT } from "../_constants/constants";

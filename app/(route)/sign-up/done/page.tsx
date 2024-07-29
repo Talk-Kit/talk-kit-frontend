@@ -4,7 +4,7 @@ import { useRouter } from "next/navigation";
 import PrimaryButton from "../_components/PrimaryButton";
 import { useRecoilValue } from "recoil";
 import { nicknameState } from "../_state/atom";
-import TalkKitLogo from "../../../components/LOGO";
+import TalkKitLogo from "../../../_components/LOGO";
 import { DONE_TEXT } from "../_constants/constants";
 
 export default function SignUp_Done() {

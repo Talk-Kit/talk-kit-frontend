@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
-import TopBar from "../../../../components/TopBar/TopBar";
+import TopBar from "../../../../_components/TopBar/TopBar";
 import RecordingAnimation from "../../_components/RecordingAnimation";
 import {
   MikeIcon,
@@ -10,7 +10,7 @@ import {
   RecordIcon,
   ShowSelectionIcon,
 } from "../../_components/Icons";
-import Button from "../../../../components/Button";
+import Button from "../../../../_components/Button";
 import RecordBox from "../../_components/RecordBox";
 
 export default function Record() {

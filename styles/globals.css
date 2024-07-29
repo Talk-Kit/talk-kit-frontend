@@ -20,7 +20,7 @@ body {
 }
 
 * {
-  @apply text-gray-9 whitespace-pre-wrap break-keep;
+  @apply text-gray-9 whitespace-pre-wrap break-keep box-border;
 }
 
 /* 스크롤바 숨기기 */
@@ -57,6 +57,11 @@ body {
 
   .large-topbar-button {
     @apply px-4 py-[0.62rem] text-sm rounded-lg;
+  }
+
+  /* 드롭다운 */
+  .dropdown-shadow {
+    box-shadow: 0px 4px 4px 0px rgba(22, 22, 22, 0.2);
   }
 
   /* 회원가입 */

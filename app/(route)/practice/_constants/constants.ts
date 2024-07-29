@@ -19,3 +19,10 @@ export const RECORD_BOX_TEXT = [
   "저장할 프로젝트",
   "저장",
 ];
+
+export const DUMMY_SELECTION_LIST = [
+  "선택지1",
+  "선택지2",
+  "선택지3",
+  "선택지4",
+];

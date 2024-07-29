@@ -1,5 +1,5 @@
-import Button from "../../../components/Button";
-import { FolderIcon } from "../../../components/Icons";
+import Button from "../../../_components/Button";
+import { FolderIcon } from "../../../_components/Icons";
 import { DIALOG_TEXT } from "../_constants/constants";
 import { DialogProps } from "../_types/project_types";
 

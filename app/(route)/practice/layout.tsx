@@ -1,4 +1,4 @@
-import TopBar from "../../components/TopBar/TopBar";
+import TopBar from "../../_components/TopBar/TopBar";
 import Footer from "../_components/Footer";
 
 export const metadata = {

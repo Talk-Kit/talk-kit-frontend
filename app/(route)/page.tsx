@@ -1,4 +1,4 @@
-import TopBar from "../components/TopBar/TopBar";
+import TopBar from "../_components/TopBar/TopBar";
 import Banner from "./_components/Banner";
 import PostCard from "./_components/PostCard";
 import FileCard from "./_components/FileCard";

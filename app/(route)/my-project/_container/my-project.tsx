@@ -3,7 +3,7 @@
 import { ChangeEvent, useState } from "react";
 import { useRouter } from "next/navigation";
 import MyProjectFolder from "../_components/MyProjectFolder";
-import Button from "../../../components/Button";
+import Button from "../../../_components/Button";
 import { EmptyProjectIcon } from "../_components/Icons";
 import { MYPROJECT_TEXT } from "../_constants/constants";
 

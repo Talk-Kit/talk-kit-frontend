@@ -83,10 +83,11 @@ export default function TopBar({ screen }: ITopBar) {
                           )}
                         </div>
                       </div>
-                      {SMALL_TOPBAR_AUTH.map((el) => {
+                      {SMALL_TOPBAR_AUTH.map((el, index) => {
                         if (el.url !== "") {
                           return (
                             <MenuCard
+                              key={index}
                               text={el.text}
                               onClick={() => router.push(el.url)}
                             />
@@ -94,6 +95,7 @@ export default function TopBar({ screen }: ITopBar) {
                         } else {
                           return (
                             <MenuCard
+                              key={index}
                               text={el.text}
                               onClick={() => {
                                 /* 팝업창 구현 후 수정 필요 */
@@ -106,8 +108,9 @@ export default function TopBar({ screen }: ITopBar) {
                   ) : (
                     <>
                       {/* 로그인이 안 되었을 때 */}
-                      {SMALL_TOPBAR_UNAUTH.map((el) => (
+                      {SMALL_TOPBAR_UNAUTH.map((el, index) => (
                         <MenuCard
+                          key={index}
                           text={el.text}
                           onClick={() => router.push(el.url)}
                         />
@@ -125,8 +128,9 @@ export default function TopBar({ screen }: ITopBar) {
             <>
               {/* 로그인 되었을 때 */}
               <div className="flex gap-3">
-                {LARGE_TOPBAR_AUTH.map((el) => (
+                {LARGE_TOPBAR_AUTH.map((el, index) => (
                   <button
+                    key={index}
                     className="large-topbar-menu"
                     onClick={() => router.push(el.url)}
                   >
@@ -148,8 +152,9 @@ export default function TopBar({ screen }: ITopBar) {
             <>
               {/* 로그인이 안 되었을 때 */}
               <div className="flex gap-2">
-                {LARGE_TOPBAR_UNAUTH.map((el) => (
+                {LARGE_TOPBAR_UNAUTH.map((el, index) => (
                   <button
+                    key={index}
                     className={`large-topbar-button ${
                       el.text === "회원가입" && "bg-primary-1 text-white"
                     }`}

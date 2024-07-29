@@ -9,8 +9,8 @@ import { AlertIcon, DetailCheckBox } from "../_components/Icons";
 import { useRecoilState, useRecoilValue } from "recoil";
 import { emailState, nicknameState } from "../_state/atom";
 import { FormData } from "../_types/sign-up_types";
-import { DownLightArrow } from "../../../components/Icons";
-import TalkKitLogo from "../../../components/LOGO";
+import { DownLightArrow } from "../../../_components/Icons";
+import TalkKitLogo from "../../../_components/LOGO";
 import AffiliationSelect from "../_components/AffiliationSelect";
 import { DETAIL_ALERT_TEXT, DETAIL_TEXT } from "../_constants/constants";
 
