@@ -4,7 +4,7 @@ import { useState } from "react";
 import { DownLightArrow } from "../../components/Icons";
 import { CheckBox } from "../sign-up/_components/Icons";
 import { PLACEHOLDER_TEXT, SECTION_TITLE } from "./_constants/constants";
-import RecordBox from "./components/RecordBox";
+import RecordBox from "./_components/RecordBox";
 
 export default function PracticePage() {
   const [isChecked, setIsChecked] = useState(false);
