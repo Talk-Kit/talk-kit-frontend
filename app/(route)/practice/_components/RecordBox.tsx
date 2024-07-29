@@ -3,7 +3,9 @@
 import { useEffect, useState } from "react";
 import RecordingAnimation from "./RecordingAnimation";
 import { motion, AnimatePresence } from "framer-motion";
-import { MikeIcon, PlayIcon, RecordIcon, ShowSelectionIcon } from "./Icons";
+import { ShowSelectionIcon } from "../../my-project/_components/Icons";
+import { RECORD_BOX_TEXT } from "../_constants/constants";
+import { MikeIcon, PlayIcon, RecordIcon } from "./Icons";
 
 export default function RecordBox() {
   const [isRecording, setIsRecording] = useState(false);
@@ -74,7 +76,7 @@ export default function RecordBox() {
         mediaRecorder.stop();
       }
     } catch (err) {
-      alert("마이크 사용 권한을 허용해야 녹음을 시작할 수 있어요!");
+      alert(RECORD_BOX_TEXT[0]);
     }
   };
 
@@ -99,9 +101,9 @@ export default function RecordBox() {
                       ? `0${Math.floor(recordedTime / 1000)}`
                       : Math.floor(recordedTime / 1000)
                   }`
-                : isRecorded
-                ? "음성녹음을 저장하지 않으면\n자동삭제되니 주의하세요"
-                : "녹음을 시작하려면 하단 빨간 버튼을 클릭해 주세요"}
+                : !isRecorded
+                ? RECORD_BOX_TEXT[1]
+                : RECORD_BOX_TEXT[2]}
             </span>
           </div>
           <span
@@ -177,14 +179,14 @@ export default function RecordBox() {
               onClick={() => {}}
               className="w-full h-full grow bg-white border border-gray-3 rounded-lg flex items-center justify-between px-4 cursor-pointer"
             >
-              <span className="text-gray-3">저장할 프로젝트</span>
+              <span className="text-gray-3">{RECORD_BOX_TEXT[3]}</span>
               <ShowSelectionIcon />
             </div>
             <button
               onClick={() => {}}
               className="px-6 py-3 bg-primary-1 text-white rounded-lg"
             >
-              저장
+              {RECORD_BOX_TEXT[4]}
             </button>
           </div>
         </>
