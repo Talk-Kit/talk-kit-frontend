@@ -9,6 +9,7 @@ import {
 } from "./_constants/constants";
 import RecordBox from "./_components/RecordBox";
 import DropDown from "../../_components/DropDown";
+import Timer from "./_components/Timer";
 
 export default function PracticePage() {
   // 타이머 활성화 state
@@ -48,6 +49,10 @@ export default function PracticePage() {
               {SECTION_TITLE[0]}
             </span>
           </div>
+          <Timer
+            isVisible={isTimerActivated}
+            onClose={() => setIsTimerActivated((prev) => !prev)}
+          />
         </section>
         {/* 대본 선택 */}
         <section className="w-full flex flex-col gap-3">

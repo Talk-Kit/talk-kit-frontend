@@ -3,9 +3,9 @@
 import { useEffect, useState } from "react";
 import RecordingAnimation from "./RecordingAnimation";
 import { motion, AnimatePresence } from "framer-motion";
-import { ShowSelectionIcon } from "../../my-project/_components/Icons";
-import { RECORD_BOX_TEXT } from "../_constants/constants";
+import { DUMMY_SELECTION_LIST, RECORD_BOX_TEXT } from "../_constants/constants";
 import { MikeIcon, PlayIcon, RecordIcon } from "./Icons";
+import DropDown from "../../../_components/DropDown";
 
 export default function RecordBox() {
   const [isRecording, setIsRecording] = useState(false);
@@ -79,6 +79,10 @@ export default function RecordBox() {
       alert(RECORD_BOX_TEXT[0]);
     }
   };
+
+  // 저장 관련
+  const [isOpened, setIsOpened] = useState(false);
+  const [selectedProject, setSelectedProject] = useState("");
 
   return (
     <div className="w-full flex flex-col gap-3">
@@ -175,13 +179,16 @@ export default function RecordBox() {
           </div>
           {/* 녹음 파일 저장 */}
           <div className="w-full h-[50px] flex gap-3">
-            <div
-              onClick={() => {}}
-              className="w-full h-full grow bg-white border border-gray-3 rounded-lg flex items-center justify-between px-4 cursor-pointer"
-            >
-              <span className="text-gray-3">{RECORD_BOX_TEXT[3]}</span>
-              <ShowSelectionIcon />
-            </div>
+            <DropDown
+              currentValue={selectedProject}
+              isOpened={isOpened}
+              onDropDownClick={() => setIsOpened((prev) => !prev)}
+              onSelectionClick={(select) => {
+                setSelectedProject(select);
+              }}
+              placeholder={RECORD_BOX_TEXT[3]}
+              selectionList={DUMMY_SELECTION_LIST}
+            />
             <button
               onClick={() => {}}
               className="px-6 py-3 bg-primary-1 text-white rounded-lg"

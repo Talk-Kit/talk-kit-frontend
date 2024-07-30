@@ -20,6 +20,17 @@ export const RECORD_BOX_TEXT = [
   "저장",
 ];
 
+export const TIMER_BUTTON_TEXT = [
+  { text: "+1분", minutes: 1 },
+  { text: "+5분", minutes: 5 },
+  { text: "+10분", minutes: 10 },
+  { text: "+30분", minutes: 30 },
+  { text: "초기화", minutes: 0 },
+  { text: "정지/재생", minutes: -1 },
+];
+
+export const CIRCUMFERENCE = 2 * 80 * Math.PI;
+
 export const DUMMY_SELECTION_LIST = [
   "선택지1",
   "선택지2",

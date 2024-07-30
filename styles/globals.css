@@ -90,4 +90,13 @@ body {
   .title-text {
     @apply font-semibold;
   }
+  .timer-button {
+    @apply px-3 py-[6px] bg-white text-gray-4 rounded-lg;
+  }
+  .timer-number {
+    @apply text-white text-2xl tracking-wider font-extralight relative;
+  }
+  .timer-unit {
+    @apply absolute -translate-y-full top-[2px] right-[4.5px] text-white text-[7px] font-extralight leading-none;
+  }
 }
