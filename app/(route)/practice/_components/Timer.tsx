@@ -28,8 +28,8 @@ export default function Timer({ isVisible, onClose }: ITimer) {
     if (isTicking && time > 0) {
       // 타이머 시작
       const id = setInterval(() => {
-        setTime((prev) => prev - 1);
-      }, 1000);
+        setTime((prev) => prev - 0.1);
+      }, 100);
       setTimerId(id);
 
       return () => clearInterval(id);
@@ -80,6 +80,8 @@ export default function Timer({ isVisible, onClose }: ITimer) {
           viewBox="0 0 170 170"
         >
           <motion.circle
+            // 타이머가 초기화될 때마다 리렌더링
+            key={isStarted + ""}
             fill="none"
             stroke="#6B71FF"
             strokeWidth="10"
@@ -87,11 +89,12 @@ export default function Timer({ isVisible, onClose }: ITimer) {
             cx="85"
             cy="85"
             strokeDasharray={CIRCUMFERENCE}
-            strokeDashoffset={
-              !isNaN(time / startedTime)
+            animate={{
+              strokeDashoffset: !isNaN(time / startedTime)
                 ? CIRCUMFERENCE - CIRCUMFERENCE * (time / startedTime)
-                : 0
-            }
+                : 0,
+            }}
+            transition={{ duration: 0.1, type: "tween", ease: "linear" }}
             style={{ rotate: -90 }}
           />
         </svg>
