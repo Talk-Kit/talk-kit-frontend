@@ -99,4 +99,10 @@ body {
   .timer-unit {
     @apply absolute -translate-y-full top-[2px] right-[4.5px] text-white text-[7px] font-extralight leading-none;
   }
+  .tick-container {
+    @apply absolute bottom-1/2 pb-[65px] origin-bottom;
+  }
+  .tick {
+    @apply w-[2px] h-[1px] rounded-full bg-white;
+  }
 }

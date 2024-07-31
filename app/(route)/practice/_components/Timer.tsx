@@ -4,6 +4,7 @@ import { useCalculateTime } from "../../../_hooks/useCalculateTime";
 import { motion } from "framer-motion";
 import { CloseIcon } from "../../../_components/Icons";
 import { useOutsideClick } from "../../../_hooks/useOutsideClick";
+import ClockTicks from "./ClockTicks";
 
 interface ITimer {
   isVisible: boolean;
@@ -28,7 +29,7 @@ export default function Timer({ isVisible, onClose }: ITimer) {
     if (isTicking && time > 0) {
       // 타이머 시작
       const id = setInterval(() => {
-        setTime((prev) => prev - 0.1);
+        setTime((prev) => Number((prev - 0.1).toFixed(1)));
       }, 100);
       setTimerId(id);
 
@@ -61,6 +62,7 @@ export default function Timer({ isVisible, onClose }: ITimer) {
       transition={{ type: "tween", duration: 0.5 }}
       className="bg-[#161616]/[0.2] fixed w-full top-0 left-0 z-20 flex flex-col items-center py-6 gap-8"
     >
+      {/* 타이머 스타일링 */}
       <section className="w-[180px] h-[180px] flex justify-center items-center relative">
         <div className="w-[150px] h-[150px] bg-gray-9 rounded-full flex justify-center items-center">
           <span className="timer-number">
@@ -73,6 +75,7 @@ export default function Timer({ isVisible, onClose }: ITimer) {
             <span className="timer-unit">S</span>
           </span>
         </div>
+        {/* 진행도 바 스타일링 */}
         <svg
           className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2"
           width="170"
@@ -80,7 +83,7 @@ export default function Timer({ isVisible, onClose }: ITimer) {
           viewBox="0 0 170 170"
         >
           <motion.circle
-            // 타이머가 초기화될 때마다 리렌더링
+            // 진행도 바 즉시 초기화(리렌더링)를 위한 key
             key={isStarted + ""}
             fill="none"
             stroke="#6B71FF"
@@ -89,15 +92,19 @@ export default function Timer({ isVisible, onClose }: ITimer) {
             cx="85"
             cy="85"
             strokeDasharray={CIRCUMFERENCE}
+            initial={{ strokeDashoffset: 0 }}
             animate={{
-              strokeDashoffset: !isNaN(time / startedTime)
-                ? CIRCUMFERENCE - CIRCUMFERENCE * (time / startedTime)
-                : 0,
+              strokeDashoffset:
+                time && startedTime
+                  ? CIRCUMFERENCE - CIRCUMFERENCE * (time / startedTime)
+                  : 0,
             }}
             transition={{ duration: 0.1, type: "tween", ease: "linear" }}
             style={{ rotate: -90 }}
           />
         </svg>
+        {/* 시계 점 스타일링 */}
+        <ClockTicks />
       </section>
       <section className="flex gap-4">
         {TIMER_BUTTON_TEXT.map((el, index) => (
