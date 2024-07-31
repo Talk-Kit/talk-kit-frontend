@@ -60,83 +60,91 @@ export default function Timer({ isVisible, onClose }: ITimer) {
       animate={{ y: isVisible ? 0 : "-100%" }}
       ref={ref}
       transition={{ type: "tween", duration: 0.5 }}
-      className="bg-[#161616]/[0.2] fixed w-full top-0 left-0 z-20 flex flex-col items-center py-6 gap-8"
+      className="bg-[#161616]/[0.2] fixed w-full top-0 left-0 z-20 flex flex-col items-center py-6 gap-8 rounded-b-lg"
     >
-      {/* 타이머 스타일링 */}
-      <section className="w-[180px] h-[180px] flex justify-center items-center relative">
-        <div className="w-[150px] h-[150px] bg-gray-9 rounded-full flex justify-center items-center">
-          <span className="timer-number">
-            {minutes}
-            <span className="timer-unit">M</span>
-          </span>
-          <span className="timer-number -mt-[5px]">:</span>
-          <span className="timer-number">
-            {seconds}
-            <span className="timer-unit">S</span>
-          </span>
-        </div>
-        {/* 진행도 바 스타일링 */}
-        <svg
-          className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2"
-          width="170"
-          height="170"
-          viewBox="0 0 170 170"
-        >
-          <motion.circle
-            // 진행도 바 즉시 초기화(리렌더링)를 위한 key
-            key={isStarted + ""}
-            fill="none"
-            stroke="#6B71FF"
-            strokeWidth="10"
-            r="80"
-            cx="85"
-            cy="85"
-            strokeDasharray={CIRCUMFERENCE}
-            initial={{ strokeDashoffset: 0 }}
-            animate={{
-              strokeDashoffset:
-                time && startedTime
-                  ? CIRCUMFERENCE - CIRCUMFERENCE * (time / startedTime)
-                  : 0,
-            }}
-            transition={{ duration: 0.1, type: "tween", ease: "linear" }}
-            style={{ rotate: -90 }}
-          />
-        </svg>
-        {/* 시계 점 스타일링 */}
-        <ClockTicks />
-      </section>
-      <section className="flex gap-4">
-        {TIMER_BUTTON_TEXT.map((el, index) => (
-          <button
-            key={index}
-            onClick={() => {
-              if (el.minutes === 0) {
-                setTime(0);
-              } else if (el.minutes === -1) {
-                if (time <= 0) {
-                  alert("시간을 설정해주세요");
-                } else {
-                  if (!isStarted) {
-                    // 처음 시작되었을 때만 startedTime 설정
-                    setIsStarted((prev) => !prev);
-                    // 비율 계산을 위한 초기 time값 저장
-                    setStartedTime(time);
-                    setIsTicking((prev) => !prev);
+      <div className="flex lg:flex-col lg:gap-8 items-center gap-8">
+        {/* 타이머 스타일링 */}
+        <section className="w-[180px] h-[180px] flex justify-center items-center relative">
+          <div className="w-[150px] h-[150px] bg-gray-9 rounded-full flex justify-center items-center">
+            <span className="timer-number">
+              {minutes}
+              <span className="timer-unit">M</span>
+            </span>
+            <span className="timer-number -mt-[5px]">:</span>
+            <span className="timer-number">
+              {seconds}
+              <span className="timer-unit">S</span>
+            </span>
+          </div>
+          {/* 진행도 바 스타일링 */}
+          <svg
+            className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2"
+            width="170"
+            height="170"
+            viewBox="0 0 170 170"
+          >
+            <motion.circle
+              // 진행도 바 즉시 초기화(리렌더링)를 위한 key
+              key={isStarted + ""}
+              fill="none"
+              stroke="#6B71FF"
+              strokeWidth="10"
+              r="80"
+              cx="85"
+              cy="85"
+              strokeDasharray={CIRCUMFERENCE}
+              initial={{ strokeDashoffset: 0 }}
+              animate={{
+                strokeDashoffset:
+                  time && startedTime
+                    ? CIRCUMFERENCE - CIRCUMFERENCE * (time / startedTime)
+                    : 0,
+              }}
+              transition={{ duration: 0.1, type: "tween", ease: "linear" }}
+              style={{ rotate: -90 }}
+            />
+          </svg>
+          {/* 시계 점 스타일링 */}
+          <ClockTicks />
+        </section>
+        {/* 버튼 */}
+        <section className="flex gap-4 max-lg:grid max-lg:grid-cols-2">
+          {TIMER_BUTTON_TEXT.map((el, index) => (
+            <button
+              key={index}
+              onClick={() => {
+                if (el.minutes === 0) {
+                  setTime(0);
+                } else if (el.minutes === -1) {
+                  if (time <= 0) {
+                    alert("시간을 설정해주세요");
                   } else {
-                    setIsTicking((prev) => !prev);
+                    if (!isStarted) {
+                      // 처음 시작되었을 때만 startedTime 설정
+                      setIsStarted((prev) => !prev);
+                      // 비율 계산을 위한 초기 time값 저장
+                      setStartedTime(time);
+                      setIsTicking((prev) => !prev);
+                    } else {
+                      setIsTicking((prev) => !prev);
+                    }
+                  }
+                } else {
+                  if (isStarted) {
+                    setStartedTime((prev) => prev + el.minutes * 60);
+                    setTime((prev) => prev + el.minutes * 60);
+                  } else {
+                    setTime((prev) => prev + el.minutes * 60);
                   }
                 }
-              } else {
-                setTime((prev) => prev + el.minutes * 60);
-              }
-            }}
-            className="timer-button"
-          >
-            {el.text}
-          </button>
-        ))}
-      </section>
+              }}
+              className="timer-button"
+            >
+              {el.text}
+            </button>
+          ))}
+        </section>
+      </div>
       <button
         onClick={() => {
           onClose();
