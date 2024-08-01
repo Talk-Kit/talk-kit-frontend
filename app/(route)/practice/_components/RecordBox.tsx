@@ -6,34 +6,70 @@ import { motion, AnimatePresence } from "framer-motion";
 import { DUMMY_SELECTION_LIST, RECORD_BOX_TEXT } from "../_constants/constants";
 import { MikeIcon, PlayIcon, RecordIcon } from "./Icons";
 import DropDown from "../../../_components/DropDown";
+import { useCalculateTime } from "../../../_hooks/useCalculateTime";
 
 export default function RecordBox() {
+  // 녹음 상태 관련 state
   const [isRecording, setIsRecording] = useState(false);
   const [isRecorded, setIsRecorded] = useState(false);
   const [isPlaying, setIsPlaying] = useState(false);
+  const [isDone, setIsDone] = useState(false);
+  const [resetCounter, setResetCounter] = useState(0);
 
-  const [mediaRecorder, setMediaRecorder] = useState<MediaRecorder>(null);
-  const [latestBlobURL, setLatestBlobURL] = useState("");
-  const [audio, setAudio] = useState<HTMLAudioElement>();
+  // 녹음 기능 관련 state
   const [recordedTime, setRecordedTime] = useState(0);
-  // 녹음 시간 측정 (10 밀리초마다 측정)
+  const [recMinutes, recSeconds] = useCalculateTime(recordedTime);
+  const [mediaRecorder, setMediaRecorder] = useState<MediaRecorder>(null);
+  const [audio, setAudio] = useState<HTMLAudioElement>();
+
+  // 녹음된 파일 재생 관련 시간 state
+  const [currentTime, setCurrentTime] = useState(0);
+  const [currMinutes, currSeconds] = useCalculateTime(currentTime / 1000);
+  const [totalTime, setTotalTime] = useState(0);
+
+  // 녹음된 시각 저장
+  const [recordedHours, setRecordedHours] = useState(0);
+  const [recordedMinutes, setRecordedMinutes] = useState(0);
+
+  // 녹음 시간 측정 (사용자에게 출력하기 위한 용도)
   useEffect(() => {
     let interval: NodeJS.Timeout;
     if (isRecording) {
       interval = setInterval(() => {
-        setRecordedTime((prev) => prev + 10);
-      }, 10);
+        setRecordedTime((prev) => prev + 1);
+      }, 1000);
     } else {
       clearInterval(interval);
     }
     return () => clearInterval(interval);
   }, [isRecording]);
-  const [currentTime, setCurrentTime] = useState(0);
+
+  useEffect(() => {
+    let interval: NodeJS.Timeout;
+    if (isPlaying) {
+      interval = setInterval(() => {
+        setCurrentTime((prev) => prev + 100);
+      }, 100);
+    } else {
+      clearInterval(interval);
+    }
+    return () => clearInterval(interval);
+  }, [isPlaying]);
+
   // 녹음된 데이터가 저장될 배열
   const audioArray = [];
   const onRecord = async () => {
     try {
       if (!isRecording) {
+        // 녹음이 시작되면 재생되고 있던 오디오 정지
+        if (audio) {
+          audio.pause();
+        }
+        setIsPlaying(false);
+
+        // 시간 측정 변수 선언
+        let startedTime: number, endedTime: number;
+
         // 마이크 mediaStream 생성
         const mediaStream = await navigator.mediaDevices.getUserMedia({
           audio: true,
@@ -45,28 +81,42 @@ export default function RecordBox() {
         newMediaRecorder.ondataavailable = (event) => {
           audioArray.push(event.data);
         };
+
+        newMediaRecorder.onstart = (event) => {
+          // 녹음 시작 시의 시간 측정
+          startedTime = new Date().getTime();
+        };
+
         // 녹음 종료 시 EventHandling
         newMediaRecorder.onstop = (event) => {
+          // 녹음 종료 시의 시간 측정
+          endedTime = new Date().getTime();
+          setRecordedHours(new Date().getHours());
+          setRecordedMinutes(new Date().getMinutes());
+
+          const totalTime = endedTime - startedTime;
+          setTotalTime(totalTime);
+
           setIsRecording(false);
+
           // 녹음이 종료될 때, 배열에 담긴 데이터를 합치고 코덱 설정
           const blob = new Blob(audioArray, { type: "audio/ogg codecs=opus" });
           // 녹음 데이터 배열 초기화
           audioArray.splice(0);
           // 합쳐진 음성 데이터(Blob)에 접근할 수 있는 URL 생성
           const blobURL = window.URL.createObjectURL(blob);
-          setLatestBlobURL(blobURL);
           // 생성된 blobURL에 맞게 audio과 관련 state 갱신
           const newAudio = new Audio(blobURL);
+
           // 음성 재생이 끝나면 isPlaying state 변경
           newAudio.addEventListener("ended", () => {
             setIsPlaying(false);
+            setIsDone(true);
           });
-          // 새로운 녹음이 저장되었을 경우 currentTime state 초기화 및
+
+          // 새로운 녹음이 저장되었을 경우 currentTime state 초기화
           setCurrentTime(0);
-          // 재생 시간이 변경될 경우 currentTime state 변경
-          newAudio.addEventListener("timeupdate", () => {
-            setCurrentTime(newAudio.currentTime);
-          });
+          // 생성된 오디오 엘리먼트 저장
           setAudio(newAudio);
         };
         newMediaRecorder.start();
@@ -96,15 +146,7 @@ export default function RecordBox() {
               }`}
             >
               {isRecording
-                ? `${
-                    Math.floor(recordedTime / 1000 / 60) < 10
-                      ? `0${Math.floor(recordedTime / 1000 / 60)}`
-                      : Math.floor(recordedTime / 1000 / 60)
-                  }:${
-                    Math.floor(recordedTime / 1000) < 10
-                      ? `0${Math.floor(recordedTime / 1000)}`
-                      : Math.floor(recordedTime / 1000)
-                  }`
+                ? `${recMinutes}:${recSeconds}`
                 : !isRecorded
                 ? RECORD_BOX_TEXT[1]
                 : RECORD_BOX_TEXT[2]}
@@ -140,13 +182,19 @@ export default function RecordBox() {
           <div className="w-full h-[50px] rounded-2xl bg-white flex gap-9 items-center px-6">
             <div className="flex gap-3 items-center">
               <span className="font-semibold">새로운 녹음</span>
-              <span className="text-gray-4 text-sm">10시 32분</span>
+              <span className="text-gray-4 text-sm">{`${recordedHours}시 ${recordedMinutes}분`}</span>
             </div>
             <div className="flex gap-3 grow items-center">
               <div
                 className="cursor-pointer"
                 onClick={() => {
                   if (!isPlaying) {
+                    // 끝까지 재생되었을 때 다시 재생하는 경우 진행도 즉시 초기화
+                    if (isDone) {
+                      setIsDone(false);
+                      setCurrentTime(0);
+                      setResetCounter((prev) => prev + 1);
+                    }
                     setIsPlaying(true);
                     audio.play();
                   } else {
@@ -156,25 +204,26 @@ export default function RecordBox() {
                 }}
               >
                 <PlayIcon />
-                <audio src={latestBlobURL}></audio>
               </div>
               <div className="bg-gray-2 h-3 w-full grow rounded-full relative overflow-hidden">
                 <motion.div
-                  style={{
-                    scaleX: currentTime / Math.floor(recordedTime / 1000),
+                  // 끝까지 재생되었을 때 다시 재생하는 경우 진행도 즉시 초기화
+                  key={resetCounter + ""}
+                  initial={{
+                    scaleX: 0,
+                  }}
+                  animate={{
+                    scaleX: currentTime / totalTime,
+                  }}
+                  transition={{
+                    type: "tween",
+                    ease: "linear",
+                    duration: 0.1,
                   }}
                   className="bg-primary-1 h-3 w-full relative origin-left"
                 />
               </div>
-              <span className="text-gray-4 text-xs">{`${
-                Math.floor(currentTime / 60) < 10
-                  ? `0${Math.floor(currentTime / 60)}`
-                  : Math.floor(currentTime / 60)
-              }:${
-                Math.floor(currentTime) < 10
-                  ? `0${Math.floor(currentTime)}`
-                  : Math.floor(currentTime)
-              }`}</span>
+              <span className="text-gray-4 text-xs">{`${currMinutes}:${currSeconds}`}</span>
             </div>
           </div>
           {/* 녹음 파일 저장 */}
