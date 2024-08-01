@@ -14,7 +14,6 @@ export default function RecordBox() {
   const [isRecorded, setIsRecorded] = useState(false);
   const [isPlaying, setIsPlaying] = useState(false);
   const [isDone, setIsDone] = useState(false);
-  const [resetCounter, setResetCounter] = useState(0);
 
   // 녹음 기능 관련 state
   const [recordedTime, setRecordedTime] = useState(0);
@@ -48,8 +47,8 @@ export default function RecordBox() {
     let interval: NodeJS.Timeout;
     if (isPlaying) {
       interval = setInterval(() => {
-        setCurrentTime((prev) => prev + 100);
-      }, 100);
+        setCurrentTime((prev) => prev + 10);
+      }, 10);
     } else {
       clearInterval(interval);
     }
@@ -65,6 +64,7 @@ export default function RecordBox() {
         if (audio) {
           audio.pause();
         }
+        setIsDone(false);
         setIsPlaying(false);
 
         // 시간 측정 변수 선언
@@ -193,7 +193,6 @@ export default function RecordBox() {
                     if (isDone) {
                       setIsDone(false);
                       setCurrentTime(0);
-                      setResetCounter((prev) => prev + 1);
                     }
                     setIsPlaying(true);
                     audio.play();
@@ -207,18 +206,8 @@ export default function RecordBox() {
               </div>
               <div className="bg-gray-2 h-3 w-full grow rounded-full relative overflow-hidden">
                 <motion.div
-                  // 끝까지 재생되었을 때 다시 재생하는 경우 진행도 즉시 초기화
-                  key={resetCounter + ""}
-                  initial={{
-                    scaleX: 0,
-                  }}
-                  animate={{
+                  style={{
                     scaleX: currentTime / totalTime,
-                  }}
-                  transition={{
-                    type: "tween",
-                    ease: "linear",
-                    duration: 0.1,
                   }}
                   className="bg-primary-1 h-3 w-full relative origin-left"
                 />
