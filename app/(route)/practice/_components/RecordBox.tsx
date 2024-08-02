@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import RecordingAnimation from "./RecordingAnimation";
 import { motion, AnimatePresence } from "framer-motion";
 import { DUMMY_SELECTION_LIST, RECORD_BOX_TEXT } from "../_constants/constants";
@@ -43,6 +43,7 @@ export default function RecordBox() {
     return () => clearInterval(interval);
   }, [isRecording]);
 
+  // 녹음된 오디오를 재생할 때의 시간 측정
   useEffect(() => {
     let interval: NodeJS.Timeout;
     if (isPlaying) {
@@ -112,6 +113,8 @@ export default function RecordBox() {
           newAudio.addEventListener("ended", () => {
             setIsPlaying(false);
             setIsDone(true);
+            // 오디오가 끝났을 때 진행도 바가 끝까지 가지 않았을 경우 방지
+            setCurrentTime(totalTime);
           });
 
           // 새로운 녹음이 저장되었을 경우 currentTime state 초기화
@@ -130,10 +133,87 @@ export default function RecordBox() {
     }
   };
 
-  // 저장 관련
+  // Progress Bar 관련
+  const [isMouseDown, setIsMouseDown] = useState(false);
+  const [isMouseLeave, setIsMouseLeave] = useState(false);
+  const ref = useRef<HTMLDivElement>(null);
+  const handleProgress = (e: React.MouseEvent) => {
+    // 시간을 변경하기 전에 오디오 중지
+    audio.pause();
+    setIsPlaying(false);
+
+    const width = e.currentTarget.clientWidth;
+    const offsetX = e.nativeEvent.offsetX;
+    const percent = Math.max(0, Math.min(1, offsetX / width));
+
+    // currentTime의 증가 단위인 10ms와 동일하게 10단위로 설정
+    // percent가 1인 경우 floor로 인해 내림이 되는 경우 방지
+    const result =
+      percent === 1 ? totalTime : Math.floor((totalTime * percent) / 10) * 10;
+    setCurrentTime(result);
+
+    // isDone, audio 초기화
+    if (result < totalTime) {
+      setIsDone(false);
+      audio.currentTime = result / 1000;
+    } else {
+      setIsDone(true);
+      audio.currentTime = 0;
+    }
+  };
+
+  // 드래그 중 Progress Bar 밖으로 마우스가 벗어났을 때의 Event Handle
+  const handleProgressOutside = (e: MouseEvent) => {
+    if (isMouseDown && isMouseLeave) {
+      // 드래그 중 다른 요소 선택 방지
+      document.body.style.userSelect = "none";
+      // 시간을 변경하기 전에 오디오 중지
+      audio.pause();
+      setIsPlaying(false);
+
+      const width = ref.current.clientWidth;
+      // 현재 마우스의 위치 - Progress Bar의 시작 지점의 좌표
+      const offsetX = e.clientX - ref.current.offsetLeft;
+      const percent = Math.max(0, Math.min(1, offsetX / width));
+
+      // currentTime의 증가 단위인 10ms와 동일하게 10단위로 설정
+      // percent가 1인 경우 floor로 인해 내림이 되는 경우 방지
+      const result =
+        percent === 1 ? totalTime : Math.floor((totalTime * percent) / 10) * 10;
+      setCurrentTime(result);
+
+      // isDone, audio 초기화
+      if (result < totalTime) {
+        setIsDone(false);
+        audio.currentTime = result / 1000;
+      } else {
+        setIsDone(true);
+        audio.currentTime = 0;
+      }
+    }
+  };
+  const handleMouseUpOutside = () => {
+    if (isMouseDown && isMouseLeave) {
+      // 드래그가 끝난 뒤 다른 요소 선택 정상화
+      document.body.style.userSelect = "auto";
+      setIsMouseDown(false);
+    }
+  };
+
+  // 마우스가 Progress Bar에서 벗어났을 경우에 window에 Event 부여
+  useEffect(() => {
+    window.addEventListener("mousemove", handleProgressOutside);
+    window.addEventListener("mouseup", handleMouseUpOutside);
+
+    return () => {
+      window.removeEventListener("mousemove", handleProgressOutside);
+      window.removeEventListener("mouseup", handleMouseUpOutside);
+    };
+  }, [isMouseDown, isMouseLeave]);
+
+  // 프로젝트에 저장 관련
   const [isOpened, setIsOpened] = useState(false);
   const [selectedProject, setSelectedProject] = useState("");
-
   return (
     <div className="w-full flex flex-col gap-3">
       <div className="py-6 bg-white rounded-lg">
@@ -195,6 +275,8 @@ export default function RecordBox() {
                       setCurrentTime(0);
                     }
                     setIsPlaying(true);
+                    // 재생/일시정지를 빠르게 반복했을 경우 오디오가 밀려 일찍 끝나는 것 방지
+                    audio.currentTime = currentTime / 1000;
                     audio.play();
                   } else {
                     setIsPlaying(false);
@@ -204,12 +286,21 @@ export default function RecordBox() {
               >
                 <PlayIcon />
               </div>
-              <div className="bg-gray-2 h-3 w-full grow rounded-full relative overflow-hidden">
+              <div
+                ref={ref}
+                onClick={(e) => handleProgress(e)}
+                onMouseDown={() => setIsMouseDown(true)}
+                onMouseUp={() => setIsMouseDown(false)}
+                onMouseMove={(e) => isMouseDown && handleProgress(e)}
+                onMouseLeave={() => setIsMouseLeave(true)}
+                onMouseEnter={() => setIsMouseLeave(false)}
+                className="bg-gray-2 h-3 w-full grow rounded-full relative overflow-hidden"
+              >
                 <motion.div
                   style={{
                     scaleX: currentTime / totalTime,
                   }}
-                  className="bg-primary-1 h-3 w-full relative origin-left"
+                  className="bg-primary-1 h-3 w-full relative origin-left pointer-events-none"
                 />
               </div>
               <span className="text-gray-4 text-xs">{`${currMinutes}:${currSeconds}`}</span>
