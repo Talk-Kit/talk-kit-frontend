@@ -4,7 +4,7 @@ import { useEffect, useRef, useState } from "react";
 import RecordingAnimation from "./RecordingAnimation";
 import { motion, AnimatePresence } from "framer-motion";
 import { DUMMY_SELECTION_LIST, RECORD_BOX_TEXT } from "../_constants/constants";
-import { MikeIcon, PlayIcon, RecordIcon } from "./Icons";
+import { MikeIcon, PauseIcon, PlayIcon, RecordIcon } from "./Icons";
 import DropDown from "../../../_components/DropDown";
 import { useCalculateTime } from "../../../_hooks/useCalculateTime";
 
@@ -284,7 +284,7 @@ export default function RecordBox() {
                   }
                 }}
               >
-                <PlayIcon />
+                {!isPlaying ? <PlayIcon /> : <PauseIcon />}
               </div>
               <div
                 ref={ref}
