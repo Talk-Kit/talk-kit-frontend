@@ -48,7 +48,8 @@ export default function RecordBox() {
     let interval: NodeJS.Timeout;
     if (isPlaying) {
       interval = setInterval(() => {
-        setCurrentTime((prev) => prev + 10);
+        // 녹음된 시간보다 currentTime이 커지는 것을 방지
+        setCurrentTime((prev) => Math.min(totalTime, prev + 10));
       }, 10);
     } else {
       clearInterval(interval);
