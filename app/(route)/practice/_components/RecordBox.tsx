@@ -242,8 +242,6 @@ export default function RecordBox() {
   const [isOpened, setIsOpened] = useState(false);
   const [selectedProject, setSelectedProject] = useState("");
 
-  console.log(currentTime / totalTime);
-
   return (
     <div className="w-full flex flex-col gap-3">
       <div className="py-6 bg-white rounded-lg">
