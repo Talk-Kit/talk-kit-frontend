@@ -59,17 +59,18 @@ export default function RecordBox() {
 
   // 녹음된 데이터가 저장될 배열
   const audioArray = [];
+  // 녹음
   const onRecord = async () => {
     try {
       if (!isRecording) {
-        // 녹음이 시작되면 재생되고 있던 오디오 정지
+        // 녹음이 시작되면 재생되고 있던 오디오 정지 및 state 초기화
         if (audio) {
           audio.pause();
         }
         setIsDone(false);
         setIsPlaying(false);
 
-        // 시간 측정 변수 선언
+        // 녹음 시간 측정용 변수 선언
         let startedTime: number, endedTime: number;
 
         // 마이크 mediaStream 생성
@@ -96,27 +97,29 @@ export default function RecordBox() {
           setRecordedHours(new Date().getHours());
           setRecordedMinutes(new Date().getMinutes());
 
+          // 측정된 시간을 음원의 총 길이로 설정
           const totalTime = endedTime - startedTime;
           setTotalTime(totalTime);
 
           setIsRecording(false);
 
           // 녹음이 종료될 때, 배열에 담긴 데이터를 합치고 코덱 설정
-          const blob = new Blob(audioArray, { type: "audio/ogg codecs=opus" });
+          const blob = new Blob(audioArray, { type: "audio/mp3" });
           // 녹음 데이터 배열 초기화
           audioArray.splice(0);
           // 합쳐진 음성 데이터(Blob)에 접근할 수 있는 URL 생성
-          const blobURL = window.URL.createObjectURL(blob);
+          const blobURL = URL.createObjectURL(blob);
           // 생성된 blobURL에 맞게 audio과 관련 state 갱신
           const newAudio = new Audio(blobURL);
 
           // 음성 재생이 끝나면 isPlaying state 변경
-          newAudio.addEventListener("ended", () => {
+          const onEnded = () => {
             setIsPlaying(false);
             setIsDone(true);
             // 오디오가 끝났을 때 진행도 바가 끝까지 가지 않았을 경우 방지
             setCurrentTime(totalTime);
-          });
+          };
+          newAudio.addEventListener("ended", onEnded);
 
           // 새로운 녹음이 저장되었을 경우 currentTime state 초기화
           setCurrentTime(0);
@@ -130,7 +133,10 @@ export default function RecordBox() {
         mediaRecorder.stop();
       }
     } catch (err) {
-      alert(RECORD_BOX_TEXT[0]);
+      if (err.name === "NotAllowedError") {
+        // 마이크 사용 권한이 허용되지 않은 경우
+        alert(RECORD_BOX_TEXT[0]);
+      }
     }
   };
 
@@ -138,15 +144,9 @@ export default function RecordBox() {
   const [isMouseDown, setIsMouseDown] = useState(false);
   const [isMouseLeave, setIsMouseLeave] = useState(false);
   const ref = useRef<HTMLDivElement>(null);
-  const handleProgress = (e: React.MouseEvent) => {
-    // 시간을 변경하기 전에 오디오 중지
-    audio.pause();
-    setIsPlaying(false);
 
-    const width = e.currentTarget.clientWidth;
-    const offsetX = e.nativeEvent.offsetX;
-    const percent = Math.max(0, Math.min(1, offsetX / width));
-
+  // 현재 시간 계산용 함수
+  const getResult = (percent: number) => {
     // currentTime의 증가 단위인 10ms와 동일하게 10단위로 설정
     // percent가 1인 경우 floor로 인해 내림이 되는 경우 방지
     const result =
@@ -156,11 +156,23 @@ export default function RecordBox() {
     // isDone, audio 초기화
     if (result < totalTime) {
       setIsDone(false);
-      audio.currentTime = result / 1000;
     } else {
       setIsDone(true);
       audio.currentTime = 0;
     }
+  };
+
+  // Progress Bar 클릭 / 드래그를 통해 시점 이동
+  const handleProgress = (e: React.MouseEvent) => {
+    // 시간을 변경하기 전에 오디오 중지
+    audio.pause();
+    setIsPlaying(false);
+
+    const width = e.currentTarget.clientWidth;
+    const offsetX = e.nativeEvent.offsetX;
+    const percent = Math.max(0, Math.min(1, offsetX / width));
+
+    getResult(percent);
   };
 
   // 드래그 중 Progress Bar 밖으로 마우스가 벗어났을 때의 Event Handle
@@ -168,6 +180,8 @@ export default function RecordBox() {
     if (isMouseDown && isMouseLeave) {
       // 드래그 중 다른 요소 선택 방지
       document.body.style.userSelect = "none";
+      document.body.style.webkitUserSelect = "none"; // Safari
+
       // 시간을 변경하기 전에 오디오 중지
       audio.pause();
       setIsPlaying(false);
@@ -177,26 +191,15 @@ export default function RecordBox() {
       const offsetX = e.clientX - ref.current.offsetLeft;
       const percent = Math.max(0, Math.min(1, offsetX / width));
 
-      // currentTime의 증가 단위인 10ms와 동일하게 10단위로 설정
-      // percent가 1인 경우 floor로 인해 내림이 되는 경우 방지
-      const result =
-        percent === 1 ? totalTime : Math.floor((totalTime * percent) / 10) * 10;
-      setCurrentTime(result);
-
-      // isDone, audio 초기화
-      if (result < totalTime) {
-        setIsDone(false);
-        audio.currentTime = result / 1000;
-      } else {
-        setIsDone(true);
-        audio.currentTime = 0;
-      }
+      getResult(percent);
     }
   };
   const handleMouseUpOutside = () => {
     if (isMouseDown && isMouseLeave) {
       // 드래그가 끝난 뒤 다른 요소 선택 정상화
       document.body.style.userSelect = "auto";
+      document.body.style.webkitUserSelect = "auto"; // Safari
+
       setIsMouseDown(false);
     }
   };
@@ -212,9 +215,35 @@ export default function RecordBox() {
     };
   }, [isMouseDown, isMouseLeave]);
 
+  // 재생 / 일시정지
+  const onPlay = () => {
+    if (!isPlaying) {
+      // 다시 재생될 때 이전에 남아있던 audio 정보로 재생되는 것 방지
+      audio.load();
+      if (isDone) {
+        // 끝까지 재생되었을 때 다시 재생하는 경우 진행도 즉시 초기화
+        setIsDone(false);
+        setCurrentTime(0);
+        audio.currentTime = 0;
+      } else {
+        // 현재 시간에 맞게 audio 시작 지점 설정
+        // 재생/일시정지를 빠르게 반복했을 경우 오디오가 밀려 일찍 끝나는 것 방지
+        audio.currentTime = currentTime / 1000;
+      }
+      setIsPlaying(true);
+      audio.play();
+    } else {
+      setIsPlaying(false);
+      audio.pause();
+    }
+  };
+
   // 프로젝트에 저장 관련
   const [isOpened, setIsOpened] = useState(false);
   const [selectedProject, setSelectedProject] = useState("");
+
+  console.log(currentTime / totalTime);
+
   return (
     <div className="w-full flex flex-col gap-3">
       <div className="py-6 bg-white rounded-lg">
@@ -266,25 +295,7 @@ export default function RecordBox() {
               <span className="text-gray-4 text-sm">{`${recordedHours}시 ${recordedMinutes}분`}</span>
             </div>
             <div className="flex gap-3 grow items-center">
-              <div
-                className="cursor-pointer"
-                onClick={() => {
-                  if (!isPlaying) {
-                    // 끝까지 재생되었을 때 다시 재생하는 경우 진행도 즉시 초기화
-                    if (isDone) {
-                      setIsDone(false);
-                      setCurrentTime(0);
-                    }
-                    setIsPlaying(true);
-                    // 재생/일시정지를 빠르게 반복했을 경우 오디오가 밀려 일찍 끝나는 것 방지
-                    audio.currentTime = currentTime / 1000;
-                    audio.play();
-                  } else {
-                    setIsPlaying(false);
-                    audio.pause();
-                  }
-                }}
-              >
+              <div className="cursor-pointer" onClick={onPlay}>
                 {!isPlaying ? <PlayIcon /> : <PauseIcon />}
               </div>
               <div
@@ -293,9 +304,9 @@ export default function RecordBox() {
                 onMouseDown={() => setIsMouseDown(true)}
                 onMouseUp={() => setIsMouseDown(false)}
                 onMouseMove={(e) => isMouseDown && handleProgress(e)}
-                onMouseLeave={() => setIsMouseLeave(true)}
-                onMouseEnter={() => setIsMouseLeave(false)}
-                className="bg-gray-2 h-3 w-full grow rounded-full relative overflow-hidden"
+                onMouseLeave={() => isMouseDown && setIsMouseLeave(true)}
+                onMouseEnter={() => isMouseDown && setIsMouseLeave(false)}
+                className="bg-gray-2 h-3 w-full grow rounded-full relative overflow-hidden cursor-pointer"
               >
                 <motion.div
                   style={{
