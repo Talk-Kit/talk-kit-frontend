@@ -1,5 +1,5 @@
 import SignUpProgress from "../_components/SignUpProgress";
-import TalkKitLogo from "../../../components/LOGO";
+import TalkKitLogo from "../../../_components/LOGO";
 import { DETAIL_TEXT } from "../_constants/constants";
 import DetailContainer from "../_container/detail";
 

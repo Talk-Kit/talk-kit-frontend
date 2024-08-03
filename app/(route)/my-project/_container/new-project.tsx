@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import dynamic from "next/dynamic";
-import Button from "../../../components/Button";
+import Button from "../../../_components/Button";
 import ProjectInput from "../_components/ProjectInput";
 import RemoveContentBtn from "../_components/RemoveContentBtn";
 import { NEWPROJECT_TEXT } from "../_constants/constants";

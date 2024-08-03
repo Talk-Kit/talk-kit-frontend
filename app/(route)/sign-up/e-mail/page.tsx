@@ -1,4 +1,4 @@
-import TalkKitLogo from "../../../components/LOGO";
+import TalkKitLogo from "../../../_components/LOGO";
 import SignUpProgress from "../_components/SignUpProgress";
 import { EMAIL_TEXT } from "../_constants/constants";
 import EmailContainer from "../_container/e-mail";

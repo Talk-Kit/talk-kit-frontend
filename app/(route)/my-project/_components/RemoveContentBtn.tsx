@@ -1,4 +1,4 @@
-import { MinusIcon } from "../../../components/Icons";
+import { MinusIcon } from "../../../_components/Icons";
 import { BtnProps } from "../_types/project_types";
 
 export default function RemoveContentBtn({ onClick }: BtnProps) {

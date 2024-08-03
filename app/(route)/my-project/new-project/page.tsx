@@ -1,4 +1,4 @@
-import TopBar from "../../../components/TopBar/TopBar";
+import TopBar from "../../../_components/TopBar/TopBar";
 import MyProjectFooter from "../_components/Footer";
 import NewProjectContainer from "../_container/new-project";
 

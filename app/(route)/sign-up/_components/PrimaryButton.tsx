@@ -1,5 +1,5 @@
 import React from "react";
-import { ButtonProps } from "../../../components/Button";
+import { ButtonProps } from "../../../_components/Button";
 
 export default function PrimaryButton({
   isActive,

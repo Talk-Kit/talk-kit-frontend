@@ -1,8 +1,9 @@
 import TopBar from "../../_components/TopBar/TopBar";
+import Footer from "../_components/Footer";
 
 export const metadata = {
-  title: "회원가입",
-  description: "토크키트 회원가입",
+  title: "발표 연습",
+  description: "토크키트 발표 연습 페이지",
 };
 
 export default function RootLayout({
@@ -14,6 +15,7 @@ export default function RootLayout({
     <>
       <TopBar screen={"lg"} />
       {children}
+      <Footer />
     </>
   );
 }
