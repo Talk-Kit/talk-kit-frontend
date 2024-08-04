@@ -32,8 +32,8 @@ export default function PracticePage() {
   });
 
   return (
-    <div className="w-full min-h-screen bg-primary-0 flex justify-center">
-      <div className="w-full max-w-[1200px] px-4 pt-[132px] pb-[60px] flex flex-col gap-[60px]">
+    <div className="full-screen bg-primary-0 flex justify-center">
+      <div className="w-full max-w-[1200px] px-4 pt-[50px] pb-[60px] flex flex-col gap-[60px]">
         {/* 타이머 */}
         <section className="w-full">
           <div
