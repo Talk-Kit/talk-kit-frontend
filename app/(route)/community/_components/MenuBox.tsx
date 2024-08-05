@@ -4,12 +4,9 @@ import { SearchIcon } from "./Icons";
 import { useState } from "react";
 import { motion } from "framer-motion";
 import { COMMUNITY_LIST, COMMUNITY_TEXT } from "../_constants/constants";
+import { IFormData } from "../_types/community_types";
 
 export default function MenuBox() {
-  interface IFormData {
-    search: string;
-  }
-
   const { register, handleSubmit } = useForm();
   const onSubmit = ({ search }: IFormData) => {
     console.log(search);
@@ -67,10 +64,7 @@ export default function MenuBox() {
         </div>
       </form>
       <section className="w-full flex justify-end">
-        <button
-          onClick={() => {}}
-          className="font-bold text-gray-0 p-3 bg-primary-1 rounded-lg"
-        >
+        <button onClick={() => {}} className="short-button">
           {COMMUNITY_TEXT[1]}
         </button>
       </section>

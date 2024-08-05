@@ -10,7 +10,7 @@ export default function Community() {
       <div className="max-w-[1200px] w-full px-4 py-8 flex flex-col gap-8">
         <MenuBox />
         <section className="w-full flex flex-col">
-          {DUMMY_CARD_DATA.map((el, index) => (
+          {DUMMY_CARD_DATA.map((el) => (
             <Card key={el.id} data={el} />
           ))}
         </section>

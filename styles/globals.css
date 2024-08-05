@@ -113,4 +113,7 @@ body {
   .likes-comments {
     @apply flex gap-1 items-center;
   }
+  .short-button {
+    @apply font-semibold text-gray-0 p-3 bg-primary-1 rounded-lg leading-none;
+  }
 }
