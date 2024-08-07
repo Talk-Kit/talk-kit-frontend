@@ -33,7 +33,7 @@ export default function DetailPage() {
     console.log(text);
   };
   return (
-    <div className="full-screen flex justify-center">
+    <div className="full-screen">
       <div className="w-full max-w-[1200px] flex flex-col gap-8 py-8">
         <Card data={data} isDetail />
         <div className="w-full flex flex-col gap-8 px-4">

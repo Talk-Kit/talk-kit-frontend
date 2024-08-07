@@ -12,3 +12,14 @@ export interface DialogProps {
 
   isReport?: boolean;
 }
+
+export interface IDropDown {
+  placeholder: string;
+  currentValue: string;
+  selectionList: string[];
+  isOpened: boolean;
+  onDropDownClick: () => void;
+  onSelectionClick: (selected: string) => void;
+
+  isDisabled?: boolean;
+}

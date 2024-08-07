@@ -1,4 +1,4 @@
-export interface IFormData {
+export interface ISearch {
   search: string;
 }
 
@@ -36,4 +36,16 @@ export interface IComment {
   likes: number;
   content: string;
   reply: IReply[];
+}
+
+export interface IUploadDialog {
+  onBgClick: () => void;
+  onCancelClick: () => void;
+  onUploadClick: (select: string) => void;
+}
+
+export interface IFormData {
+  title: string;
+  content: string;
+  files: string[];
 }

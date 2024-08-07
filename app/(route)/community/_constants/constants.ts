@@ -22,6 +22,14 @@ export const REPORT_PLACEHOLDER = [
   "신고",
 ];
 
+export const NEW_POST_TEXT = [
+  "제목을 입력해 주세요",
+  "공개",
+  "비공개",
+  "프로젝트에 저장된 나만의 파일을 공유해보세요",
+  "프로젝트에서 가져오기",
+];
+
 // 이후 실제 데이터로 대체
 export const DUMMY_CARD_DATA: ICardData[] = [
   {
@@ -124,5 +132,24 @@ export const DUMMY_COMMENT_DATA: IComment[] = [
     content:
       "좋은 글 감사합니다\n좋은 글 감사합니다\n\n좋은 글 감사합니다좋은 글 감사합니다좋은 글 감사합니다",
     reply: [],
+  },
+];
+
+export const DUMMY_UPLOAD_DATA = [
+  {
+    name: "프로젝트1",
+    files: ["프1 파일1", "프1 파일2", "프1 파일3", "프1 파일4"],
+  },
+  {
+    name: "프로젝트2",
+    files: ["프2 파일1", "프2 파일2", "프2 파일3", "프2 파일4"],
+  },
+  {
+    name: "프로젝트3",
+    files: ["프3 파일1", "프3 파일2", "프3 파일3", "프3 파일4"],
+  },
+  {
+    name: "프로젝트4",
+    files: ["프4 파일1", "프4 파일2", "프4 파일3", "프4 파일4"],
   },
 ];

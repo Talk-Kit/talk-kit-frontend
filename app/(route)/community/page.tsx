@@ -6,7 +6,7 @@ import { DUMMY_CARD_DATA } from "./_constants/constants";
 
 export default function Community() {
   return (
-    <div className="full-screen flex justify-center">
+    <div className="full-screen">
       <div className="max-w-[1200px] w-full px-4 py-8 flex flex-col gap-8">
         <MenuBox />
         <section className="w-full flex flex-col">

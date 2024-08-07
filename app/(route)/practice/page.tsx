@@ -32,12 +32,12 @@ export default function PracticePage() {
   });
 
   return (
-    <div className="full-screen bg-primary-0 flex justify-center">
+    <div className="full-screen bg-primary-0">
       <div className="w-full max-w-[1200px] px-4 pt-[50px] pb-[60px] flex flex-col gap-[60px]">
         {/* 타이머 */}
         <section className="w-full">
           <div
-            className="w-fit flex gap-2 cursor-pointer"
+            className="check-button"
             onClick={() => setIsTimerActivated((prev) => !prev)}
           >
             <CheckBox isChecked={isTimerActivated} />

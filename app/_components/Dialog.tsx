@@ -61,9 +61,9 @@ export function Dialog({
           {isTwoButton && (
             <button
               onClick={onSubBtnClick}
-              className={`flex-center p-2 gap-2 rounded-lg w-full bg-gray-0 border-[1px] border-gray-3`}
+              className={`flex-center px-2 py-3 gap-2 rounded-lg w-full bg-gray-0 border-[1px] border-gray-3`}
             >
-              <span className="text-gray-3 text-sm font-bold">
+              <span className="text-gray-3 text-sm font-bold leading-tight">
                 {subBtnText}
               </span>
             </button>

@@ -97,3 +97,40 @@ export const ReplyIcon = () => {
     </svg>
   );
 };
+
+export const UploadIcon = () => {
+  return (
+    <svg
+      width="96"
+      height="96"
+      viewBox="0 0 96 96"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path
+        d="M44 76H52V59.3L58.4 65.7L64 60L48 44L32 60L37.7 65.6L44 59.3V76ZM24 88C21.8 88 19.9167 87.2167 18.35 85.65C16.7833 84.0833 16 82.2 16 80V16C16 13.8 16.7833 11.9167 18.35 10.35C19.9167 8.78333 21.8 8 24 8H56L80 32V80C80 82.2 79.2167 84.0833 77.65 85.65C76.0833 87.2167 74.2 88 72 88H24ZM52 36H72L52 16V36Z"
+        fill="#B5B5B5"
+      />
+    </svg>
+  );
+};
+
+export const RemoveIcon = () => {
+  return (
+    <svg
+      width="10"
+      height="10"
+      viewBox="0 0 10 10"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path
+        d="M7.5 2.5L2.5 7.5M2.5 2.5L7.5 7.5"
+        stroke="white"
+        strokeWidth="1.5"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
+  );
+};
