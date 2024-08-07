@@ -1,14 +1,16 @@
 import { useState } from "react";
-import { CommentsIcon, LikesIcon } from "./Icons";
-import { CARD_TEXT, COMMUNITY_TEXT } from "../_constants/constants";
+import { CommentsIcon } from "./Icons";
+import { CARD_TEXT, REPORT_PLACEHOLDER } from "../_constants/constants";
 import { useCalculateDate } from "../../../_hooks/useCalculateDate";
 import { ICard } from "../_types/community_types";
 import { useRouter } from "next/navigation";
 import Profile from "../../_components/Profile";
 import LikeButton from "./LikeButton";
+import { Dialog } from "../../../_components/Dialog";
 
 export default function Card({ data, isDetail }: ICard) {
   const [showMore, setShowMore] = useState(isDetail || false);
+  const [isReported, setIsReported] = useState(false);
 
   const difference = useCalculateDate(data.date);
 
@@ -73,10 +75,28 @@ export default function Card({ data, isDetail }: ICard) {
             </button>
           )}
         </div>
-        <button onClick={() => {}} className="text-sm text-gray-4">
+        <button
+          onClick={() => setIsReported((prev) => !prev)}
+          className="text-sm text-gray-4"
+        >
           {CARD_TEXT[4]}
         </button>
       </section>
+      {isReported && (
+        <Dialog
+          topText={REPORT_PLACEHOLDER[0]}
+          isWarn
+          isReport
+          onBtnClick={() => {
+            // 신고 처리 로직 추가 필요
+            setIsReported((prev) => !prev);
+          }}
+          onBgClick={() => {
+            setIsReported((prev) => !prev);
+          }}
+          btnText={REPORT_PLACEHOLDER[2]}
+        />
+      )}
     </div>
   );
 }

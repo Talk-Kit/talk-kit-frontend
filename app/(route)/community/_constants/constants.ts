@@ -14,6 +14,14 @@ export const CARD_TEXT = [
 
 export const DETAIL_PAGE_TEXT = ["댓글", "댓글을 남겨 보세요", "등록"];
 
+export const COMMENT_TEXT = ["답글 남기기", "댓글 신고"];
+
+export const REPORT_PLACEHOLDER = [
+  "이 게시물을 정말 신고하시겠습니까?",
+  "이 댓글을 정말 신고하시겠습니까?",
+  "신고",
+];
+
 // 이후 실제 데이터로 대체
 export const DUMMY_CARD_DATA: ICardData[] = [
   {
