@@ -16,7 +16,7 @@ export default function MenuBox() {
   return (
     <>
       <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-8">
-        <BoardSelection />
+        <BoardSelection onSelect={() => {}} />
         <div className="flex items-center w-full px-4 py-3 bg-gray-0 rounded-full gap-2">
           <input
             {...register("search")}

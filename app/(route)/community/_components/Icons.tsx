@@ -134,3 +134,56 @@ export const RemoveIcon = () => {
     </svg>
   );
 };
+
+export const PrivateIcon = () => {
+  return (
+    <svg
+      width="14"
+      height="17"
+      viewBox="0 0 14 17"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <g clipPath="url(#clip0_992_1576)">
+        <path
+          d="M4.5 5V6.5H9.5V5C9.5 3.61875 8.38125 2.5 7 2.5C5.61875 2.5 4.5 3.61875 4.5 5ZM2.5 6.5V5C2.5 2.51562 4.51562 0.5 7 0.5C9.48438 0.5 11.5 2.51562 11.5 5V6.5H12C13.1031 6.5 14 7.39687 14 8.5V14.5C14 15.6031 13.1031 16.5 12 16.5H2C0.896875 16.5 0 15.6031 0 14.5V8.5C0 7.39687 0.896875 6.5 2 6.5H2.5Z"
+          fill="#737373"
+        />
+      </g>
+      <defs>
+        <clipPath id="clip0_992_1576">
+          <rect
+            width="14"
+            height="16"
+            fill="white"
+            transform="translate(0 0.5)"
+          />
+        </clipPath>
+      </defs>
+    </svg>
+  );
+};
+
+export const DialogPrivateIcon = () => {
+  return (
+    <svg
+      width="72"
+      height="80"
+      viewBox="0 0 72 80"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <g clipPath="url(#clip0_985_2833)">
+        <path
+          d="M23.1429 22.5V30H48.8571V22.5C48.8571 15.5938 43.1036 10 36 10C28.8964 10 23.1429 15.5938 23.1429 22.5ZM12.8571 30V22.5C12.8571 10.0781 23.2232 0 36 0C48.7768 0 59.1429 10.0781 59.1429 22.5V30H61.7143C67.3875 30 72 34.4844 72 40V70C72 75.5156 67.3875 80 61.7143 80H10.2857C4.6125 80 0 75.5156 0 70V40C0 34.4844 4.6125 30 10.2857 30H12.8571Z"
+          fill="#6B71FF"
+        />
+      </g>
+      <defs>
+        <clipPath id="clip0_985_2833">
+          <rect width="72" height="80" fill="white" />
+        </clipPath>
+      </defs>
+    </svg>
+  );
+};

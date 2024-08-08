@@ -145,7 +145,7 @@ export default function NewPost() {
         </section>
         <section className="flex justify-end">
           <button className="short-button" type="submit">
-            등록
+            {NEW_POST_TEXT[5]}
           </button>
         </section>
       </form>

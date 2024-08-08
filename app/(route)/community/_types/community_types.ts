@@ -17,6 +17,8 @@ export interface ICardData {
   content: string;
   likes: number;
   comments: number;
+  isPrivate: boolean;
+  password: string;
 }
 
 export interface IReply {
@@ -50,4 +52,9 @@ export interface IFormData {
   files: string[];
   isPrivate: boolean;
   password: string;
+}
+
+export interface IPrivateDialog {
+  onBgClick: () => void;
+  onBtnClick: (password: string) => void;
 }

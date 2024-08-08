@@ -34,7 +34,7 @@ export default function DetailPage() {
   };
   return (
     <div className="full-screen">
-      <div className="w-full max-w-[1200px] flex flex-col gap-8 py-8">
+      <div className="w-full max-w-[1200px] flex flex-col gap-8 py-8 px-4">
         <Card data={data} isDetail />
         <div className="w-full flex flex-col gap-8 px-4">
           <span>{`${DETAIL_PAGE_TEXT[0]} ${data.comments}`}</span>
