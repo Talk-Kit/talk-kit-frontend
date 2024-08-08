@@ -47,6 +47,15 @@ export default function NewPost() {
     setValue("files", uploadedFiles);
   }, [uploadedFiles]);
 
+  // 공개 범위 변경 시 Form 데이터 갱신
+  useEffect(() => {
+    if (checkBox.isPrivate) {
+      setValue("isPrivate", true);
+    } else {
+      setValue("isPrivate", false);
+    }
+  }, [checkBox]);
+
   return (
     <div className="full-screen">
       <form
@@ -61,9 +70,10 @@ export default function NewPost() {
           />
           <div className="flex gap-6 px-2">
             <button
-              onClick={() =>
-                setCheckBox(() => ({ isPublic: true, isPrivate: false }))
-              }
+              onClick={(e) => {
+                e.preventDefault();
+                setCheckBox(() => ({ isPublic: true, isPrivate: false }));
+              }}
               className="check-button"
             >
               <CheckBox isChecked={checkBox.isPublic} />
@@ -72,9 +82,10 @@ export default function NewPost() {
               </span>
             </button>
             <button
-              onClick={() =>
-                setCheckBox(() => ({ isPublic: false, isPrivate: true }))
-              }
+              onClick={(e) => {
+                e.preventDefault();
+                setCheckBox(() => ({ isPublic: false, isPrivate: true }));
+              }}
               className="check-button"
             >
               <CheckBox isChecked={checkBox.isPrivate} />
@@ -82,11 +93,17 @@ export default function NewPost() {
                 {NEW_POST_TEXT[2]}
               </span>
             </button>
+            <input
+              {...register("password")}
+              type="password"
+              className="w-full max-w-[200px] px-4 py-2 border border-gray-2 outline-none font-semibold"
+              disabled={!checkBox.isPrivate && true}
+            />
           </div>
-          <BoardSelection />
+          <BoardSelection onSelect={(select) => setValue("board", select)} />
         </section>
         <section>{/* react-quill */}</section>
-        <section className="flex flex-col p-4 border border-gray-2 border-dotted rounded-lg gap-8">
+        <section className="flex flex-col p-4 border border-gray-2 border-dashed rounded-lg gap-8">
           <div className="flex flex-col gap-[18px] w-full items-center">
             <UploadIcon />
             <span className="font-medium text-gray-4">{NEW_POST_TEXT[3]}</span>

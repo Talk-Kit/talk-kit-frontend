@@ -48,4 +48,6 @@ export interface IFormData {
   title: string;
   content: string;
   files: string[];
+  isPrivate: boolean;
+  password: string;
 }

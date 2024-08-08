@@ -3,7 +3,11 @@ import { COMMUNITY_LIST } from "../_constants/constants";
 import { DownLightArrow } from "../../../_components/Icons";
 import { motion } from "framer-motion";
 
-export default function BoardSelection() {
+export default function BoardSelection({
+  onSelect,
+}: {
+  onSelect: (select: string) => void;
+}) {
   const [isOpened, setIsOpened] = useState(false);
   const [selected, setSelected] = useState(COMMUNITY_LIST[0]);
 
@@ -32,6 +36,7 @@ export default function BoardSelection() {
                 onClick={() => {
                   setSelected(el);
                   setIsOpened((prev) => !prev);
+                  onSelect(el);
                 }}
                 className="text-sm text-gray-4 p-3 cursor-pointer hover:bg-gray-1"
               >
