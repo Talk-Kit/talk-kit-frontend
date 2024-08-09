@@ -6,7 +6,7 @@ import { TERMS_TEXT } from "../_constants/constants";
 // 토크키트 이용 약관
 export const Terms1: React.FC<TermsProps> = ({ isChecked, onClick }) => (
   <div className="signup-max-w-600 flex-col items-start gap-4">
-    <button onClick={onClick} className="flex items-center gap-2 self-stretch">
+    <button onClick={onClick} className="check-button">
       <CheckBox isChecked={isChecked} />
       <span className={`${isChecked ? "text-gray-9" : "text-gray-4"}`}>
         <span className="font-bold">{TERMS_TEXT[2]}</span> {TERMS_TEXT[3]}
@@ -29,7 +29,7 @@ export const Terms1: React.FC<TermsProps> = ({ isChecked, onClick }) => (
 // 개인정보 수집 및 이용
 export const Terms2: React.FC<TermsProps> = ({ isChecked, onClick }) => (
   <div className="signup-max-w-600 flex-col items-start gap-4">
-    <button onClick={onClick} className="flex items-center gap-2 self-stretch">
+    <button onClick={onClick} className="check-button">
       <CheckBox isChecked={isChecked} />
       <span className={`${isChecked ? "text-gray-9" : "text-gray-4"}`}>
         <span className="font-bold">{TERMS_TEXT[2]}</span> {TERMS_TEXT[4]}
@@ -52,7 +52,7 @@ export const Terms2: React.FC<TermsProps> = ({ isChecked, onClick }) => (
 // [선택] 마케팅 수신 동의
 export const Terms3: React.FC<TermsProps> = ({ isChecked, onClick }) => (
   <div className="signup-max-w-600 flex-col items-start gap-4">
-    <button onClick={onClick} className="flex items-center gap-2 self-stretch">
+    <button onClick={onClick} className="check-button">
       <CheckBox isChecked={isChecked} />
       <span className={`${isChecked ? "text-gray-9" : "text-gray-4"}`}>
         <span className="font-bold">{TERMS_TEXT[5]}</span> {TERMS_TEXT[6]}

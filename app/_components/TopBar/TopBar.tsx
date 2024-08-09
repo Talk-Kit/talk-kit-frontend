@@ -43,7 +43,7 @@ export default function TopBar({ screen }: ITopBar) {
     };
   }, []);
   return (
-    <nav className="fixed w-full bg-white h-[72px] flex justify-center px-4 z-10">
+    <nav className="fixed w-full bg-white h-[72px] flex justify-center px-4 z-10 border-b border-gray-2">
       <div className="w-full h-full max-w-[1200px] flex justify-between items-center">
         <TalkKitLogo width={130} height={50} />
         {/* 작은 화면일 때의 탑바 */}

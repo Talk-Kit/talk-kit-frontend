@@ -1,14 +1,6 @@
 import { useOutsideClick } from "../_hooks/useOutsideClick";
+import { IDropDown } from "../_types/types";
 import { DownLightArrow } from "./Icons";
-
-interface IDropDown {
-  placeholder: string;
-  currentValue: string;
-  selectionList: string[];
-  isOpened: boolean;
-  onDropDownClick: () => void;
-  onSelectionClick: (selected: string) => void;
-}
 
 export default function DropDown({
   placeholder,
@@ -17,6 +9,7 @@ export default function DropDown({
   isOpened,
   onDropDownClick,
   onSelectionClick,
+  isDisabled,
 }: IDropDown) {
   // 영역 밖이 클릭되었을 때 메뉴 닫기
   const ref = useOutsideClick(() => isOpened && onDropDownClick());
@@ -24,14 +17,12 @@ export default function DropDown({
   return (
     <div
       ref={ref}
-      onClick={onDropDownClick}
-      className="relative w-full h-[50px] border border-gray-3 bg-white rounded-lg flex items-center px-4 cursor-pointer"
+      onClick={!isDisabled ? onDropDownClick : () => {}}
+      className={`relative w-full h-[50px] border border-gray-3 rounded-lg flex items-center px-4 ${
+        isDisabled ? "bg-gray-1" : "bg-white cursor-pointer"
+      }`}
     >
-      <div
-        className={`grow cursor-pointer text-gray-3 ${
-          currentValue && "text-gray-9"
-        }`}
-      >
+      <div className={`grow text-gray-3 ${currentValue && "text-gray-9"}`}>
         {currentValue || placeholder}
       </div>
       {!isOpened ? (
