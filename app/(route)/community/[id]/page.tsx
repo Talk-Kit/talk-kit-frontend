@@ -52,7 +52,7 @@ export default function DetailPage() {
                   ref={ref}
                   rows={1}
                   onChange={handleHeight}
-                  className="w-full max-h-[4.5rem] outline-none resize-none leading-[1.375rem]"
+                  className="w-full max-h-[4.125rem] outline-none resize-none leading-[1.375rem]"
                   placeholder={DETAIL_PAGE_TEXT[1]}
                 />
               </div>

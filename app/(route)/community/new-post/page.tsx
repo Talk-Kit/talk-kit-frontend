@@ -8,13 +8,23 @@ import UploadDialog from "../_components/UploadDialog";
 import { NEW_POST_TEXT } from "../_constants/constants";
 import { useForm } from "react-hook-form";
 import { IFormData } from "../_types/community_types";
+import TextEditor from "../_components/TextEditor";
 
 export default function NewPost() {
   // 게시글 관련
-  const { register, handleSubmit, setValue } = useForm();
+  const { register, handleSubmit, setValue, getValues } = useForm();
   const onSubmit = (data: IFormData) => {
-    console.log(data);
+    if (data.content === "<p><br></p>") {
+      alert("내용을 입력해주세요");
+    } else if (data.isPrivate && data.password === "") {
+      alert("비밀번호를 입력해주세요");
+    } else {
+      console.log(data);
+    }
   };
+
+  // 게시판 분류 관련
+  const [board, setBoard] = useState("자유 게시판");
 
   // 공개 범위 설정
   const [checkBox, setCheckBox] = useState({
@@ -62,6 +72,7 @@ export default function NewPost() {
         onSubmit={handleSubmit(onSubmit)}
         className="w-full max-w-[1200px] px-4 py-[60px] flex flex-col gap-8"
       >
+        {/* 새 게시글 정보 입력 부분 */}
         <section className="flex flex-col gap-8">
           <input
             {...register("title")}
@@ -100,49 +111,71 @@ export default function NewPost() {
               disabled={!checkBox.isPrivate && true}
             />
           </div>
-          <BoardSelection onSelect={(select) => setValue("board", select)} />
+          <BoardSelection
+            onSelect={(select) => {
+              setBoard(select);
+              setValue("board", select);
+            }}
+          />
         </section>
-        <section>{/* react-quill */}</section>
-        <section className="flex flex-col p-4 border border-gray-2 border-dashed rounded-lg gap-8">
-          <div className="flex flex-col gap-[18px] w-full items-center">
-            <UploadIcon />
-            <span className="font-medium text-gray-4">{NEW_POST_TEXT[3]}</span>
-            <button
-              onClick={(e) => {
-                e.preventDefault();
-                setIsUploadOpen((prev) => !prev);
-              }}
-              className="px-6 py-3 bg-[#9095FF] text-white rounded-lg font-semibold text-sm"
-            >
-              {NEW_POST_TEXT[4]}
-            </button>
-          </div>
-          {isUploadOpen && (
-            <UploadDialog
-              onBgClick={() => setIsUploadOpen((prev) => !prev)}
-              onCancelClick={() => setIsUploadOpen((prev) => !prev)}
-              onUploadClick={(select) => onUpload(select)}
-            />
-          )}
-          {uploadedFiles && (
-            <div className="w-full flex flex-col gap-4">
-              {uploadedFiles.map((el, index) => (
-                <div
-                  key={index}
-                  className="w-full bg-primary-0 px-4 py-3 text-sm text-gray-4 rounded-lg flex justify-between items-center"
-                >
-                  <span>{el}</span>
-                  <button
-                    onClick={() => removeFile(el)}
-                    className="w-4 h-4 rounded-full bg-gray-4 flex justify-center items-center"
-                  >
-                    <RemoveIcon />
-                  </button>
-                </div>
-              ))}
+
+        {/* react-quill */}
+        <section className="w-full h-[500px]">
+          <TextEditor
+            initial={getValues("content")}
+            onChange={(text) => {
+              setValue("content", text);
+            }}
+          />
+        </section>
+
+        {/* 파일 업로드 */}
+        {board === "피드백 게시판" && (
+          <section className="flex flex-col p-4 border border-gray-2 border-dashed rounded-lg gap-8">
+            <div className="flex flex-col gap-[18px] w-full items-center">
+              <UploadIcon />
+              <span className="font-medium text-gray-4">
+                {NEW_POST_TEXT[3]}
+              </span>
+              <button
+                onClick={(e) => {
+                  e.preventDefault();
+                  setIsUploadOpen((prev) => !prev);
+                }}
+                className="px-6 py-3 bg-[#9095FF] text-white rounded-lg font-semibold text-sm"
+              >
+                {NEW_POST_TEXT[4]}
+              </button>
             </div>
-          )}
-        </section>
+            {isUploadOpen && (
+              <UploadDialog
+                onBgClick={() => setIsUploadOpen((prev) => !prev)}
+                onCancelClick={() => setIsUploadOpen((prev) => !prev)}
+                onUploadClick={(select) => onUpload(select)}
+              />
+            )}
+            {uploadedFiles && (
+              <div className="w-full flex flex-col gap-4">
+                {uploadedFiles.map((el, index) => (
+                  <div
+                    key={index}
+                    className="w-full bg-primary-0 px-4 py-3 text-sm text-gray-4 rounded-lg flex justify-between items-center"
+                  >
+                    <span>{el}</span>
+                    <button
+                      onClick={() => removeFile(el)}
+                      className="w-4 h-4 rounded-full bg-gray-4 flex justify-center items-center"
+                    >
+                      <RemoveIcon />
+                    </button>
+                  </div>
+                ))}
+              </div>
+            )}
+          </section>
+        )}
+
+        {/* 게시글 등록 버튼 */}
         <section className="flex justify-end">
           <button className="short-button" type="submit">
             {NEW_POST_TEXT[5]}
