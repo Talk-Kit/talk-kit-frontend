@@ -28,6 +28,7 @@ export interface IReply {
   affiliation: string;
   likes: number;
   content: string;
+  targetName: string;
 }
 
 export interface IComment {
@@ -57,4 +58,9 @@ export interface IFormData {
 export interface IPrivateDialog {
   onBgClick: () => void;
   onBtnClick: (password: string) => void;
+}
+
+export interface ICommentInput {
+  target?: string;
+  onSubmit: (content: string) => void;
 }

@@ -130,6 +130,7 @@ export const DUMMY_COMMENT_DATA: IComment[] = [
         affiliation: "대학생",
         likes: 4,
         content: "좋은 글 감사합니다",
+        targetName: "화끈한분노",
       },
       {
         id: 1,
@@ -138,6 +139,7 @@ export const DUMMY_COMMENT_DATA: IComment[] = [
         affiliation: "대학생",
         likes: 4,
         content: "감사합니다",
+        targetName: "침착한분노",
       },
     ],
   },

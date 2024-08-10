@@ -9,9 +9,17 @@ import { IComment } from "../_types/community_types";
 import { ReplyIcon } from "./Icons";
 import LikeButton from "./LikeButton";
 import { Dialog } from "../../../_components/Dialog";
+import CommentInput from "./CommentInput";
 
-export default function Comment({ data }: { data: IComment }) {
+export default function Comment({
+  data,
+  onSubmit,
+}: {
+  data: IComment;
+  onSubmit: (targetId: number, targetName: string, content: string) => void;
+}) {
   const [isReported, setIsReported] = useState(false);
+  const [isReplying, setIsReplying] = useState(false);
   return (
     <div className="w-full flex flex-col gap-2">
       <Profile
@@ -28,7 +36,10 @@ export default function Comment({ data }: { data: IComment }) {
           {data.content}
         </div>
         <div className="flex justify-between items-center">
-          <button className="flex gap-2 items-center">
+          <button
+            onClick={() => setIsReplying((prev) => !prev)}
+            className="flex gap-2 items-center"
+          >
             <ReplyIcon />
             <span className="text-sm text-gray-4">{COMMENT_TEXT[0]}</span>
           </button>
@@ -53,6 +64,15 @@ export default function Comment({ data }: { data: IComment }) {
             setIsReported((prev) => !prev);
           }}
           btnText={REPORT_PLACEHOLDER[2]}
+        />
+      )}
+      {isReplying && (
+        <CommentInput
+          target={data.nickname}
+          onSubmit={(content) => {
+            onSubmit(data.id, data.nickname, content);
+            setIsReplying((prev) => !prev);
+          }}
         />
       )}
     </div>
