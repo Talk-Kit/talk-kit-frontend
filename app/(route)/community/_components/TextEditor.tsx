@@ -15,8 +15,12 @@ export default function TextEditor({
   // import 되지 않고 브라우저 내에서만 실행되도록 함
   const ReactQuill = dynamic(() => import("react-quill"), {
     ssr: false,
-    // 로딩 중에도 자리를 차지해 요소들 높이 이동 방지
-    loading: () => <div className="w-full h-full"></div>,
+    // 로딩 중에도 기본 레이아웃 제공으로 사용자가 변화를 최소한으로 느끼게 함
+    loading: () => (
+      <div className="w-full h-full border border-[#CCCCCC]">
+        <div className="w-full h-[42.5px] border-b border-[#CCCCCC]"></div>
+      </div>
+    ),
   });
 
   const onTextChange = (text: string) => {

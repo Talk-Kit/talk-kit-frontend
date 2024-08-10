@@ -3,7 +3,7 @@ export interface DialogProps {
   topText: string;
   bottomText?: string;
   btnText: string;
-  onBtnClick: () => void;
+  onBtnClick: (reason?: string) => void;
   onBgClick: () => void;
 
   isTwoButton?: boolean;

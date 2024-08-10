@@ -111,8 +111,10 @@ export default function Card({ data, isDetail }: ICard) {
           topText={REPORT_PLACEHOLDER[0]}
           isWarn
           isReport
-          onBtnClick={() => {
-            // 신고 처리 로직 추가 필요
+          onBtnClick={(reason: string) => {
+            // 신고 처리 로직 수정 필요
+            const newReport = { postId: data.id, reason: reason };
+            console.log(newReport);
             setIsReported((prev) => !prev);
           }}
           onBgClick={() => {

@@ -71,7 +71,9 @@ export function Dialog({
 
           {/* 기본 버튼 */}
           <button
-            onClick={onBtnClick}
+            onClick={
+              isReport ? () => onBtnClick(currentValue) : () => onBtnClick()
+            }
             className={`flex-center px-2 py-3 gap-2 rounded-lg w-full ${
               isWarn ? "bg-red-1" : "bg-primary-1"
             } `}

@@ -28,7 +28,7 @@ export default function CommentInput({ target, onSubmit }: ICommentInput) {
     >
       <div className="flex w-full gap-4">
         {/* 프로필 이미지로 대체 필요 */}
-        <div className="w-[36px] h-[36px] rounded-full bg-gray-2" />
+        <div className="shrink-0 w-[36px] h-[36px] rounded-full bg-gray-2" />
         <div className="grow h-fit mt-[7px]">
           {/* 답글일 경우 target 표시 */}
           {target && (

@@ -51,6 +51,7 @@ export const LikesIcon = ({ isLiked }: { isLiked: boolean }) => {
 export const CommentsIcon = () => {
   return (
     <svg
+      className="shrink-0"
       width="14"
       height="15"
       viewBox="0 0 14 15"
@@ -138,6 +139,7 @@ export const RemoveIcon = () => {
 export const PrivateIcon = () => {
   return (
     <svg
+      className="shrink-0"
       width="14"
       height="17"
       viewBox="0 0 14 17"

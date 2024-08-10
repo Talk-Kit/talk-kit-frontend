@@ -56,8 +56,10 @@ export default function Comment({
           topText={REPORT_PLACEHOLDER[1]}
           isWarn
           isReport
-          onBtnClick={() => {
-            // 신고 처리 로직 추가 필요
+          onBtnClick={(reason: string) => {
+            // 신고 처리 로직 수정 필요
+            const newReport = { commentId: data.id, reason: reason };
+            console.log(newReport);
             setIsReported((prev) => !prev);
           }}
           onBgClick={() => {

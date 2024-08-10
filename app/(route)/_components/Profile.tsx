@@ -8,7 +8,7 @@ export default function Profile({
   return (
     <div className="flex gap-3">
       {/* 프로필 이미지로 대체 필요 */}
-      <div className="w-[36px] h-[36px] rounded-full bg-gray-2" />
+      <div className="w-[36px] h-[36px] rounded-full bg-gray-2 shrink-0" />
 
       <div className="flex flex-col justify-center">
         <span className="text-sm font-semibold">{nickname}</span>
