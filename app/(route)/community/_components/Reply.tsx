@@ -50,8 +50,10 @@ export default function Reply({
           topText="이 댓글을 정말 신고하시겠습니까?"
           isWarn
           isReport
-          onBtnClick={() => {
-            // 신고 처리 로직 추가 필요
+          onBtnClick={(reason: string) => {
+            // 신고 처리 로직 수정 필요
+            const newReport = { replyId: data.id, reason: reason };
+            console.log(newReport);
             setIsReported((prev) => !prev);
           }}
           onBgClick={() => {
