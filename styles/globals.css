@@ -122,7 +122,7 @@ body {
 
   /* quill toolbar css 오버라이딩 */
   .react-quill > div {
-    @apply text-base !important;
+    @apply text-base;
   }
   .ql-toolbar {
     @apply h-[43px] flex items-center border-b-0 !important;

@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { CheckBox } from "../../sign-up/_components/Icons";
 import BoardSelection from "../_components/BoardSelection";
 import { RemoveIcon, UploadIcon } from "../_components/Icons";
@@ -22,6 +22,14 @@ export default function NewPost() {
       console.log(data);
     }
   };
+
+  // state 변화로 인한 TextEditor 컴포넌트 리렌더링 방지
+  const handleContentChange = useCallback(
+    (text: string) => {
+      setValue("content", text);
+    },
+    [setValue]
+  );
 
   // 게시판 분류 관련
   const [board, setBoard] = useState("자유 게시판");
@@ -123,10 +131,7 @@ export default function NewPost() {
         <TextEditor
           width="100%"
           height="500px"
-          initial={getValues("content")}
-          onChange={(text) => {
-            setValue("content", text);
-          }}
+          onChange={handleContentChange}
         />
 
         {/* 파일 업로드 */}
