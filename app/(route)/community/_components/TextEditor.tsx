@@ -7,6 +7,9 @@ import EditorToolBar from "./EditorToolBar";
 import { FONT_SIZE } from "../_constants/constants";
 import React, { useEffect } from "react";
 
+// props에 들어가는 onChange 함수는 사용할 페이지에서 useCallBack으로 감싸주어야
+// state의 변화가 일어나도 리렌더링 되지 않아요! (new-post의 handleContentChange 함수 참고 바람)
+
 // React.memo를 이용하여 state 변화 시 컴포넌트 리렌더링 방지
 const TextEditor = React.memo(
   ({
