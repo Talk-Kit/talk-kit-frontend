@@ -3,7 +3,7 @@ import { Dialog } from "../../../_components/Dialog";
 import Profile from "../../_components/Profile";
 import { IReply } from "../_types/community_types";
 import { ReplyIcon } from "./Icons";
-import { COMMENT_TEXT } from "../_constants/constants";
+import { COMMENT_TEXT, REPORT_PLACEHOLDER } from "../_constants/constants";
 import CommentInput from "./CommentInput";
 
 export default function Reply({
@@ -47,7 +47,7 @@ export default function Reply({
       </div>
       {isReported && (
         <Dialog
-          topText="이 댓글을 정말 신고하시겠습니까?"
+          topText={REPORT_PLACEHOLDER[1]}
           isWarn
           isReport
           onBtnClick={(reason: string) => {
@@ -59,7 +59,7 @@ export default function Reply({
           onBgClick={() => {
             setIsReported((prev) => !prev);
           }}
-          btnText="신고"
+          btnText={REPORT_PLACEHOLDER[2]}
         />
       )}
       {isReplying && (

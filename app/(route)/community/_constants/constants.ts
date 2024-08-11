@@ -38,6 +38,24 @@ export const PRIVATE_DIALOG_TEXT = [
   "확인",
 ];
 
+export const FONT_SIZE = [
+  "8px",
+  "9px",
+  "10px",
+  "11px",
+  "12px",
+  "14px",
+  "16px",
+  "18px",
+  "24px",
+  "30px",
+  "36px",
+  "48px",
+  "60px",
+  "72px",
+  "96px",
+];
+
 // 이후 실제 데이터로 대체
 export const DUMMY_CARD_DATA: ICardData[] = [
   {

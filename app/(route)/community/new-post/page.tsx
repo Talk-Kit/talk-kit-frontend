@@ -120,14 +120,14 @@ export default function NewPost() {
         </section>
 
         {/* react-quill */}
-        <section className="w-full h-[500px]">
-          <TextEditor
-            initial={getValues("content")}
-            onChange={(text) => {
-              setValue("content", text);
-            }}
-          />
-        </section>
+        <TextEditor
+          width="100%"
+          height="500px"
+          initial={getValues("content")}
+          onChange={(text) => {
+            setValue("content", text);
+          }}
+        />
 
         {/* 파일 업로드 */}
         {board === "피드백 게시판" && (

@@ -119,4 +119,21 @@ body {
   .short-button {
     @apply font-semibold text-gray-0 px-4 py-3 bg-primary-1 rounded-lg leading-none;
   }
+
+  /* quill toolbar css 오버라이딩 */
+  .react-quill > div {
+    @apply text-base !important;
+  }
+  .ql-toolbar {
+    @apply h-[43px] flex items-center border-b-0 !important;
+  }
+  .ql-size {
+    @apply w-full !important;
+  }
+  .ql-size > span:last-child {
+    @apply h-[256px] overflow-scroll;
+  }
+  .ql-size > span > span {
+    @apply text-center;
+  }
 }
