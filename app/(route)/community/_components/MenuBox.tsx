@@ -8,7 +8,11 @@ import { ISearch } from "../_types/community_types";
 export default function MenuBox() {
   const { register, handleSubmit } = useForm();
   const onSubmit = ({ search }: ISearch) => {
-    console.log(search);
+    if (search !== "") {
+      console.log(search);
+    } else {
+      alert("검색어를 입력해주세요");
+    }
   };
 
   const router = useRouter();

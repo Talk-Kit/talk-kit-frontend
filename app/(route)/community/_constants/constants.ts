@@ -191,3 +191,5 @@ export const DUMMY_UPLOAD_DATA = [
     files: ["프4 파일1", "프4 파일2", "프4 파일3", "프4 파일4"],
   },
 ];
+
+export const DUMMY_IMG_URL = "https://picsum.photos/id/237/300/200";

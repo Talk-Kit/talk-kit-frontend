@@ -1,3 +1,5 @@
+import ReactQuill, { ReactQuillProps } from "react-quill";
+
 export interface ISearch {
   search: string;
 }
@@ -63,4 +65,8 @@ export interface IPrivateDialog {
 export interface ICommentInput {
   target?: string;
   onSubmit: (content: string) => void;
+}
+
+export interface ForwardedQuillComponent extends ReactQuillProps {
+  forwardedRef: React.Ref<ReactQuill>;
 }
