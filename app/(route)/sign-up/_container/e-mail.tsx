@@ -6,6 +6,10 @@ import { useRecoilState } from "recoil";
 import { emailState } from "../_state/atom";
 import PrimaryButton from "../_components/PrimaryButton";
 import { EMAIL_TEXT } from "../_constants/constants";
+import api from "../../../_api/config";
+import { Dialog  } from "../../../_components/Dialog";
+
+
 
 export default function EmailContainer() {
   const router = useRouter();
@@ -14,9 +18,23 @@ export default function EmailContainer() {
   // 이메일 state
   const [formState, setFormState] = useState({
     email: "",
+    code:"",
     isEmailValid: false,
     isBtnActive: true,
   });
+
+  // dialog
+  const [dialogProps,setDialogProps] = useState({
+    isWarn: false,
+    topText: "",
+    bottomText: "",
+    btnText: "",
+    onBtnClick: () => {},
+    isTwoButton: false,
+    subBtnText: "",
+    onSubBtnClick: () => {},
+  });
+  const [dialogState,setDialogState] = useState(false);
 
   useEffect(() => {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -33,22 +51,76 @@ export default function EmailContainer() {
     }));
   };
 
+  const handleCodeChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setFormState((prevState) => ({
+      ...prevState,
+      code: e.target.value,
+    }));
+  };
+
   // 인증요청 버튼 클릭
-  const handleAuthRequest = () => {
+  const handleAuthRequest = async() => {
     if (formState.isEmailValid) {
-      console.log("인증 요청");
+      try{
+        const res = await api.post("/api/user-service/email",{userEmail:formState.email});
+        if(res.status === 200){
+          console.log("Email sent Successfully");
+
+          //인증요청 다이얼로그
+          setDialogProps({
+            isWarn: false,
+            topText: EMAIL_TEXT[5],
+            bottomText: EMAIL_TEXT[6],
+            btnText: "확인",
+            onBtnClick: ()=>{setDialogState(false);},
+            isTwoButton: false,
+            subBtnText: "",
+            onSubBtnClick: () => {},
+          });
+          setDialogState(true);
+        }
+      }catch(e){
+        console.error("Error: " + e.message);
+      }
     }
   };
 
   // 다음 버튼 클릭
-  const handleButtonClick = () => {
+  const handleButtonClick = async() => {
     if (formState.isBtnActive) {
       setEmailState(formState.email);
-      router.push("/sign-up/detail");
+      try{
+        const res = await api.post("/api/user-service/email/confirm",
+        {userEmail:formState.email,authCode:formState.code});
+        if(res.status === 200){
+          router.push("/sign-up/detail");
+        }
+      }catch(e){
+        console.error("Error: " + e.message);
+        // 잘못된 인증번호 다이얼로그
+        setDialogProps({
+          isWarn: true,
+          topText: EMAIL_TEXT[7],
+          bottomText: EMAIL_TEXT[8],
+          btnText: "확인",
+          onBtnClick: ()=>{setDialogState(false);},
+          isTwoButton: false,
+          subBtnText: "",
+          onSubBtnClick: () => {},
+        });
+        setDialogState(true);
+        return; 
+      }
     }
   };
   return (
     <>
+      {dialogState && (
+        <Dialog
+          {...dialogProps} 
+        />
+      )}
+
       {/* 이메일을 입력해주세요 */}
       <div className="signup-max-w-600 justify-between items-center py-2 px-4 h-[50px] border-[1px] border-gray-3 rounded-lg">
         <input
@@ -71,7 +143,13 @@ export default function EmailContainer() {
       </div>
 
       {/* 인증번호를 입력해주세요 */}
-      <input className="signup-input" placeholder={EMAIL_TEXT[3]} />
+      <input 
+        type="text"
+        value={formState.code}
+        onChange={handleCodeChange}
+        className="signup-input" 
+        placeholder={EMAIL_TEXT[3]} 
+      />
 
       {/* 다음 버튼 */}
       <PrimaryButton
