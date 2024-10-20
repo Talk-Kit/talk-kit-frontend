@@ -1,11 +1,16 @@
+import { useRouter } from "next/navigation";
+
 interface SizeProps {
   width: number;
   height: number;
 }
 
 export default function TalkKitLogo({ width, height }: SizeProps) {
+  const router = useRouter();
   return (
     <svg
+      onClick={() => router.push("/")}
+      className="cursor-pointer"
       width={width}
       height={height}
       viewBox="0 0 130 50"

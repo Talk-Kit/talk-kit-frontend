@@ -7,6 +7,13 @@ import { BellIcon, SmMenuIcon, SmSignInIcon } from "../Icons";
 import Overlay from "../Overlay";
 import MenuCard from "./MenuCard";
 import { AnimatePresence, motion } from "framer-motion";
+import {
+  LARGE_TOPBAR_AUTH,
+  LARGE_TOPBAR_AUTH_BTN,
+  LARGE_TOPBAR_UNAUTH,
+  SMALL_TOPBAR_AUTH,
+  SMALL_TOPBAR_UNAUTH,
+} from "../../_constants/constants";
 
 // 화면 변화 시점이 744인 페이지 => md
 // 화면 변화 시점이 834인 페이지 => lg
@@ -76,23 +83,38 @@ export default function TopBar({ screen }: ITopBar) {
                           )}
                         </div>
                       </div>
-                      <MenuCard text="워크스페이스" onClick={() => {}} />
-                      <MenuCard text="대본" onClick={() => {}} />
-                      <MenuCard text="발표" onClick={() => {}} />
-                      <MenuCard text="커뮤니티" onClick={() => {}} />
-                      <MenuCard text="설정" onClick={() => {}} />
+                      {SMALL_TOPBAR_AUTH.map((el, index) => {
+                        if (el.url !== "") {
+                          return (
+                            <MenuCard
+                              key={index}
+                              text={el.text}
+                              onClick={() => router.push(el.url)}
+                            />
+                          );
+                        } else {
+                          return (
+                            <MenuCard
+                              key={index}
+                              text={el.text}
+                              onClick={() => {
+                                /* 팝업창 구현 후 수정 필요 */
+                              }}
+                            />
+                          );
+                        }
+                      })}
                     </>
                   ) : (
                     <>
                       {/* 로그인이 안 되었을 때 */}
-                      <MenuCard
-                        text="로그인"
-                        onClick={() => router.push("/sign-in")}
-                      />
-                      <MenuCard
-                        text="회원가입"
-                        onClick={() => router.push("/sign-up")}
-                      />
+                      {SMALL_TOPBAR_UNAUTH.map((el, index) => (
+                        <MenuCard
+                          key={index}
+                          text={el.text}
+                          onClick={() => router.push(el.url)}
+                        />
+                      ))}
                     </>
                   )}
                 </motion.div>
@@ -106,15 +128,15 @@ export default function TopBar({ screen }: ITopBar) {
             <>
               {/* 로그인 되었을 때 */}
               <div className="flex gap-3">
-                <button className="px-3 py-1 rounded-lg text-sm text-gray-4">
-                  대본
-                </button>
-                <button className="px-3 py-1 rounded-lg text-sm text-gray-4">
-                  발표
-                </button>
-                <button className="px-3 py-1 rounded-lg text-sm text-gray-4">
-                  커뮤니티
-                </button>
+                {LARGE_TOPBAR_AUTH.map((el, index) => (
+                  <button
+                    key={index}
+                    className="large-topbar-menu"
+                    onClick={() => router.push(el.url)}
+                  >
+                    {el.text}
+                  </button>
+                ))}
                 <div className="relative">
                   <div className="w-9 h-9 rounded-full bg-gray-3" />
                   {newAlarm && (
@@ -122,7 +144,7 @@ export default function TopBar({ screen }: ITopBar) {
                   )}
                 </div>
                 <button className="px-4 py-2 text-sm text-gray-4 rounded-lg border border-gray-2">
-                  새로운 프로젝트 생성
+                  {LARGE_TOPBAR_AUTH_BTN[0]}
                 </button>
               </div>
             </>
@@ -130,22 +152,17 @@ export default function TopBar({ screen }: ITopBar) {
             <>
               {/* 로그인이 안 되었을 때 */}
               <div className="flex gap-2">
-                <button
-                  onClick={() => {
-                    router.push("/sign-in");
-                  }}
-                  className="px-4 py-[0.62rem] text-sm rounded-lg"
-                >
-                  로그인
-                </button>
-                <button
-                  onClick={() => {
-                    router.push("sign-up");
-                  }}
-                  className="px-4 py-[0.62rem] text-sm rounded-lg bg-primary-1 text-white"
-                >
-                  회원가입
-                </button>
+                {LARGE_TOPBAR_UNAUTH.map((el, index) => (
+                  <button
+                    key={index}
+                    className={`large-topbar-button ${
+                      el.text === "회원가입" && "bg-primary-1 text-white"
+                    }`}
+                    onClick={() => router.push(el.url)}
+                  >
+                    {el.text}
+                  </button>
+                ))}
               </div>
             </>
           )}

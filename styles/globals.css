@@ -20,7 +20,7 @@ body {
 }
 
 * {
-  @apply text-gray-9 whitespace-pre-wrap break-keep;
+  @apply text-gray-9 whitespace-pre-wrap break-keep box-border;
 }
 
 /* 스크롤바 숨기기 */
@@ -50,6 +50,20 @@ body {
     @apply flex w-[300px] py-6 px-4 flex-col items-start gap-8 rounded-2xl bg-white shadow-xl;
   }
 
+  /* 상단바 */
+  .large-topbar-menu {
+    @apply px-3 py-1 rounded-lg text-sm text-gray-4;
+  }
+
+  .large-topbar-button {
+    @apply px-4 py-[0.62rem] text-sm rounded-lg;
+  }
+
+  /* 드롭다운 */
+  .dropdown-shadow {
+    box-shadow: 0px 4px 4px 0px rgba(22, 22, 22, 0.2);
+  }
+
   /* 회원가입 */
   .signup-screen {
     @apply flex w-full pt-[72px] px-4 pb-8 flex-col items-center gap-6 self-stretch;
@@ -70,5 +84,25 @@ body {
   }
   .long-button {
     @apply w-full py-3 rounded-lg;
+  }
+
+  /* 발표 연습 */
+  .title-text {
+    @apply font-semibold;
+  }
+  .timer-button {
+    @apply px-3 py-[6px] bg-white text-gray-4 rounded-lg;
+  }
+  .timer-number {
+    @apply text-white text-2xl tracking-wider font-extralight relative;
+  }
+  .timer-unit {
+    @apply absolute -translate-y-full top-[2px] right-[4.5px] text-white text-[7px] font-extralight leading-none;
+  }
+  .tick-container {
+    @apply absolute bottom-1/2 pb-[65px] origin-bottom;
+  }
+  .tick {
+    @apply w-[2px] h-[1px] rounded-full bg-white;
   }
 }
