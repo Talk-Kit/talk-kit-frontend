@@ -7,6 +7,7 @@ import { DUMMY_SELECTION_LIST, RECORD_BOX_TEXT } from "../_constants/constants";
 import { MikeIcon, PauseIcon, PlayIcon, RecordIcon } from "./Icons";
 import DropDown from "../../../_components/DropDown";
 import { useCalculateTime } from "../../../_hooks/useCalculateTime";
+import api from "../../../_api/config";
 
 export default function RecordBox() {
   // 녹음 상태 관련 state
@@ -329,7 +330,9 @@ export default function RecordBox() {
               selectionList={DUMMY_SELECTION_LIST}
             />
             <button
-              onClick={() => {}}
+              onClick={() => {
+                api.post("/asfasfsaf", audio);
+              }}
               className="px-6 py-3 bg-primary-1 text-white rounded-lg"
             >
               {RECORD_BOX_TEXT[4]}
