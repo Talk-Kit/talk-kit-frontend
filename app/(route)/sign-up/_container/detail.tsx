@@ -7,7 +7,6 @@ import { useRecoilValue, useRecoilState } from "recoil";
 import { DETAIL_ALERT_TEXT, DETAIL_TEXT } from "../_constants/constants";
 import { emailState, nicknameState } from "../_state/atom";
 import { FormData } from "../_types/sign-up_types";
-
 import AffiliationSelect from "../_components/AffiliationSelect";
 import { AlertIcon, DetailCheckBox } from "../_components/Icons";
 import PrimaryButton from "../_components/PrimaryButton";
