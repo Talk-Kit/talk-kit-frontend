@@ -6,7 +6,7 @@ import Footer from "../_components/Footer";
 import api from "../../_api/config";
 import CreateScriptDraft from "./_components/CreateScriptDraft";
 import CreateScript from "./_components/CreateScript";
-import { Project } from "./_interfaces/interfaces";
+import { Project, ScriptForm } from "./_interfaces/interfaces";
 import { DUMMY_PROJECT_LIST } from "./_constants/constants";
 
 export default function ScriptPage() {
@@ -58,6 +58,25 @@ export default function ScriptPage() {
     }
   };
 
+  const handleScript = async (data: ScriptForm) => {
+    try {
+      // 지금 data.projectSeq은 존재하는 프로젝트의 id값
+      const response = await api.post(
+        `/api/script-service/script/${data.projectSeq}`,
+        {
+          fileName: data.fileName,
+          fileContent: data.fileContent,
+        },
+        {
+          headers: { Authorization: token },
+        }
+      );
+      console.log(response);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
   return (
     <>
       <TopBar screen="lg" />
@@ -69,9 +88,7 @@ export default function ScriptPage() {
           <CreateScript
             defaultValue={defaultValue}
             projectList={DUMMY_PROJECT_LIST}
-            onSubmit={(data) => {
-              console.log(data);
-            }}
+            onSubmit={handleScript}
           />
         </div>
       </div>
