@@ -136,4 +136,21 @@ body {
   .ql-size > span > span {
     @apply text-center;
   }
+
+  /* 대본 작성 */
+  .text-input {
+    @apply w-full resize-none outline-none px-6 py-3 rounded-lg placeholder:text-gray-4;
+  }
+  .section-container {
+    @apply w-full flex flex-col gap-3;
+  }
+  .script-button {
+    @apply self-end w-fit px-6 py-3 font-semibold rounded-lg;
+  }
+  .default-script-button {
+    @apply script-button bg-white text-gray-4;
+  }
+  .primary-script-button {
+    @apply script-button bg-primary-1 text-white;
+  }
 }

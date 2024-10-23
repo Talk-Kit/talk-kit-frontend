@@ -2,7 +2,7 @@ import { FONT_SIZE } from "../_constants/constants";
 
 export default function EditorToolBar() {
   return (
-    <div id="toolbar" className="ql-toolbar">
+    <div id="toolbar" className="ql-toolbar bg-white">
       <span className="ql-formats w-16">
         <select className="ql-size" defaultValue="16px">
           {FONT_SIZE.map((el, index) => (
