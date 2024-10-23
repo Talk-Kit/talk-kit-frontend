@@ -24,3 +24,13 @@ export const SMALL_TOPBAR_UNAUTH = [
   { text: "로그인", url: "/sign-in" },
   { text: "회원가입", url: "/sign-up" },
 ];
+
+export const DIALOG_PLACEHOLDER = ["신고 사유를 선택해주세요"];
+
+export const REPORT_REASON = [
+  "음란물입니다",
+  "불법정보를 포함하고 있습니다",
+  "청소년에게 유해한 내용입니다",
+  "불쾌한 표현이 있습니다",
+  "개인정보 노출 게시물입니다",
+];
