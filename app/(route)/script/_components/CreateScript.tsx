@@ -21,7 +21,6 @@ export default function CreateScript({
       onSubmit(data);
     }
   };
-
   return (
     <form onSubmit={handleSubmit(onValid)} className="section-container">
       <span className="title-text">대본 작성</span>
@@ -49,11 +48,11 @@ export default function CreateScript({
           setSelectedProject(selected);
           setValue(
             "projectSeq",
-            projectList.filter((el) => el.project === selected)[0].id
+            projectList.filter((el) => el.projectName === selected)[0].projectSeq
           );
         }}
         placeholder="저장할 프로젝트를 선택해 주세요"
-        selectionList={projectList.map((el) => el.project)}
+        selectionList={projectList&&projectList.map((el) => el.projectName)||[]}
       />
       <button className="primary-script-button" type="submit">
         저장하기

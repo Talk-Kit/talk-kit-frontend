@@ -1,21 +1,26 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { useRecoilValue } from 'recoil';
 import TalkKitLogo from "../../_components/LOGO";
 import { useForm } from "react-hook-form";
 import api from "../../_api/config";
 import { useRouter } from "next/navigation";
+import { useToken} from "../../_hooks/useToken";
+
 
 export default function SignIn() {
   const router = useRouter();
+  const {token, saveToken} = useToken();
 
   // 로그인 여부 확인
   useEffect(() => {
-    console.log(localStorage.getItem("token"));
-    if (localStorage.getItem("token") !== null) {
+    if (!token) { // 토큰 유효하지 않다면
+      return;
+    }else{
       router.push("/");
     }
-  }, []);
+  }, [token]);
 
   const [loginErr, setLoginErr] = useState(false);
   const { register, handleSubmit } = useForm();
@@ -24,7 +29,7 @@ export default function SignIn() {
       const response = await api.post("/api/user-service/login", data);
       if (response.status === 200) {
         const accessToken = response.headers.authorization;
-        localStorage.setItem("token", accessToken);
+        saveToken(accessToken); // 토큰 저장
         router.push("/");
       }
     } catch (error) {
