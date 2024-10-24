@@ -5,15 +5,20 @@ import { useState, useEffect } from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { useRecoilValue, useRecoilState } from "recoil";
 import { DETAIL_ALERT_TEXT, DETAIL_TEXT } from "../_constants/constants";
-import { emailState, nicknameState } from "../_state/atom";
+import { emailState, nicknameState,terms1State,terms2State,terms3State } from "../_state/atom";
 import { FormData } from "../_types/sign-up_types";
+import { DownLightArrow } from "../../../_components/Icons";
 import AffiliationSelect from "../_components/AffiliationSelect";
 import { AlertIcon, DetailCheckBox } from "../_components/Icons";
 import PrimaryButton from "../_components/PrimaryButton";
-import { DownLightArrow } from "../../../_components/Icons";
+import api from "../../../_api/config";
 
 export default function DetailContainer() {
   const email = useRecoilValue(emailState);
+  const termsOfAgreement = useRecoilValue(terms1State);
+  const personalInfoAgreement = useRecoilValue(terms2State);
+  const marketingAgreement = useRecoilValue(terms3State);
+
   const [, setNicknameState] = useRecoilState(nicknameState);
   const router = useRouter();
   const {
@@ -65,13 +70,40 @@ export default function DetailContainer() {
   };
 
   // 아이디 중복 검사
-  const checkIdDuplicate = (id: string) => {
-    console.log("아이디 중복검사");
+  const checkIdDuplicate = async (id: string) => {
+    if (id != "") {
+      try{
+        await api.post("/api/user-service/check/id",{userId:id});
+        clearErrors("id");
+      }catch(error){
+        console.error(error);
+        if(error.status === 409){
+          setError("id", {
+            type: "manual",
+            message: DETAIL_ALERT_TEXT[8], 
+          });
+        }
+      }
+    }
   };
 
   // 닉네임 중복 검사
-  const checkNicknameDuplicate = (nickname: string) => {
-    console.log("닉네임 중복검사");
+  const checkNicknameDuplicate = async (nickname: string) => {
+    if (nickname != "") {
+      try{
+        await api.post("/api/user-service/check/name",{userNickname:nickname});
+        clearErrors("nickname");
+        setNicknameState(nickname);
+      }catch(error){
+        console.error(error);
+        if(error.status === 409){
+          setError("nickname", {
+            type: "manual",
+            message: DETAIL_ALERT_TEXT[9], 
+          });
+        }
+      }
+    }
   };
 
   // 소속 클릭
@@ -99,7 +131,7 @@ export default function DetailContainer() {
     }
   }, [formState.affiliation]);
 
-  const onSubmit: SubmitHandler<FormData> = (data) => {
+  const onSubmit: SubmitHandler<FormData> = async (data) => {
     if (!formState.affiliation) {
       setError("affiliation", {
         type: "manual",
@@ -107,15 +139,32 @@ export default function DetailContainer() {
       });
       return;
     }
-    // 아이디 중복 검사
-    checkIdDuplicate(data.id);
+    // // 아이디 중복 검사
+    // checkIdDuplicate(data.id);
 
-    // 닉네임 중복 검사
-    checkNicknameDuplicate(data.nickname);
-    setNicknameState(data.nickname);
+    // // 닉네임 중복 검사
+    // checkNicknameDuplicate(data.nickname);
+    // setNicknameState(data.nickname);
 
     console.log("서브밋", data);
-    router.push("/sign-up/done");
+    try{
+      const res = await api.post("/api/user-service/join",{
+        userId:data.id,
+        userPwd:data.pwd,
+        userEmail: email,
+        userNickname: data.nickname,
+        userAffiliation: data.affiliation,
+        termsOfAgreement: termsOfAgreement,
+        personalInfoAgreement: personalInfoAgreement,
+        marketingAgreement: marketingAgreement,
+      });
+      if(res.status === 201){
+        router.push("/sign-up/done");
+      }
+    }catch(error){
+      console.log(error);
+      return;
+    }
   };
   return (
     <form className="signup-screen pt-0" onSubmit={handleSubmit(onSubmit)}>

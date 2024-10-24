@@ -7,9 +7,17 @@ import { CheckBox } from "../_components/Icons";
 import PrimaryButton from "../_components/PrimaryButton";
 import { Terms1, Terms2, Terms3 } from "../_components/Terms";
 import { TERMS_TEXT } from "../_constants/constants";
+import { useRecoilState } from "recoil";
+import { terms1State,terms2State,terms3State } from "../_state/atom";
+
+
 
 export default function SignUpContainer() {
   const router = useRouter();
+  const [, setTerms1State] = useRecoilState(terms1State);
+  const [, setTerms2State] = useRecoilState(terms2State);
+  const [, setTerms3State] = useRecoilState(terms3State);
+
 
   const [isChecked, setIsChecked] = useState<Record<CheckboxName, boolean>>({
     all: false,
@@ -54,6 +62,9 @@ export default function SignUpContainer() {
   // 다음 버튼
   const handleButtonClick = () => {
     if (isButtonActive) {
+      setTerms1State(isChecked.terms1);
+      setTerms2State(isChecked.terms2);
+      setTerms3State(isChecked.terms3);
       router.push("/sign-up/e-mail");
     }
   };
