@@ -1,6 +1,10 @@
 export interface Project {
-  id: number;
-  project: string;
+  // id: number;
+  // project: string;
+  projectSeq:number;
+  projectName:string;
+  userSeq:number;
+  updatedAt:string;
 }
 
 export interface CreateScriptDraftProps {

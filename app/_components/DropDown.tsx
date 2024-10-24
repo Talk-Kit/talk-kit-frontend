@@ -34,7 +34,7 @@ export default function DropDown({
       )}
       {isOpened && (
         <div className="absolute top-[calc(100%+4px)] -left-[1px] w-[calc(100%+2px)] bg-white rounded-lg flex flex-col dropdown-shadow overflow-hidden z-10">
-          {selectionList.map((el, index) => (
+          {selectionList&&selectionList.map((el, index) => (
             <span
               key={index}
               onClick={() => {

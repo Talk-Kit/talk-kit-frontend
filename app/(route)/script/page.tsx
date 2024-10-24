@@ -7,37 +7,33 @@ import api from "../../_api/config";
 import CreateScriptDraft from "./_components/CreateScriptDraft";
 import CreateScript from "./_components/CreateScript";
 import { Project, ScriptForm } from "./_interfaces/interfaces";
-import { DUMMY_PROJECT_LIST } from "./_constants/constants";
+import { useToken } from "../../_hooks/useToken";
+import { set } from "react-hook-form";
+
 
 export default function ScriptPage() {
   // token 가져오기
-  const [token, setToken] = useState("");
-  useEffect(() => {
-    if (typeof window !== "undefined") {
-      // 로그인(토큰 저장) 구현 후 수정 필요
-      const storedToken = localStorage.getItem("token");
-      storedToken && setToken(storedToken); // Bearer 제거
-    }
-  }, []);
-
+  const {token, } = useToken();
+  
   // 토큰으로 프로젝트 목록 불러오기
   const [projectList, setProjectList] = useState<Project[]>();
+
   useEffect(() => {
-    if (token !== "") {
+    if (token !== null) {
+      console.log("token: "+token);
       api
         .get("/api/script-service/projects", {
-          headers: { Authorization: token },
-          params: { Authorization: token },
+          headers: { Authorization: token }
         })
         .then((res) => {
+          if(res.status === 202){
+            // 생성된 프로젝트가 없을때
+            setProjectList([]);
+          }
           // 이후 res에서 가져온 데이터로 대체 필요
           setProjectList(res.data);
+          console.log(res.data);
         });
-      // 403 에러
-      // parameters에 Authorization에 뭘 넣어야 하는지 모르겠음
-      // 위의 headers를 없애면 401 에러가 나오는 것을 보아
-      // headers의 토큰으로 JWT 인증까지는 되는 것으로 판단됨
-      // (아래의 초안 GPT 작성은 멀쩡하게 됨)
     }
   }, [token]);
 
@@ -71,6 +67,9 @@ export default function ScriptPage() {
           headers: { Authorization: token },
         }
       );
+      if (response.status === 201){
+        alert("저장되었습니다")
+      }
       console.log(response);
     } catch (err) {
       console.log(err);
@@ -87,7 +86,7 @@ export default function ScriptPage() {
           {/* 대본 작성 */}
           <CreateScript
             defaultValue={defaultValue}
-            projectList={DUMMY_PROJECT_LIST}
+            projectList={projectList}
             onSubmit={handleScript}
           />
         </div>

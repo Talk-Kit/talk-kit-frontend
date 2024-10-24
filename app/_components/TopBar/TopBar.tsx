@@ -7,6 +7,8 @@ import { BellIcon, SmMenuIcon, SmSignInIcon } from "../Icons";
 import Overlay from "../Overlay";
 import MenuCard from "./MenuCard";
 import { AnimatePresence, motion } from "framer-motion";
+import { useToken } from "../../_hooks/useToken";
+import api from "../../_api/config";
 import {
   LARGE_TOPBAR_AUTH,
   LARGE_TOPBAR_AUTH_BTN,
@@ -23,11 +25,29 @@ interface ITopBar {
 
 export default function TopBar({ screen }: ITopBar) {
   // 로그인 구현 후 수정 필요
-  const [token, setToken] = useState(true);
-  const [newAlarm, setNewAlarm] = useState(true);
+  const [isValidToken, setToken] = useState(false);
+  const { token } = useToken();
+  const [newAlarm, setNewAlarm] = useState(false);
   const [isMenuOpen, setIsMenuOpened] = useState(false);
+  const [userNickname,setUserNickname] = useState("");
 
   const router = useRouter();
+  
+  useEffect(()=>{
+    if (token !== null) {
+      api.get("/api/user-service/user",{
+        headers: { Authorization: token }
+      })
+      .then((res)=>{
+        if(res.status === 200){
+          setUserNickname(res.data.userNickname);
+        }
+      });
+      setToken(true);
+    } else {
+      setToken(false);
+    }
+  },[token]);
 
   // 서브 메뉴가 열린 채 화면 크기가 변화했을 시 state 초기화
   useEffect(() => {
@@ -74,7 +94,7 @@ export default function TopBar({ screen }: ITopBar) {
                           <div className="w-9 h-9 bg-gray-3 rounded-full">
                             {/* 프로필 이미지로 변경 필요 */}
                           </div>
-                          <span>화끈한분노{/* 닉네임 반영 필요 */}</span>
+                          <span>{userNickname}</span>
                         </div>
                         <div className="relative cursor-pointer">
                           <BellIcon />
@@ -124,7 +144,7 @@ export default function TopBar({ screen }: ITopBar) {
         </div>
         {/* 큰 화면일 때의 탑바 */}
         <div className={`hidden ${screen === "md" ? "md:block" : "lg:block"}`}>
-          {token ? (
+          {isValidToken ? (
             <>
               {/* 로그인 되었을 때 */}
               <div className="flex gap-3">
