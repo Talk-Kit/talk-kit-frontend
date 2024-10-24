@@ -1,6 +1,5 @@
 // 이후 다른 곳에서 사용하게 되면 상위 _components 폴더로 옮겨주세요
 
-import DOMPurify from "isomorphic-dompurify";
 import dynamic from "next/dynamic";
 import "react-quill/dist/quill.snow.css";
 import EditorToolBar from "./EditorToolBar";
@@ -18,10 +17,12 @@ const TextEditor = React.memo(
     width,
     height,
     onChange,
+    defaultValue,
   }: {
     width: string;
     height: string;
     onChange: (text: string) => void;
+    defaultValue?: string;
   }) => {
     // ReactQuill을 dynamic을 이용하여 서버에서
     // import 되지 않고 브라우저 내에서만 실행되도록 함
@@ -113,9 +114,10 @@ const TextEditor = React.memo(
           forwardedRef={ref}
           theme="snow"
           // toolbar의 높이 : 43px
-          className={`react-quill w-full h-[calc(100%-43px)]`}
+          className={`react-quill w-full h-[calc(100%-43px)] bg-white`}
           onChange={onTextChange}
           modules={modules}
+          defaultValue={defaultValue}
         />
       </section>
     );
