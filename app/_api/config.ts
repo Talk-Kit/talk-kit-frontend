@@ -1,5 +1,5 @@
-
 import axios, { AxiosInstance } from "axios";
+
 const config = {
   backend: {
     baseURL: process.env.NEXT_PUBLIC_BASE_URL,
@@ -13,4 +13,5 @@ const api: AxiosInstance = axios.create({
     "Content-Type": "application/json",
   },
 });
+
 export default api;

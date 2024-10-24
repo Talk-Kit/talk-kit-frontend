@@ -49,6 +49,12 @@ body {
   .dialog-container {
     @apply flex w-[300px] py-6 px-4 flex-col items-start gap-8 rounded-2xl bg-white shadow-xl;
   }
+  .full-screen {
+    @apply w-full min-h-[calc(100vh-89px)] pt-[72px] flex justify-center;
+  }
+  .check-button {
+    @apply w-fit flex gap-2 cursor-pointer items-center;
+  }
 
   /* 상단바 */
   .large-topbar-menu {
@@ -104,5 +110,47 @@ body {
   }
   .tick {
     @apply w-[2px] h-[1px] rounded-full bg-white;
+  }
+
+  /* 커뮤니티 */
+  .likes-comments {
+    @apply flex gap-1 items-center;
+  }
+  .short-button {
+    @apply font-semibold text-gray-0 px-4 py-3 bg-primary-1 rounded-lg leading-none;
+  }
+
+  /* quill toolbar css 오버라이딩 */
+  .react-quill > div {
+    @apply text-base;
+  }
+  .ql-toolbar {
+    @apply h-[43px] flex items-center border-b-0 !important;
+  }
+  .ql-size {
+    @apply w-full !important;
+  }
+  .ql-size > span:last-child {
+    @apply h-[256px] overflow-scroll;
+  }
+  .ql-size > span > span {
+    @apply text-center;
+  }
+
+  /* 대본 작성 */
+  .text-input {
+    @apply w-full resize-none outline-none px-6 py-3 rounded-lg placeholder:text-gray-4;
+  }
+  .section-container {
+    @apply w-full flex flex-col gap-3;
+  }
+  .script-button {
+    @apply self-end w-fit px-6 py-3 font-semibold rounded-lg;
+  }
+  .default-script-button {
+    @apply script-button bg-white text-gray-4;
+  }
+  .primary-script-button {
+    @apply script-button bg-primary-1 text-white;
   }
 }

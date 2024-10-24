@@ -13,7 +13,6 @@ import { AlertIcon, DetailCheckBox } from "../_components/Icons";
 import PrimaryButton from "../_components/PrimaryButton";
 import api from "../../../_api/config";
 
-
 export default function DetailContainer() {
   const email = useRecoilValue(emailState);
   const termsOfAgreement = useRecoilValue(terms1State);
